@@ -7,37 +7,29 @@ from scipy.optimize import curve_fit
 
 # Pendulum Set up
 class pendulum:
-   def __init__(self,l,m,c,k):
+   def __init__(self,l,m,c,g):
        self.l = l
        self.m = m
        self.c = c
-       self.k = k
-
-
-def fitfunc(x, a, b, c):
-    return a * np.sin(b * x) + c
+       self.g = g
 
 # l: initial length of pendulum 1 in m
 # m: mass of pendulum 1 in kg
 # c: Damping of the joint
-# k: Spring constant of the pendulum rod
+# Environmental Constant: acceleration due to gravity, in m/s^2
 
-pen1 = pendulum(1,1,0,1000000)
+def fitfunc(x, a, b, c):
+    return a * np.sin(b * x) + c
 
-# Environmental Constant
-g = 9.8  # acceleration due to gravity, in m/s^2
+pen1 = pendulum(1,1,0,9.8)
 
 def derivs(state, t):
 
     dthdt = np.zeros_like(state)
 
-    dthdt[0] = - g/(state[3]+pen1.l) * np.sin(state[1]) - 2 * state[2] * state[0] / (state[3]+pen1.l) - pen1.c/pen1.m * state[0]
+    dthdt[0] = - pen1.g/pen1.l * np.sin(state[1])  - pen1.c/pen1.m * state[0]
 
     dthdt[1] = state[0]
-
-    dthdt[2] = (pen1.l+state[3])*state[0]**2 - pen1.k / pen1.m * state[3] + g * np.cos(state[1])
-
-    dthdt[3] = state[2]
 
     return dthdt
 
@@ -47,32 +39,27 @@ t = np.arange(0, 20, dt)
 
 # initial conditions
 # th is initial angle,  w is initial angular velocitie
-# l0 is the initial length of the rod, v0 is the initial longitudial velocity of the pendulum
 w0 = 0
 th0 = 120
-v0 = 0
-l0 = 0
 
 # initial value for state vectors
-state = [np.radians(w0),np.radians(th0),v0, l0]
+state = [np.radians(w0),np.radians(th0)]
 
 # integrate ODE to obtain the angle values
 th = integrate.odeint(derivs, state, t)
+x = pen1.l*sin(th[:, 1])
+y = -pen1.l*cos(th[:, 1])
 
-x = (pen1.l+th[:,3])*sin(th[:, 1])
-y = -(pen1.l+th[:,3])*cos(th[:, 1])
-
-
-popt, pcov = curve_fit(fitfunc, t, y)  # popt- fitting parameters, pcov- covariance
-plt.plot(t, y, 'b-', label='data')
-plt.plot(t, fitfunc(t, *popt), 'r-',
-         label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
+# frequency calculation
+popt, pcov = curve_fit(fitfunc, t, th[:,1])  # popt- fitting parameters, pcov- covariance
+plt.plot(t, th[:,1], 'b-', label='data')
+plt.plot(t, fitfunc(t, *popt), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
 plt.xlabel('t')
 plt.ylabel('y')
 plt.legend(loc='upper right')
-
 plt.show()
 
+# time plot, x and y
 fig, axs = plt.subplots(1, 2)
 plot1, = axs[0].plot(t, x)
 axs[0].set_title('x over time')
@@ -82,8 +69,17 @@ plot2, = axs[1].plot(t, y)
 axs[1].set_title('y over time')
 axs[1].set_xlabel('time [s] ')
 axs[1].set_ylabel('y [m]')
-
-
-
 plt.tight_layout()
+plt.show()
+
+# time plot, theta and omega
+fig, axs = plt.subplots(1, 2)
+plot1, = axs[0].plot(t, th[:,1])
+axs[0].set_title(r'$\theta$ over time')
+axs[0].set_xlabel(r'time [s] ')
+axs[0].set_ylabel(r'$\theta$ [rad]')
+plot2, = axs[1].plot(t, th[:,0])
+axs[1].set_title(r'$\omega$ over time')
+axs[1].set_xlabel(r'time [s] ')
+axs[1].set_ylabel(r'$\omega$ [rad/s]')
 plt.show()
