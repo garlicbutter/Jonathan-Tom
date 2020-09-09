@@ -2,7 +2,7 @@ from numpy import sin, cos
 import numpy as np
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+from scipy.optimize import curve_fit
 
 
 # Pendulum Set up
@@ -12,6 +12,10 @@ class pendulum:
        self.m = m
        self.c = c
        self.k = k
+
+
+def fitfunc(x, a, b, c):
+    return a * np.sin(b * x) + c
 
 # l: initial length of pendulum 1 in m
 # m: mass of pendulum 1 in kg
@@ -59,8 +63,17 @@ x = (pen1.l+th[:,3])*sin(th[:, 1])
 y = -(pen1.l+th[:,3])*cos(th[:, 1])
 
 
-fig, axs = plt.subplots(1, 2)
+popt, pcov = curve_fit(fitfunc, t, y)  # popt- fitting parameters, pcov- covariance
+plt.plot(t, y, 'b-', label='data')
+plt.plot(t, fitfunc(t, *popt), 'r-',
+         label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
+plt.xlabel('t')
+plt.ylabel('y')
+plt.legend(loc='upper right')
 
+plt.show()
+
+fig, axs = plt.subplots(1, 2)
 plot1, = axs[0].plot(t, x)
 axs[0].set_title('x over time')
 axs[0].set_xlabel('time [s] ')
@@ -69,6 +82,7 @@ plot2, = axs[1].plot(t, y)
 axs[1].set_title('y over time')
 axs[1].set_xlabel('time [s] ')
 axs[1].set_ylabel('y [m]')
+
 
 
 plt.tight_layout()
