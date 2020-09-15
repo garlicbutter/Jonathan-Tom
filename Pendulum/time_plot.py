@@ -1,9 +1,8 @@
 from numpy import sin, cos
+from scipy.fft import fft, fftfreq
 import numpy as np
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
-
 
 # Pendulum Set up
 class pendulum:
@@ -17,9 +16,6 @@ class pendulum:
 # m: mass of pendulum 1 in kg
 # c: Damping of the joint
 # Environmental Constant: acceleration due to gravity, in m/s^2
-
-def fitfunc(x, a, b, c):
-    return a * np.sin(b * x) + c
 
 pen1 = pendulum(1,1,0,9.8)
 
@@ -36,29 +32,45 @@ def derivs(state, t):
 #time array from 0..100 sampled at 0.05 second steps
 dt = 0.05
 t = np.arange(0, 20, dt)
-
 # initial conditions
-# th is initial angle,  w is initial angular velocitie
+# th is initial angle,  w is initial angular velocity
 w0 = 0
-th0 = 120
+th0 = 5
 
 # initial value for state vectors
 state = [np.radians(w0),np.radians(th0)]
 
 # integrate ODE to obtain the angle values
 th = integrate.odeint(derivs, state, t)
-x = pen1.l*sin(th[:, 1])
-y = -pen1.l*cos(th[:, 1])
+omega_sol, theta_sol = th[:, 0], th[:, 1]
+x = pen1.l*sin(theta_sol)
+y = -pen1.l*cos(theta_sol)
 
-# frequency calculation
-popt, pcov = curve_fit(fitfunc, t, th[:,1])  # popt- fitting parameters, pcov- covariance
-plt.plot(t, th[:,1], 'b-', label='data')
-plt.plot(t, fitfunc(t, *popt), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
-plt.xlabel('t')
-plt.ylabel('y')
-plt.legend(loc='upper right')
+# Do FFT analysis of array
+FFT = fft(theta_sol)
+
+# Getting the related frequencies
+freqs = fftfreq(len(theta_sol), dt)     ## added dt, so x-axis is in meaningful units
+
+# Create subplot windows and show plot
+fig, axs = plt.subplots(2, 1)
+plot1, = axs[0].plot(t, theta_sol)
+axs[0].set_title(r'$\theta$')
+axs[0].set_xlabel('Time')
+axs[0].set_ylabel('Amplitude')
+plot2, = axs[1].plot(freqs, np.log10(abs(FFT)), '.', label = 'fft')
+plot3 = axs[1].axvline(1/(2*np.pi*np.sqrt(pen1.l/pen1.g)), 0.1, 0.9, color = 'k', label = 'linear small angle approximation')
+plot4 = axs[1].axvline(1/(-2*np.pi*np.sqrt(pen1.l/pen1.g)), 0.1, 0.9, color = 'k')
+axs[1].legend()
+axs[1].set_title('FFT analysis')
+axs[1].set_xlabel('Frequencies [Hz]')
+axs[1].set_ylabel('Amplitude (log10)')
+plt.tight_layout()
 plt.show()
 
+
+
+'''
 # time plot, x and y
 fig, axs = plt.subplots(1, 2)
 plot1, = axs[0].plot(t, x)
@@ -83,3 +95,4 @@ axs[1].set_title(r'$\omega$ over time')
 axs[1].set_xlabel(r'time [s] ')
 axs[1].set_ylabel(r'$\omega$ [rad/s]')
 plt.show()
+'''
