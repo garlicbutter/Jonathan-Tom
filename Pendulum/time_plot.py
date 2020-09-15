@@ -35,7 +35,7 @@ t = np.arange(0, 20, dt)
 # initial conditions
 # th is initial angle,  w is initial angular velocity
 w0 = 0
-th0 = 5
+th0 = 20
 
 # initial value for state vectors
 state = [np.radians(w0),np.radians(th0)]
@@ -55,11 +55,11 @@ freqs = fftfreq(len(theta_sol), dt)     ## added dt, so x-axis is in meaningful 
 # Create subplot windows and show plot
 fig, axs = plt.subplots(2, 1)
 plot1, = axs[0].plot(t, theta_sol)
-axs[0].set_title(r'$\theta$')
+axs[0].set_title(r'$\theta$ over time where $\theta_0 = $ %5.3f' %(th0))
 axs[0].set_xlabel('Time')
 axs[0].set_ylabel('Amplitude')
 plot2, = axs[1].plot(freqs, np.log10(abs(FFT)), '.', label = 'fft')
-plot3 = axs[1].axvline(1/(2*np.pi*np.sqrt(pen1.l/pen1.g)), 0.1, 0.9, color = 'k', label = 'linear small angle approximation')
+plot3 = axs[1].axvline(1/(2*np.pi*np.sqrt(pen1.l/pen1.g)), 0.1, 0.9, color = 'k', label = r'$\frac{1}{2\pi}\sqrt{g/L}$')
 plot4 = axs[1].axvline(1/(-2*np.pi*np.sqrt(pen1.l/pen1.g)), 0.1, 0.9, color = 'k')
 axs[1].legend()
 axs[1].set_title('FFT analysis')
