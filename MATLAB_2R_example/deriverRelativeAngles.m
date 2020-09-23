@@ -84,7 +84,7 @@ matlabFunction(T2Eq, 'file', 'GravityCompT2');
 %Jacobian relating end effector velocity to joint space vel
 % ie Ve = J*qv
 
-J = jacobian(Ve,{thdot1 thdot2});
+J = jacobian(Ve,[thdot1 thdot2]);
 
 syms Kp Kd xt yt xdott ydott real
 
