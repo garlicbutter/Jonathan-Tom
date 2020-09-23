@@ -79,9 +79,6 @@ dt_phy = 1/physics_freq;
 controller_freq = 20;
 dt_con = 1/controller_freq;
 freq_ratio = physics_freq/controller_freq
-if freq_ratio<=0
-error("controller frequency is not valid")
-end
 
 while (ishandle(f))
     figData = get(f,'UserData');
