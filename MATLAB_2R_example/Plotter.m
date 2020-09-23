@@ -78,32 +78,32 @@ told = 0;
 
 set(f,'UserData',figData);
 
+current_time = 0;
+physics_freq = 100;
+dt_phy = 1/physics_freq;
 tic %Start the clock
 while (ishandle(f))
     figData = get(f,'UserData');
     %%%% INTEGRATION %%%%
-    tnew = toc;
-    dt = tnew - told;
-    
+ 
     %Old velocity and position
     xold = [z1(1),z1(3)];
     vold = [z1(2),z1(4)];
    
     %Call RHS given old state
-    [zdot1, T1, T2] = FullDyn(tnew,z1,p);
+    [zdot1, T1, T2] = FullDyn(current_time,z1,p);
     vinter1 = [zdot1(1),zdot1(3)];
     ainter = [zdot1(2),zdot1(4)];
     
-    vinter2 = vold + ainter*dt; %Update velocity based on old RHS call
+    vinter2 = vold + ainter*dt_phy; %Update velocity based on old RHS call
     
     %Update position.
-    xnew = xold + vinter2*dt;
-    vnew = (xnew-xold)/dt;
+    xnew = xold + vinter2*dt_phy;
+    vnew = (xnew-xold)/dt_phy;
     
     z2 = [xnew(1) vnew(1) xnew(2) vnew(2)];
 
     z1 = z2;
-    told = tnew;
     %%%%%%%%%%%%%%%%%%%%
     
     %If there are new mouse click locations, then set those as the new
@@ -132,10 +132,9 @@ while (ishandle(f))
     p.Fy = figData.Fy;
     end
     
-    tstar = told; %Get the time (used during this entire iteration)
     
     %On screen timer.
-    set(timer,'string',strcat(num2str(tstar,5),'s'))
+    set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
     zstar = z1;%interp1(time,zarray,tstar); %Interpolate data at this instant in time.
     
     %Rotation matrices to manipulate the vertices of the patch objects
@@ -158,6 +157,7 @@ while (ishandle(f))
     set(tmeter2,'string',strcat(num2str(T2,2),' Nm'));
     
     drawnow;
+    current_time = current_time + dt_phy;
 end
 end
 
