@@ -55,6 +55,10 @@ h2 = plot(0,0,'.k','MarkerSize',40); %link1 -> link2 hinge
 %Timer label:
 timer = text(-3.2,-3.2,'0.00','FontSize',28);
 
+%Torque meters on screen
+tmeter1 = text(0.6,-3.2,'0.00','FontSize',22,'Color', 'r');
+tmeter2 = text(2.2,-3.2,'0.00','FontSize',22,'Color', 'b');
+
 %Target Pt.
 targetPt = plot(p.xtarget,p.ytarget,'xr','MarkerSize',30);
 
@@ -73,38 +77,48 @@ z1 = p.init;
 
 set(f,'UserData',figData);
 
+% current_time is where physics take place. the controller frequency
+% differs from the frequency of the physics.
 current_time = 0;
 physics_freq = 100;
-dt_phy = 1/physics_freq;
-controller_freq = 20;
-dt_con = 1/controller_freq;
-freq_ratio = physics_freq/controller_freq
-if freq_ratio<=0
+controller_freq = 40;
+freq_ratio = controller_freq/physics_freq;
+
+if freq_ratio<=0 || freq_ratio>=1
 error("controller frequency is not valid")
 end
 
+dt_phy = 1/physics_freq;
+controller_counter = 0; % to track when the controller frequency hit
+tau = [0, 0];
+
 while (ishandle(f))
     figData = get(f,'UserData');
-    %%%% INTEGRATION %%%%
- 
+    
+    %%%% INTEGRATION %%%%%%%%%
     %Old velocity and position
     xold = [z1(1),z1(3)];
     vold = [z1(2),z1(4)];
    
     %Call RHS given old state
-    zdot1 = Physics(z1,p);
-    vinter1 = [zdot1(1),zdot1(3)];
+    zdot1 = Physics(z1,p,tau);
     ainter = [zdot1(2),zdot1(4)];
-    
-    vinter2 = vold + ainter*dt_phy; %Update velocity based on old RHS call
+    vinter = vold + ainter*dt_phy; %Update velocity based on old RHS call
     
     %Update position.
-    xnew = xold + vinter2*dt_phy;
+    xnew = xold + vinter*dt_phy;
     vnew = (xnew-xold)/dt_phy;
+    z1 = [xnew(1) vnew(1) xnew(2) vnew(2)];
+    %%%%%%%%%%%%%%%%%%%%
     
-    z2 = [xnew(1) vnew(1) xnew(2) vnew(2)];
-
-    z1 = z2;
+    
+    %%%%CONTROLLER%%%%%%%%%%
+    if controller_counter<1   % do nothing
+    controller_counter = controller_counter + freq_ratio;
+    elseif controller_counter >=1   % change tau
+    tau = Controller(z1,p);
+    controller_counter = controller_counter -1;
+    end
     %%%%%%%%%%%%%%%%%%%%
     
     %If there are new mouse click locations, then set those as the new
@@ -151,6 +165,9 @@ while (ishandle(f))
     set(h2,'xData',(rot1(1,3)+rot1(1,4))/2)
     set(h2,'yData',(rot1(2,3)+rot1(2,4))/2)
     
+    %Show torques on screen (text only atm) update for time series later.
+    set(tmeter1,'string',strcat(num2str(tau(1),2),' Nm'));
+    set(tmeter2,'string',strcat(num2str(tau(2),2),' Nm'));
     
     drawnow;
     current_time = current_time + dt_phy;
