@@ -55,10 +55,6 @@ h2 = plot(0,0,'.k','MarkerSize',40); %link1 -> link2 hinge
 %Timer label:
 timer = text(-3.2,-3.2,'0.00','FontSize',28);
 
-%Torque meters on screen
-tmeter1 = text(0.6,-3.2,'0.00','FontSize',22,'Color', 'r');
-tmeter2 = text(2.2,-3.2,'0.00','FontSize',22,'Color', 'b');
-
 %Target Pt.
 targetPt = plot(p.xtarget,p.ytarget,'xr','MarkerSize',30);
 
@@ -74,14 +70,13 @@ set(ax,'Visible','off');
 
 %Animation plot loop -- Includes symplectic integration now.
 z1 = p.init;
-told = 0;
 
 set(f,'UserData',figData);
 
 current_time = 0;
 physics_freq = 100;
 dt_phy = 1/physics_freq;
-tic %Start the clock
+
 while (ishandle(f))
     figData = get(f,'UserData');
     %%%% INTEGRATION %%%%
@@ -91,7 +86,7 @@ while (ishandle(f))
     vold = [z1(2),z1(4)];
    
     %Call RHS given old state
-    [zdot1, T1, T2] = FullDyn(current_time,z1,p);
+    zdot1 = Physics(z1,p);
     vinter1 = [zdot1(1),zdot1(3)];
     ainter = [zdot1(2),zdot1(4)];
     
@@ -111,7 +106,6 @@ while (ishandle(f))
     if ~isempty(figData.xtarget)
     p.xtarget = figData.xtarget;
     end
-    
     if ~isempty(figData.ytarget)
     p.ytarget = figData.ytarget;
     end
@@ -135,15 +129,14 @@ while (ishandle(f))
     
     %On screen timer.
     set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
-    zstar = z1;%interp1(time,zarray,tstar); %Interpolate data at this instant in time.
-    
+
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.
-    rot1 = [cos(zstar(1)), -sin(zstar(1)); sin(zstar(1)),cos(zstar(1))]*[xdat1;ydat1];
+    rot1 = [cos(z1(1)), -sin(z1(1)); sin(z1(1)),cos(z1(1))]*[xdat1;ydat1];
     set(link1,'xData',rot1(1,:))
     set(link1,'yData',rot1(2,:))
     
-    rot2 = [cos(zstar(3)+zstar(1)), -sin(zstar(3)+zstar(1)); sin(zstar(3)+zstar(1)),cos(zstar(3)+zstar(1))]*[xdat2;ydat2];
+    rot2 = [cos(z1(3)+z1(1)), -sin(z1(3)+z1(1)); sin(z1(3)+z1(1)),cos(z1(3)+z1(1))]*[xdat2;ydat2];
     
     set(link2,'xData',rot2(1,:)+(rot1(1,3)+rot1(1,4))/2) %We want to add the midpoint of the far edge of the first link to all points in link 2.
     set(link2,'yData',rot2(2,:)+(rot1(2,3)+rot1(2,4))/2)
@@ -152,9 +145,6 @@ while (ishandle(f))
     set(h2,'xData',(rot1(1,3)+rot1(1,4))/2)
     set(h2,'yData',(rot1(2,3)+rot1(2,4))/2)
     
-    %Show torques on screen (text only atm) update for time series later.
-    set(tmeter1,'string',strcat(num2str(T1,2),' Nm'));
-    set(tmeter2,'string',strcat(num2str(T2,2),' Nm'));
     
     drawnow;
     current_time = current_time + dt_phy;
