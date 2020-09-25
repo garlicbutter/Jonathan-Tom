@@ -81,7 +81,7 @@ set(f,'UserData',figData);
 % differs from the frequency of the physics.
 current_time = 0;
 physics_freq = 100;
-controller_freq = 40;
+controller_freq = 50;
 freq_ratio = controller_freq/physics_freq;
 
 if freq_ratio<=0 || freq_ratio>=1
