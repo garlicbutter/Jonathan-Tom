@@ -49,11 +49,10 @@ y0 = endZ(2);
 p.Fx = 0;
 p.Fy = 0;
 
-p.traj = [endZ(1),endZ(2);
+p.traj = [endZ(1),;
     -1, 1;
     1, 1;
-    1, -1;
-    -1,-1];
+    1, -1;];
 
 %%%%%%%% Control Parameters %%%%%%%%
 

@@ -20,7 +20,7 @@ close all
 %Name the whole window and define the mouse callback function
 f = figure;
 
-traj = [];
+figData.traj = [];
 figData.Fx = [];
 figData.Fy = [];
 figData.xend = [];
@@ -35,8 +35,6 @@ hold on
 
 %Plot trajectory :
 p.traj = [p.traj; p.traj(1,:)];
-p.xtarget = p.traj(1,1);
-p.ytarget = p.traj(1,2);
 plot(p.traj(:,1), p.traj(:,2),'r--');
  
 %Create pendulum link1 object:
@@ -90,17 +88,16 @@ error("controller frequency is not valid")
 end
 
 % trajectory planner
-traj_follow_rate = 200;
 for traj_counter = 1: length(p.traj)-1
-    traj_lin_max = ceil((pdist(p.traj(traj_counter:traj_counter+1,:))*traj_follow_rate));
+    traj_lin_max = ceil((pdist(p.traj(traj_counter:traj_counter+1,:))*100));
     temp_array1 = linspace(p.traj(traj_counter,1),p.traj(traj_counter+1,1),traj_lin_max);
     temp_array2 = linspace(p.traj(traj_counter,2),p.traj(traj_counter+1,2),traj_lin_max); 
     for traj_lin_counter = 1: traj_lin_max
-            traj = [traj; temp_array1(traj_lin_counter), temp_array2(traj_lin_counter)];
+            figData.traj = [figData.traj; temp_array1(traj_lin_counter), temp_array2(traj_lin_counter)];
     end
 end
 iter = 0;
-iterlen = length(traj);
+iterlen = length(figData.traj)-1;
 
     
 while (ishandle(f))
@@ -134,16 +131,16 @@ while (ishandle(f))
     end
     %%%%%%%%%%%%%%%%%%%%
     % trajectory follower
-     if iter < iterlen
+    if iter < iterlen
         iter = iter+1;
     else
         iter = 1;
     end
-    p.xtarget = traj(iter,1);
-    p.ytarget = traj(iter,2);
+    p.xtarget = figData.traj(1,iter,1);
+    p.ytarget = figData.traj(2,iter,2);
+    disp(['iter = ', iter]);
     set(targetPt,'xData',p.xtarget); %Change the target point graphically.
     set(targetPt,'yData',p.ytarget);
-   
     
     %When you hit a key, it changes to force mode, where the mouse will
     %pull things.
