@@ -32,6 +32,10 @@ figData.tarControl = true;
 figData.simArea = subplot(1,1,1); %Eliminated other subplots, but left this for syntax consistency.
 axis equal
 hold on
+grid on
+
+
+
 
 %Plot trajectory :
 p.traj = [p.traj; p.traj(1,:)];
@@ -55,6 +59,9 @@ axis([-3.5 3.5 -3.6 3.6]);
 %Dots for the hinges:
 h1 = plot(0,0,'.k','MarkerSize',40); %First link anchor
 h2 = plot(0,0,'.k','MarkerSize',40); %link1 -> link2 hinge
+
+% Traces for the trajectory:
+trace = plot(0,0,'.g','MarkerSize',10); %First link anchor
 
 %Timer label:
 timer = text(-3.2,-3.2,'0.00','FontSize',28);
@@ -90,7 +97,7 @@ error("controller frequency is not valid")
 end
 
 % trajectory planner
-traj_follow_rate = 200;
+traj_follow_rate = 100;
 for traj_counter = 1: length(p.traj)-1
     traj_lin_max = ceil((pdist(p.traj(traj_counter:traj_counter+1,:))*traj_follow_rate));
     temp_array1 = linspace(p.traj(traj_counter,1),p.traj(traj_counter+1,1),traj_lin_max);
@@ -178,9 +185,15 @@ while (ishandle(f))
     set(h2,'xData',(rot1(1,3)+rot1(1,4))/2)
     set(h2,'yData',(rot1(2,3)+rot1(2,4))/2)
     
+    
     %Show torques on screen (text only atm) update for time series later.
     set(tmeter1,'string',strcat(num2str(tau(1),2),' Nm'));
     set(tmeter2,'string',strcat(num2str(tau(2),2),' Nm'));
+    
+     
+    %Keep the trace drawing
+    set(trace,'xData',rot2(1,3)+(rot1(1,3)+rot1(1,4))/2)
+    set(trace,'yData',rot2(2,3)+(rot1(2,3)+rot1(2,4))/2)
     
     drawnow;
     current_time = current_time + dt_phy;
