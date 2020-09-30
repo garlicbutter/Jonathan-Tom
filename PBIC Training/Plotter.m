@@ -135,7 +135,7 @@ while (ishandle(f))
     controller_counter = controller_counter + freq_ratio;
     %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
-    tau = Controller(z1,p);
+    tau = DBIController(z1,p);
     %disp("torque has been altered");
     controller_counter = controller_counter -1;
     end

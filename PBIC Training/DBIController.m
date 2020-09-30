@@ -1,4 +1,4 @@
-function [T] = Controller(z,p)
+function [T] = DBIController(z,p)
 %Controller that uses DB-IC to calculate the torque needed
 
 th1 = z(1);
