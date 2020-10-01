@@ -19,7 +19,6 @@ close all
 
 %Name the whole window and define the mouse callback function
 f = figure;
-set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
 
 traj = [];
 figData.Fx = [];
@@ -89,7 +88,7 @@ set(f,'UserData',figData);
 % differs from the frequency of the physics.
 current_time = 0;
 physics_freq = 100;
-controller_freq = 80;
+controller_freq = 50;
 freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
 controller_counter = 0; % to track when the controller frequency hit
@@ -132,24 +131,27 @@ while (ishandle(f))
     
     
     %%%%CONTROLLER%%%%%%%%%%
-    if controller_type=="DBIC"     
+    if controller_type=="DBIC"
+        
         if controller_counter<1   % do nothing
-            controller_counter = controller_counter + freq_ratio;
-            %disp("torque hasn't changed");
+        controller_counter = controller_counter + freq_ratio;
+        %disp("torque hasn't changed");
         elseif controller_counter >=1   % change tau
-            tau = DBIController(z1,p);
-            %disp("torque has been altered");
-            controller_counter = controller_counter -1;
-        end    
+        tau = DBIController(z1,p);
+        %disp("torque has been altered");
+        controller_counter = controller_counter -1;
+        end
+    
     elseif controller_type=="PBIC"  
-        if controller_counter<1   % do nothing
-            controller_counter = controller_counter + freq_ratio;
-            %disp("torque hasn't changed");
-        elseif controller_counter >=1   % change tau
-            tau = PBIController(z1,p);
-            %disp("torque has been altered");
-            controller_counter = controller_counter -1;
-        end    
+        
+    if controller_counter<1   % do nothing
+    controller_counter = controller_counter + freq_ratio;
+    %disp("torque hasn't changed");
+    elseif controller_counter >=1   % change tau
+    tau = DBIController(z1,p);
+    %disp("torque has been altered");
+    controller_counter = controller_counter -1;
+    end    
     end
     %%%%%%%%%%%%%%%%%%%%
     
@@ -213,53 +215,3 @@ while (ishandle(f))
 end
 end
 
-%%%% BEGIN CALLBACKS FOR MOUSE AND KEYBOARD STUFF %%%%%
-
-% When click-up occurs, disable the mouse motion detecting callback
-function ClickUp(varargin)
-    figData = get(varargin{1},'UserData');
-    set(figData.fig,'WindowButtonMotionFcn','');
-    figData.Fx = 0;
-    figData.Fy = 0;
-    set(varargin{1},'UserData',figData);
-end
-
-% When click-down occurs, enable the mouse motion detecting callback
-function ClickDown(varargin)
-    figData = get(varargin{1},'UserData');
-    figData.Fx = 0;
-    figData.Fy = 0;
-
-    set(figData.fig,'WindowButtonMotionFcn',@MousePos);
-    set(varargin{1},'UserData',figData);
-end
-
-% any keypress switches from dragging the setpoint to applying a
-% disturbance.
-function KeyPress(hObject, eventdata, handles)
-
-figData = get(hObject,'UserData');
-
-figData.tarControl = ~figData.tarControl;
-
-    if figData.tarControl
-       disp('Mouse will change the target point of the end effector.')
-    else
-       disp('Mouse will apply a force on end effector.') 
-    end
-set(hObject,'UserData',figData);
-end
-
-% Checks mouse position and sends it back up.
-function MousePos(varargin)
-    figData = get(varargin{1},'UserData');
-
-    mousePos = get(figData.simArea,'CurrentPoint');
-    if figData.tarControl
-        
-    else
-        figData.Fx = 10*(mousePos(1,1)-figData.xend);
-        figData.Fy = 10*(mousePos(1,2)-figData.yend);
-    end
-     set(varargin{1},'UserData',figData);
-end
