@@ -93,7 +93,7 @@ ztdot = [xdott ydott 0]'; %velocity tracked
 
 Ta = J'*(Kp*(zt - ra_e) + Kd*(ztdot - J*[thdot1 thdot2]'));
 
-matlabFunction(Ta, 'file', 'ImpedenceControl');
+matlabFunction(Ta, 'file', 'DBIC');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% Energy eqns %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

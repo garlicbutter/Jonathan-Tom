@@ -74,8 +74,8 @@ if rederive
         disp('Equations of motion and control parameters derived using relative angles.');
 end
 
-%%%%%%%% Integrate %%%%%%%%
-
-Plotter(p) %Integration is done in real time using symplectic euler like we did in the CS animation class.
+%%%%%%%% Integrate %%%%%%%
+controller_type = "DBIC"; %DBIC/ PBIC
+Plotter(p, controller_type) %Integration is done in real time using symplectic euler like we did in the CS animation class.
 
 
