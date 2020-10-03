@@ -16,7 +16,7 @@ q2 = atan2(Sq2,Cq2)
 syms Sq1 Cq1;
 eqns = [x0 == l1*Cq1+l2*(cos(q2)*Cq1-sin(q2)*Sq1), y0 == l1*Sq1 + l2*Sq1*cos(q2)+l2*sin(q2)*Cq1];
 q1 = solve(eqns,[Sq1 Cq1]); 
-q1 = atan2(double(q1.Sq1),double(q1.Cq1));
+q1 = atan2(double(q1(1;
 
 %% approxiamete plot of the model
 f = figure;
