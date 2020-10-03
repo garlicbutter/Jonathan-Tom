@@ -18,6 +18,19 @@ eqns = [x0 == l1*Cq1+l2*(cos(q2)*Cq1-sin(q2)*Sq1), y0 == l1*Sq1 + l2*Sq1*cos(q2)
 q1 = solve(eqns,[Sq1 Cq1]); 
 q1 = atan2(double(q1.Sq1),double(q1.Cq1));
 
+%% inverse Kinematics solver
+ik = inverseKinematics;
+
+robot = rigidBodyTree('DataFormat','column','MaxNumBodies',3);
+L1 = 1;
+L2 = 1;
+body = rigidBody('link1');
+joint = rigidBodyJoint('joint1', 'revolute');
+setFixedTransform(joint,trvec2tform([0 0 0]));
+joint.JointAxis = [0 0 1];
+body.Joint = joint;
+addBody(robot, body, 'base');
+
 %% approxiamete plot of the model
 f = figure;
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
