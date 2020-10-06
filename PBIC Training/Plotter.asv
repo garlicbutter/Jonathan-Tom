@@ -43,8 +43,21 @@ p.traj = [p.traj; p.traj(1,:)];
 p.xtarget = p.traj(1,1);
 p.ytarget = p.traj(1,2);
 plot(p.traj(:,1), p.traj(:,2),'r--');
+ 
+%Create pendulum link1 object:
+width1 = p.l1*0.05;
+xdat1 = 0.5*width1*[-1 1 1 -1];
+ydat1 = p.l1*[0 0 1 1];
+link1 = patch(xdat1,ydat1, [0 0 0 0],'r');
 
-% Create solution object for inverse kinematics
+%Create pendulum link2 object:
+width2 = p.l2*0.05;
+xdat2 = 0.5*width2*[-1 1 1 -1];
+ydat2 = p.l2*[0 0 1 1];
+link2 = patch(xdat2,ydat2, [0 0 0 0],'b');
+axis([-3.5 3.5 -3.6 3.6]);
+
+
 if show_solution
 %Create solution link1 object:
 sol_width1 = p.l1*0.05;
@@ -58,19 +71,6 @@ sol_xdat2 = 0.5*sol_width2*[-1 1 1 -1];
 sol_ydat2 = p.l2*[0 0 1 1];
 sol_link2 = patch(sol_xdat2,sol_ydat2, [0 0 0 0], 'LineStyle', '--');
 end
-
-%Create pendulum link1 object:
-width1 = p.l1*0.05;
-xdat1 = 0.5*width1*[-1 1 1 -1];
-ydat1 = p.l1*[0 0 1 1];
-link1 = patch(xdat1,ydat1, [0 0 0 0],'r');
-
-%Create pendulum link2 object:
-width2 = p.l2*0.05;
-xdat2 = 0.5*width2*[-1 1 1 -1];
-ydat2 = p.l2*[0 0 1 1];
-link2 = patch(xdat2,ydat2, [0 0 0 0],'b');
-axis([-3.5 3.5 -3.6 3.6]);
 
 %Dots for the hinges:
 h1 = plot(0,0,'.k','MarkerSize',40); %First link anchor
@@ -201,9 +201,9 @@ while (ishandle(f))
     %Draw the inverse kinematics solution
     if show_solution
     [q1_sol, q2_sol] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-    sol_num = 1; % 1 = lower arm, 2 = upper arm
+    sol_num = 1; % 1 = upper arm, 2 = lower arm
     q1_sol =  q1_sol(sol_num)-pi/2;
-    q2_sol =  q2_sol(sol_num);
+    q2_sol =  ;
     rot1_sol = [cos(q1_sol), -sin(q1_sol); sin(q1_sol),cos(q1_sol)]*[sol_xdat1;sol_ydat1];
     rot2_sol = [cos(q2_sol+q1_sol), -sin(q2_sol+q1_sol); sin(q2_sol+q1_sol),cos(q2_sol+q1_sol)]*[sol_xdat2;sol_ydat2];
     set(sol_link1,'xData',rot1_sol(1,:));
