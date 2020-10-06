@@ -85,6 +85,7 @@ matlabFunction(T2Eq, 'file', 'GravityCompT2');
 % ie Ve = J*qv
 
 J = jacobian(Ve,[thdot1 thdot2]);
+matlabFunction(J, 'file', 'Velocity_transformation');
 
 syms Kp Kd xt yt xdott ydott real
 

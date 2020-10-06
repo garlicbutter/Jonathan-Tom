@@ -1,5 +1,7 @@
-function [T] = PBIController(z,p)
+function [T] = PBIController(z,p,th_d,w_d)
 %Controller that uses DB-IC to calculate the torque needed
+% th_d = theta_desired
+% w_d = omega_desired
 
 th1 = z(1);
 th2 = z(3);
@@ -17,8 +19,11 @@ yCurrentTar = p.ytarget;
 xdotCurrentTar = 0;
 ydotCurrentTar = 0;
 
-%Torque to track our desired point
 
+Kd = 10;
+Kp = 6;
+%Torque to track our desired point
+T = [Kp*(th_d(1)-th1)+Kd*(w_d(1)-thdot1), Kp*(th_d(1)-th2)+Kd*(w_d(2)-thdot2)];
 
 
 %Add gravity compensation

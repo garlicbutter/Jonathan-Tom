@@ -163,9 +163,17 @@ while (ishandle(f))
             controller_counter = controller_counter + freq_ratio;
             %disp("torque hasn't changed");
         elseif controller_counter >=1   % change tau
-            tau = PBIController(z1,p);
+            sol_num = 1;
+            [th1_d, th2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
+            th1_d = th1_d(sol_num);
+            th2_d = th2_d(sol_num);
+            theta_desired = [th1_d, th2_d];
+            omega_desired = (theta_desired- theta_desired_prev)/time_passed;
+            tau = PBIController(z1,p,theta_desired, omega_desired);
             %disp("torque has been altered");
+            theta_desired_prev = theta_desired;
             controller_counter = controller_counter -1;
+            time_passed = 0;
         end    
      elseif controller_type=="PID"    
         if controller_counter<1   % do nothing
