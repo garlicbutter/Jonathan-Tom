@@ -20,10 +20,9 @@ xdotCurrentTar = 0;
 ydotCurrentTar = 0;
 
 
-Kd = 10;
-Kp = 6;
+
 %Torque to track our desired point
-T = [Kp*(th_d(1)-th1)+Kd*(w_d(1)-thdot1), Kp*(th_d(1)-th2)+Kd*(w_d(2)-thdot2)];
+T = [p.Kp*(th_d(1)-th1)+p.Kd*(w_d(1)-thdot1), p.Kp*(th_d(1)-th2)+p.Kd*(w_d(2)-thdot2)];
 
 
 %Add gravity compensation

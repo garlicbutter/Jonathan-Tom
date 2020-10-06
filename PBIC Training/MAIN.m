@@ -49,14 +49,16 @@ y0 = endZ(2);
 p.Fx = 0;
 p.Fy = 0;
 
-p.traj = [endZ(1),endZ(2);
-    -1, 1;
-    1, 1;
-    1, -1;
-    -1,-1];
+%octagon trajectory
+%p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
+
+%star pentagon trajectory
+R = 1.8;
+p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
+
+
 
 %%%%%%%% Control Parameters %%%%%%%%
-
 %Controller Gains
 p.Kp = 12;
 p.Kd = 6;
