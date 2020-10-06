@@ -75,7 +75,7 @@ if rederive
 end
 
 %%%%%%%% Integrate %%%%%%%
-controller_type = "DBIC"; %DBIC/ PBIC
+controller_type = "DBIC"; %DBIC/ PBIC/ PID
 Plotter(p, controller_type) %Integration is done in real time using symplectic euler like we did in the CS animation class.
 
 

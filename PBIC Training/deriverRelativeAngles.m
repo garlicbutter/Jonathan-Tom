@@ -96,7 +96,6 @@ Ta = J'*(Kp*(zt - ra_e) + Kd*(ztdot - J*[thdot1 thdot2]'));
 matlabFunction(Ta, 'file', 'DBIC');
 
 % Inverse Kinematics
-
 syms l1 l2 x0 y0 q1 q2 c1 c2 s1 s2 c12 s12 q12 real
 c2 = (x0^2+y0^2-l1^2-l2^2)/(2*l1*l2);
 s2 = [sqrt(1-c2^2), -sqrt(1-c2^2)];
