@@ -12,8 +12,8 @@ th2 = z(3);
 thdot1 = z(2);
 thdot2 = z(4);
 J = Velocity_transformation(p.l1,p.l2,th1,th2); % J  =Jacobian
-Jdt = J;
-H=J;
+Jdt = [1 1 1;1 1 1];
+H=[1 1;1 1;1 1;];
 x_d = traj(iter,1); %desired position
 y_d = traj(iter,2);
 xv_d = (traj(iter,1)-traj(iter-1,1))/dt_phy; %desired velocity
@@ -27,7 +27,7 @@ qddt_d =pinv(J)*([xa_d ya_d 0]'-Jdt*qdt_d) ;% joint value second derivative desi
 
 
 %Torque to track our desired point
-T = H*[qddt_d+p.Kd*([qdt_d 0]'-[thdot1 thdot2 0]')+p.Kp*([q_d 0]'-[th1 th2 0]')];
+T = H*[qddt_d+p.Kd*(qdt_d'-[thdot1 thdot2 0]')+p.Kp*(q_d'-[th1 th2 0]')];
 T = T+ -J'*[p.Fx; p.Fy;0];
 
 %Add gravity compensation
