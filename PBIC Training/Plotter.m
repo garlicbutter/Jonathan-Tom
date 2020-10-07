@@ -115,15 +115,7 @@ error("controller frequency is not valid")
 end
 
 % trajectory planner
-traj_follow_rate = 100;
-for traj_counter = 1: length(p.traj)-1
-    traj_lin_max = ceil((pdist(p.traj(traj_counter:traj_counter+1,:))*traj_follow_rate));
-    temp_array1 = linspace(p.traj(traj_counter,1),p.traj(traj_counter+1,1),traj_lin_max);
-    temp_array2 = linspace(p.traj(traj_counter,2),p.traj(traj_counter+1,2),traj_lin_max); 
-    for traj_lin_counter = 1: traj_lin_max
-            traj = [traj; temp_array1(traj_lin_counter), temp_array2(traj_lin_counter)];
-    end
-end
+traj = Trajectory_planner(p);
 iter = 0;
 iterlen = length(traj);
 
@@ -207,20 +199,20 @@ while (ishandle(f))
     set(targetPt,'yData',p.ytarget);
    
     
-    %When you hit a key, it changes to force mode, where the mouse will
-    %pull things.
+
     ra_e = ForwardKin(p.l1,p.l2,z1(1),z1(3));
     figData.xend = ra_e(1);
     figData.yend = ra_e(2);
     set(f,'UserData',figData);
     
+    %When you hit a key, it changes to force mode, where the mouse will
+    %pull things.
     if ~isempty(figData.Fx)
     p.Fx = figData.Fx;
     end
     if ~isempty(figData.Fy)
     p.Fy = figData.Fy;
     end
-    
     
     %On screen timer.
     set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
@@ -254,12 +246,10 @@ while (ishandle(f))
     set(h2,'xData',(rot1(1,3)+rot1(1,4))/2);
     set(h2,'yData',(rot1(2,3)+rot1(2,4))/2);
     
-    
     %Show torques on screen (text only atm) update for time series later.
     set(tmeter1,'string',strcat(num2str(tau(1),2),' Nm'));
     set(tmeter2,'string',strcat(num2str(tau(2),2),' Nm'));
-    
-     
+        
     %Keep the trace drawing
     set(trace,'xData',rot2(1,3)+(rot1(1,3)+rot1(1,4))/2)
     set(trace,'yData',rot2(2,3)+(rot1(2,3)+rot1(2,4))/2)
