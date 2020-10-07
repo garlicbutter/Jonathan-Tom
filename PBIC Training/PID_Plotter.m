@@ -11,12 +11,11 @@
 %   global variables so, this version is the result.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function Plotter(p,controller_type)
+function PID_Plotter(p)
 close all
 
 % show inverse kinematics solution
 show_solution = true;
-
 %Name the whole window and define the mouse callback function
 f = figure;
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
@@ -141,50 +140,22 @@ while (ishandle(f))
     
     
     %%%%CONTROLLER%%%%%%%%%%
-    if controller_type=="DBIC"     
-        if controller_counter<1   % do nothing
-            controller_counter = controller_counter + freq_ratio;
-            %disp("torque hasn't changed");
-        elseif controller_counter >=1   % change tau
-            tau = DBIController(z1,p);
-            %disp("torque has been altered");
-            controller_counter = controller_counter -1;
-        end    
-    elseif controller_type=="PBIC"  
-        if controller_counter<1   % do nothing
-            controller_counter = controller_counter + freq_ratio;
-            %disp("torque hasn't changed");
-        elseif controller_counter >=1   % change tau
-            sol_num = 1;
-            [th1_d, th2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-            th1_d = th1_d(sol_num);
-            th2_d = th2_d(sol_num);
-            theta_desired = [th1_d, th2_d];
-            omega_desired = (theta_desired- theta_desired_prev)/time_passed;
-            tau = PBIController(z1,p,theta_desired, omega_desired);
-            %disp("torque has been altered");
-            theta_desired_prev = theta_desired;
-            controller_counter = controller_counter -1;
-            time_passed = 0;
-        end    
-     elseif controller_type=="PID"    
-        if controller_counter<1   % do nothing
-            controller_counter = controller_counter + freq_ratio;
-            %disp("torque hasn't changed");
-        elseif controller_counter >=1   % change tau
-            sol_num = 1;
-            [th1_d, th2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-            th1_d = th1_d(sol_num);
-            th2_d = th2_d(sol_num);
-            theta_desired = [th1_d, th2_d];
-            omega_desired = (theta_desired- theta_desired_prev)/time_passed;
-            tau = PIDController(z1,p,theta_desired, omega_desired);
-            %disp("torque has been altered");
-            theta_desired_prev = theta_desired;
-            controller_counter = controller_counter -1;
-            time_passed = 0;
-        end  
-    end
+    if controller_counter<1   % do nothing
+        controller_counter = controller_counter + freq_ratio;
+        %disp("torque hasn't changed");
+    elseif controller_counter >=1   % change tau
+        sol_num = 1;
+        [th1_d, th2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
+        th1_d = th1_d(sol_num);
+        th2_d = th2_d(sol_num);
+        theta_desired = [th1_d, th2_d];
+        omega_desired = (theta_desired- theta_desired_prev)/time_passed;
+        tau = PIDController(z1,p,theta_desired, omega_desired);
+        %disp("torque has been altered");
+        theta_desired_prev = theta_desired;
+        controller_counter = controller_counter -1;
+        time_passed = 0;
+    end  
     %%%%%%%%%%%%%%%%%%%%
     
     % trajectory follower

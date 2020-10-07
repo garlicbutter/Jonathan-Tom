@@ -11,8 +11,7 @@ thdot2 = z(4);
 J = Velocity_transformation(p.l1,p.l2,th1,th2);
 
 %Torque to track our desired point
-T = [p.Kp*(th_d(1)-th1)+p.Kd*(w_d(1)-thdot1), p.Kp*(th_d(1)-th2)+p.Kd*(w_d(2)-thdot2)];
-
+T = J'*[p.Kp*(th_d(1)-th1)+p.Kd*(w_d(1)-thdot1), p.Kp*(th_d(1)-th2)+p.Kd*(w_d(2)-thdot2), 0]';
 
 
 %Add gravity compensation
