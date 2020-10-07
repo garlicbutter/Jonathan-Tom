@@ -44,11 +44,11 @@ p.I1 = 1/12*p.m1*p.l1^2; %Moment of inertia of link 1 about COM
 p.I2 = 1/12*p.m2*p.l2^2; %Moment of inertia of link 2 about COM
 p.Fx = 0;
 p.Fy = 0;
-p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
-p.ytarget = y0;
 endZ = ForwardKin(p.l1,p.l2,p.init(1),p.init(3));
 x0 = endZ(1); %End effector initial position in world frame.
 y0 = endZ(2);
+p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
+p.ytarget = y0;
 
 
 %octagon trajectory

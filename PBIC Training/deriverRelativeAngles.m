@@ -92,9 +92,10 @@ syms Kp Kd xt yt xdott ydott real
 zt = [xt yt 0 ]'; %Trajectory tracked
 ztdot = [xdott ydott 0]'; %velocity tracked
 
-Ta = J'*(Kp*(zt - ra_e) + Kd*(ztdot - J*[thdot1 thdot2]'));
+Tau = J'*(Kp*(zt - ra_e) + Kd*(ztdot - J*[thdot1 thdot2]'));
+matlabFunction(Tau, 'file', 'DBIC');
 
-matlabFunction(Ta, 'file', 'DBIC');
+
 
 % Inverse Kinematics
 syms l1 l2 x0 y0 q1 q2 c1 c2 s1 s2 c12 s12 q12 real
@@ -106,7 +107,6 @@ q1 = atan2(c1s1(2),c1s1(1));
 c1s1 = [l1+l2*cos(q2(2)), -l2*sin(q2(2));l2*sin(q2(2)), l1+l2*cos(q2(2))]\[x0; y0];
 q1 = [q1, atan2(c1s1(2),c1s1(1))];
 matlabFunction(q1, q2, 'file', 'InverseKin');
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%AA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

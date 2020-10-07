@@ -107,7 +107,6 @@ controller_freq = 80;
 freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
 theta_desired_prev = [0, 0]; % for PID
-time_passed = 0; % for PID
 controller_counter = 0; % to track when the controller frequency hit
 if freq_ratio<=0 || freq_ratio>=1
 error("controller frequency is not valid")
@@ -144,17 +143,9 @@ while (ishandle(f))
         controller_counter = controller_counter + freq_ratio;
         %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
-        sol_num = 1;
-        [th1_d, th2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-        th1_d = th1_d(sol_num);
-        th2_d = th2_d(sol_num);
-        theta_desired = [th1_d, th2_d];
-        omega_desired = (theta_desired- theta_desired_prev)/time_passed;
-        tau = PBIController(z1,p,theta_desired, omega_desired);
+        tau = PBIController(z1,p,traj, iter);
         %disp("torque has been altered");
-        theta_desired_prev = theta_desired;
         controller_counter = controller_counter -1;
-        time_passed = 0;
     end    
     %%%%%%%%%%%%%%%%%%%%
     
@@ -227,7 +218,6 @@ while (ishandle(f))
 
     drawnow;
     current_time = current_time + dt_phy;
-    time_passed = time_passed + dt_phy; %for the pid controller
 end
 end
 

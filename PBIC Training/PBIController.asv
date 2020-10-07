@@ -15,12 +15,19 @@ q_d = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget) % joint value desired
 qdt_d = ;% joint value derivative desired
 qddt_d = ;% joint value second derivative desired
 
+%Current disturbance force on end effector
+FxCurrent = p.Fx;
+FyCurrent = p.Fy;
+
+
+xdotCurrentTar = 0;
+ydotCurrentTar = 0;
 
 % J  =Jacobian
 J = Velocity_transformation(p.l1,p.l2,th1,th2);
 
 %Torque to track our desired point
-T = H*[qddt_d+p.Kd*([qdt_d 0]'-[thdot1 thdot2 0]')+p.Kp*([q_d 0]'-[th1 th2 0]')];
+T = [qddt_d+p.Kd*([qdt_d 0]'-[thdot1 thdot2 0]')+p.Kp*([q_d 0]'-[th1 th2 0]')];
 T = T+ -J'*[p.Fx; p.Fy;0];
 
 %Add gravity compensation
