@@ -81,8 +81,7 @@ trace = plot(0,0,'.g','MarkerSize',10); %First link anchor
 %Timer label:
 timer = text(-3.2,-3.2,'0.00','FontSize',28);
 
-%Std of effector - x
-std_x = text(-3.2,-0.2,'0.00','FontSize',28);
+%
 
 %Torque meters on screen
 tmeter1 = text(0.6,-3.2,'0.00','FontSize',22,'Color', 'r');
@@ -191,11 +190,11 @@ while (ishandle(f))
     %On screen timer.
     set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
     
-%     On screen std of x
-%     set(std_x,'string',strcat(num2str(current_time,'%.2f'),'s'))
-%     On screen std of y
-%     On screen average error of q1
-%     On screen average error of q2 
+    %On screen std of x
+    %set(std_x,'string',strcat(num2str(current_time,'%.2f'),'s'))
+    %On screen std of y
+    %On screen average error of q1
+    %On screen average error of q2 
 
     %Draw the inverse kinematics solution
     if show_solution

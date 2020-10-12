@@ -81,6 +81,9 @@ trace = plot(0,0,'.g','MarkerSize',10); %First link anchor
 %Timer label:
 timer = text(-3.2,-3.2,'0.00','FontSize',28);
 
+%Std of effector - x
+std_x = text(-3.2,-0.2,'0.00','FontSize',28);
+
 %Torque meters on screen
 tmeter1 = text(0.6,-3.2,'0.00','FontSize',22,'Color', 'r');
 tmeter2 = text(2.2,-3.2,'0.00','FontSize',22,'Color', 'b');
