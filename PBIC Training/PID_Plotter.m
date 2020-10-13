@@ -106,7 +106,7 @@ set(f,'UserData',figData);
 % differs from the frequency of the physics.
 current_time = 0;
 physics_freq = 100;
-controller_freq = 80;
+controller_freq = 99;
 freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
 theta_desired_prev = [0, 0]; % for PID

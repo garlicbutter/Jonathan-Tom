@@ -13,6 +13,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function DBIC_Plotter(p)
 close all
+delete('End_Effector_data');
 
 % show inverse kinematics solution
 show_solution = true;
@@ -27,6 +28,17 @@ figData.xend = [];
 figData.yend = [];
 figData.fig = f;
 figData.tarControl = true;
+
+
+
+%End efftor movement: EndEff_Mov
+EndEff_x = [];
+EndEff_y = [];
+traj_x = [];
+traj_y = [];
+k = 1;
+
+
 
 %%%%%%%% 1st Subplot -- the pendulum animation %%%%%%%
 figData.simArea = subplot(1,1,1); %Eliminated other subplots, but left this for syntax consistency.
@@ -163,13 +175,21 @@ while (ishandle(f))
     p.ytarget = traj(iter,2);
     set(targetPt,'xData',p.xtarget); %Change the target point graphically.
     set(targetPt,'yData',p.ytarget);
-   
-    
 
     ra_e = ForwardKin(p.l1,p.l2,z1(1),z1(3));
     figData.xend = ra_e(1);
     figData.yend = ra_e(2);
     set(f,'UserData',figData);
+    
+    
+    %For the record
+    traj_x(k) = traj(iter,1);;
+    traj_y(k) = traj(iter,2);
+    EndEff_x(k) = ra_e(1);
+    EndEff_y(k) = ra_e(2);
+    
+    
+    
     
     %When you hit a key, it changes to force mode, where the mouse will
     %pull things.
@@ -223,6 +243,13 @@ while (ishandle(f))
     drawnow;
     current_time = current_time + dt_phy;
     time_passed = time_passed + dt_phy; %for the pid controller
+    
+    %Position & Trajectory Record for further analysis
+    % if current_time <= Record_Limit
+    if current_time <= 5
+        save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y');
+    end 
+    k = k+1;
 end
 end
 
