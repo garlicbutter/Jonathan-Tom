@@ -246,7 +246,7 @@ while (ishandle(f))
     
     %Position & Trajectory Record for further analysis
     % if current_time <= Record_Limit
-    if current_time <= 5
+    if current_time <= 40
         save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y');
     end 
     k = k+1;
