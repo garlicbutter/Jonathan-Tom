@@ -43,7 +43,7 @@ q1_ideal = [];
 q2_ideal = [];
 q1_real = [];
 q2_real = [];
-
+kasdfasdf = 2;
 
 %%%%%%%% 1st Subplot -- the pendulum animation %%%%%%%
 figData.simArea = subplot(1,1,1); %Eliminated other subplots, but left this for syntax consistency.
