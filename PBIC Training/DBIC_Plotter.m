@@ -36,7 +36,7 @@ EndEff_x = [];
 EndEff_y = [];
 traj_x = [];
 traj_y = [];
-k = 1;
+iter_record = 1;
 q1_ideal = [];
 q2_ideal = [];
 q1_real = [];
@@ -214,31 +214,31 @@ while (ishandle(f))
     
     
     %For the record
-    traj_x(k) = traj(iter,1);
-    traj_y(k) = traj(iter,2);
-    EndEff_x(k) = ra_e(1);
-    EndEff_y(k) = ra_e(2);
-    q1_real(k) = z1(1);
-    q2_real(k) = z1(3);
+    traj_x(iter_record) = traj(iter,1);
+    traj_y(iter_record) = traj(iter,2);
+    EndEff_x(iter_record) = ra_e(1);
+    EndEff_y(iter_record) = ra_e(2);
+    q1_real(iter_record) = z1(1);
+    q2_real(iter_record) = z1(3);
     round_counter_1 = 0;
     round_counter_2 = 0;
-    if k>1
-        if q1_ideal(k-1) - (q1_sol + 2*pi*round_counter_1) >= pi
+    if iter_record>1
+        if q1_ideal(iter_record-1) - (q1_sol + 2*pi*round_counter_1) >= pi
             round_counter_1 = round_counter_1 + 1;
             print('one round passed');
-        else if q1_ideal(k-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
+        else if q1_ideal(iter_record-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
                  round_counter_1 = round_counter_1 -1;
             end
         end
-        if q2_ideal(k-1) - (q2_sol+ 2*pi*round_counter_2) >= pi
+        if q2_ideal(iter_record-1) - (q2_sol+ 2*pi*round_counter_2) >= pi
             round_counter_2 = round_counter_2 + 1;
-        else if q2_ideal(k-1) - (q2_sol+ 2*pi*round_counter_2) <= -pi
+        else if q2_ideal(iter_record-1) - (q2_sol+ 2*pi*round_counter_2) <= -pi
                  round_counter_2 = round_counter_2 -1;
             end
         end
     end
-    q1_ideal(k) = q1_sol + 2*pi*round_counter_1;
-    q2_ideal(k) = q2_sol + 2*pi*round_counter_2;
+    q1_ideal(iter_record) = q1_sol + 2*pi*round_counter_1;
+    q2_ideal(iter_record) = q2_sol + 2*pi*round_counter_2;
     
     
     
@@ -274,7 +274,7 @@ while (ishandle(f))
     if current_time <= 10
         save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end 
-    k = k+1;
+    iter_record = iter_record+1;
     
 end
 end

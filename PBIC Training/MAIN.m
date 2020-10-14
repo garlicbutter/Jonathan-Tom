@@ -28,7 +28,7 @@ clc; close all; clear;
 %Controller Gains and type
 p.Kp = 3;
 p.Kd = 2;
-controller_type = "PBIC"; %DBIC/ PBIC/ PID
+controller_type = "DBIC"; %DBIC/ PBIC/ PID
 
 
 %%%%%%%% System Parameters %%%%%%%%
