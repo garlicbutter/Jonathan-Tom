@@ -31,13 +31,16 @@ figData.tarControl = true;
 
 
 
-%End efftor movement: EndEff_Mov
+%End efftor movement and joint values
 EndEff_x = [];
 EndEff_y = [];
 traj_x = [];
 traj_y = [];
 k = 1;
-
+q1_ideal = [];
+q2_ideal = [];
+q1_real = [];
+q2_real = [];
 
 
 %%%%%%%% 1st Subplot -- the pendulum animation %%%%%%%
@@ -182,15 +185,6 @@ while (ishandle(f))
     set(f,'UserData',figData);
     
     
-    %For the record
-    traj_x(k) = traj(iter,1);;
-    traj_y(k) = traj(iter,2);
-    EndEff_x(k) = ra_e(1);
-    EndEff_y(k) = ra_e(2);
-    
-    
-    
-    
     %When you hit a key, it changes to force mode, where the mouse will
     %pull things.
     if ~isempty(figData.Fx)
@@ -216,6 +210,38 @@ while (ishandle(f))
     set(sol_link2,'xData',rot2_sol(1,:)+(rot1_sol(1,3)+rot1_sol(1,4))/2);
     set(sol_link2,'yData',rot2_sol(2,:)+(rot1_sol(2,3)+rot1_sol(2,4))/2);
     end
+    
+    
+    
+    %For the record
+    traj_x(k) = traj(iter,1);
+    traj_y(k) = traj(iter,2);
+    EndEff_x(k) = ra_e(1);
+    EndEff_y(k) = ra_e(2);
+    q1_real(k) = z1(1);
+    q2_real(k) = z1(3);
+    round_counter_1 = 0;
+    round_counter_2 = 0;
+    if k>1
+        if q1_ideal(k-1) - (q1_sol + 2*pi*round_counter_1) >= pi
+            round_counter_1 = round_counter_1 + 1;
+            print('one round passed');
+        else if q1_ideal(k-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
+                 round_counter_1 = round_counter_1 -1;
+            end
+        end
+        if q2_ideal(k-1) - (q2_sol+ 2*pi*round_counter_2) >= pi
+            round_counter_2 = round_counter_2 + 1;
+        else if q2_ideal(k-1) - (q2_sol+ 2*pi*round_counter_2) <= -pi
+                 round_counter_2 = round_counter_2 -1;
+            end
+        end
+    end
+    q1_ideal(k) = q1_sol + 2*pi*round_counter_1;
+    q2_ideal(k) = q2_sol + 2*pi*round_counter_2;
+    
+    
+    
     
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.
@@ -245,11 +271,11 @@ while (ishandle(f))
     time_passed = time_passed + dt_phy; %for the pid controller
     
     %Position & Trajectory Record for further analysis
-    % if current_time <= Record_Limit
-    if current_time <= 40
-        save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y');
+    if current_time <= 10
+        save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end 
     k = k+1;
+    
 end
 end
 
