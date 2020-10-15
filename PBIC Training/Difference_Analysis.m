@@ -62,8 +62,7 @@ plot(q1_ideal,'b');
 legend("Impedance Result","Required");
 xlabel("time lapse");
 ylabel("Joint value of q1 [rad]");
-str_rmsq1 = {'RMS of q1: ',RMS_q1};
-text(0,0,str_rmsq1)
+
 
 subplot(2,1,2);
 hold on
@@ -72,8 +71,7 @@ plot(q2_ideal,'b');
 legend("Impedance Result","Required");
 xlabel("time lapse");
 ylabel("Joint value of q2 [rad]");
-str_rmsq2 = {'RMS of q2: ',RMS_q2};
-text(-0.3,1,str_rmsq2)
+
 
 
 figure(4);
