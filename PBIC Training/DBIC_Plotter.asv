@@ -22,6 +22,7 @@ end
 show_solution = true;
 %Name the whole window and define the mouse callback function
 f = figure;
+>> set(gcf, 'Position',  [100, 100, 500, 400])
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
 
 figData.Fx = [];
@@ -138,10 +139,9 @@ round_counter_2 = 0;
 
 
 % for inv k solution select
-q_sol_history = [0 0 0 0;0 0 0 0;0 0 0 0];
+q_sol_history = [0 0 0 0;0 0 0 0;0 0 0 0]; 
 sol_select = [0 0 0];
-
-movegui('center');    
+    
 while (ishandle(f))
     figData = get(f,'UserData');
     
@@ -205,12 +205,9 @@ while (ishandle(f))
     %Draw the inverse kinematics solution
     if show_solution
     [q1_sol, q2_sol] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-%     q_sol_history = [q_sol_history(2:3,:);q1_sol q2_sol];
-%     sol_num = invKselector(q_sol_history, sol_select, p.init); % 1 = lower arm, 2 = upper arm
-%     sol_select = [sol_select(2:3) sol_num];
-
-    sol_num = 1; % choose the solution manually before i finish the function. 1 = lower arm, 2 = upper arm
-
+    q_sol_history = [q_sol_history(2:3,:);q1_sol q2_sol];
+    sol_num = invKselector(q_sol_history, sol_select); % 1 = lower arm, 2 = upper arm
+    sol_select = [sol_select(2:3) sol_num];
     q1_sol =  q1_sol(sol_num)-pi/2;
     q2_sol =  q2_sol(sol_num);
     rot1_sol = [cos(q1_sol), -sin(q1_sol); sin(q1_sol),cos(q1_sol)]*[sol_xdat1;sol_ydat1];
@@ -246,7 +243,7 @@ while (ishandle(f))
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
+        save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end     
     
     

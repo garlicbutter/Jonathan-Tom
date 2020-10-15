@@ -1,5 +1,8 @@
-clc;clear;
-load('End_Effector_data');
+clc
+clear
+close all
+
+load('End_Effector_data.mat');
 
 Traj = [traj_x(1,:)',traj_y(1,:)'];
 End_Efftor = [EndEff_x(1,:)',EndEff_y(1,:)'];
@@ -16,6 +19,7 @@ RMS_q1 = rms(diff_q1);
 RMS_q2 = rms(diff_q2);
 
 figure(1);
+movegui('west');    
 subplot(2,1,1);
 hold on
 title("Value of x position in Cartasian");
@@ -39,6 +43,7 @@ str_rmsy = {'RMS of y: ',RMS_y};
 text(0.3,1,str_rmsy)
 
 figure(2);
+movegui('center');    
 title("trajectory comparison");
 hold on
 plot(End_Efftor(:,1),End_Efftor(:,2),'r');
@@ -46,10 +51,11 @@ plot(Traj(:,1),Traj(:,2),'b');
 xlabel("x [m]");
 ylabel("y [m]");
 legend("End Effector","Required");
-% str = {'RMS: ',RMS};
-% text(1.3,1,str)
+str = {'RMS: ',RMS};
+text(-0.25,-0.25,str)
 
 figure(3);
+movegui('east');    
 subplot(2,1,1);
 hold on
 title("Joint Value");

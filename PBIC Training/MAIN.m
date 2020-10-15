@@ -26,8 +26,8 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
-p.Kp = 3*10;
-p.Kd = 2;
+p.Kp = 15;
+p.Kd = 3;
 controller_type = "DBIC"; %DBIC/ PBIC/ PID
 
 
@@ -55,7 +55,7 @@ p.ytarget = y0;
 p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
 
 %star pentagon trajectory
-% R = 1.8;
+% R = 2;
 % p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
 
 
