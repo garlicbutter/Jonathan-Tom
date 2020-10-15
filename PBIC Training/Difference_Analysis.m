@@ -19,7 +19,7 @@ RMS_q1 = rms(diff_q1);
 RMS_q2 = rms(diff_q2);
 
 figure(1);
-movegui('west');    
+movegui('north');    
 subplot(2,1,1);
 hold on
 title("Value of x position in Cartasian");
@@ -28,8 +28,7 @@ plot(traj_x,'b');
 legend("End Effector","Required");
 xlabel("time lapse");
 ylabel("Value of x");
-str_rmsx = {'RMS of x: ',RMS_x};
-text(0.3,1,str_rmsx)
+
 
 subplot(2,1,2);
 hold on
@@ -39,11 +38,10 @@ plot(traj_y,'b');
 legend("End Effector","Required");
 xlabel("time lapse");
 ylabel("Value of y");
-str_rmsy = {'RMS of y: ',RMS_y};
-text(0.3,1,str_rmsy)
+
 
 figure(2);
-movegui('center');    
+movegui('west');    
 title("trajectory comparison");
 hold on
 plot(End_Efftor(:,1),End_Efftor(:,2),'r');
@@ -55,7 +53,7 @@ str = {'RMS: ',RMS};
 text(-0.25,-0.25,str)
 
 figure(3);
-movegui('east');    
+movegui('northeast');    
 subplot(2,1,1);
 hold on
 title("Joint Value");
@@ -77,3 +75,47 @@ ylabel("Joint value of q2 [rad]");
 str_rmsq2 = {'RMS of q2: ',RMS_q2};
 text(-0.3,1,str_rmsq2)
 
+
+figure(4);
+movegui('south');    
+subplot(2,1,1);
+hold on
+grid on
+title("Difference of x position in Cartasian");
+plot(diff_x,'r');
+xlabel("time lapse");
+ylabel("Difference of x [m]");
+str_rmsx = {'RMS of x: ',RMS_x};
+text(500,-0.5,str_rmsx)
+
+subplot(2,1,2);
+hold on
+grid on
+title("Difference of y position in Cartasian");
+plot(diff_y,'r');
+xlabel("time lapse");
+ylabel("Difference of y [m]");
+str_rmsy = {'RMS of y: ',RMS_y};
+text(500,-0.5,str_rmsy)
+
+figure(5);
+movegui('southeast');    
+subplot(2,1,1);
+hold on
+grid on
+title("Difference of q2 to desired value");
+plot(diff_q1,'r');
+xlabel("time lapse");
+ylabel("Difference of q1 [rad]");
+str_rmsx = {'RMS of q1: ',RMS_q1};
+text(0,0,str_rmsx)
+
+subplot(2,1,2);
+hold on
+grid on
+title("Difference of q1 to desired value");
+plot(diff_q2,'r');
+xlabel("time lapse");
+ylabel("Difference of q2 [rad]");
+str_rmsy = {'RMS of q2: ',RMS_q2};
+text(0,0,str_rmsy)
