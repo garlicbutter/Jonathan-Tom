@@ -27,7 +27,7 @@ clc; close all; clear;
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
 p.Kp = 3*10;
-p.Kd = 2*10;
+p.Kd = 2;
 controller_type = "DBIC"; %DBIC/ PBIC/ PID
 
 

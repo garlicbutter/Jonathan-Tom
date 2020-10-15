@@ -13,7 +13,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function DBIC_Plotter(p)
 close all
-if 
+
+if isfile('End_Effector_data')
     delete('End_Effector_data');
 end 
 
