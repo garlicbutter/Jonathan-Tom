@@ -26,8 +26,18 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
+<<<<<<< Updated upstream
 p.Kp = 30;
 p.Kd = 6;
+=======
+<<<<<<< HEAD
+p.Kp = 3*50;
+p.Kd = 2*10;
+=======
+p.Kp = 30;
+p.Kd = 6;
+>>>>>>> c237454433093b25c8b4394163ba506e7ef264c7
+>>>>>>> Stashed changes
 controller_type = "DBIC"; %DBIC/ PBIC/ PID
 
 
