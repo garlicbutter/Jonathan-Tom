@@ -20,14 +20,18 @@ end
 
 % show inverse kinematics solution
 show_solution = true;
+
+% show and implement wall
+wall = true;
+
 %Name the whole window and define the mouse callback function
 f = figure;
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
 
 figData.Fx = [];
 figData.Fy = [];
-figData.xend = [];
-figData.yend = [];
+figData.xend = [p.xtarget];
+figData.yend = [p.ytarget];
 figData.fig = f;
 figData.tarControl = true;
 
@@ -61,6 +65,17 @@ sol_xdat2 = 0.5*sol_width2*[-1 1 1 -1];
 sol_ydat2 = p.l2*[0 0 1 1];
 sol_link2 = patch(sol_xdat2,sol_ydat2, [0 0 0 0], 'LineStyle', '--');
 end
+
+% Create wall object
+if wall
+wall_left = 0.8;
+wall_right = 3;
+wall_stiffness = -15;
+wall_x = [wall_left wall_right wall_right wall_left];
+wall_y = [-3 -3 3 3];
+patch(wall_x,wall_y,'red','FaceAlpha',.3)
+end
+
 
 %Create pendulum link1 object:
 width1 = p.l1*0.05;
@@ -198,6 +213,12 @@ while (ishandle(f))
     if ~isempty(figData.Fy)
     p.Fy = figData.Fy;
     end
+    % wall apply force
+    if wall 
+          if figData.xend> wall_left && figData.xend<wall_right
+              p.Fx = wall_stiffness*(figData.xend - wall_left)
+          end
+    end
     
     %On screen timer.
     set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
@@ -271,8 +292,8 @@ while (ishandle(f))
     set(tmeter2,'string',strcat(num2str(tau(2),2),' Nm'));
         
     %Keep the trace drawing
-    set(trace,'xData',rot2(1,3)+(rot1(1,3)+rot1(1,4))/2)
-    set(trace,'yData',rot2(2,3)+(rot1(2,3)+rot1(2,4))/2)
+    set(trace,'xData',(rot2(1,3)+rot2(1,4))/2+(rot1(1,3)+rot1(1,4))/2)
+    set(trace,'yData',(rot2(2,3)+rot2(2,4))/2+(rot1(2,3)+rot1(2,4))/2)
 
     drawnow;
     current_time = current_time + dt_phy;
