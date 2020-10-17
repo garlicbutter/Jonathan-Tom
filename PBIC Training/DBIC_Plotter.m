@@ -14,6 +14,12 @@
 function DBIC_Plotter(p)
 close all
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+delete('End_Effector_data');
+=======
+>>>>>>> Stashed changes
 =======
 <<<<<<< HEAD
 delete('End_Effector_data');
@@ -262,14 +268,20 @@ while (ishandle(f))
         if q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) >= pi
             round_counter_1 = round_counter_1 + 1;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         elseif q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
 =======
+=======
+>>>>>>> Stashed changes
 <<<<<<< HEAD
 %             print('one round passed');
         else if q1_ideal(k-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
 =======
         elseif q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
 >>>>>>> c237454433093b25c8b4394163ba506e7ef264c7
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                  round_counter_1 = round_counter_1 -1;
         end
@@ -314,7 +326,10 @@ while (ishandle(f))
     drawnow;
     current_time = current_time + dt_phy;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 <<<<<<< HEAD
     time_passed = time_passed + dt_phy; %for the pid controller
     
@@ -326,6 +341,9 @@ while (ishandle(f))
     
 =======
 >>>>>>> c237454433093b25c8b4394163ba506e7ef264c7
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 end
 end
