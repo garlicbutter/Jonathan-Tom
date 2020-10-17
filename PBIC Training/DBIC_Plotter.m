@@ -13,23 +13,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function DBIC_Plotter(p)
 close all
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-delete('End_Effector_data');
-=======
->>>>>>> Stashed changes
-=======
-<<<<<<< HEAD
-delete('End_Effector_data');
-=======
->>>>>>> Stashed changes
-
 if isfile('End_Effector_data')
     delete('End_Effector_data');
 end 
->>>>>>> c237454433093b25c8b4394163ba506e7ef264c7
 
 % show inverse kinematics solution
 show_solution = true;
@@ -267,22 +253,7 @@ while (ishandle(f))
     if iter>1
         if q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) >= pi
             round_counter_1 = round_counter_1 + 1;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         elseif q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
-=======
-=======
->>>>>>> Stashed changes
-<<<<<<< HEAD
-%             print('one round passed');
-        else if q1_ideal(k-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
-=======
-        elseif q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
->>>>>>> c237454433093b25c8b4394163ba506e7ef264c7
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
                  round_counter_1 = round_counter_1 -1;
         end
         if q2_ideal(iter-1) - (q2_sol+ 2*pi*round_counter_2) >= pi
@@ -325,12 +296,6 @@ while (ishandle(f))
 
     drawnow;
     current_time = current_time + dt_phy;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-<<<<<<< HEAD
     time_passed = time_passed + dt_phy; %for the pid controller
     
     %Position & Trajectory Record for further analysis
@@ -338,13 +303,6 @@ while (ishandle(f))
         save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end 
     k = k+1;
-    
-=======
->>>>>>> c237454433093b25c8b4394163ba506e7ef264c7
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 end
 end
 
