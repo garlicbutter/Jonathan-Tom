@@ -296,13 +296,7 @@ while (ishandle(f))
 
     drawnow;
     current_time = current_time + dt_phy;
-    time_passed = time_passed + dt_phy; %for the pid controller
-    
-    %Position & Trajectory Record for further analysis
-    if current_time <= 60
-        save('End_Effector_data','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
-    end 
-    k = k+1;
+
 end
 end
 
