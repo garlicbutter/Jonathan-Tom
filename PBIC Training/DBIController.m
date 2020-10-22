@@ -1,8 +1,8 @@
 function [T] = DBIController(z,p,traj,iter,dt_phy)
 %Controller that uses DB-IC to calculate the torque needed
 
-if iter==1 || iter==2 %temporary solution to make every index excutable
-    iter = 3;
+if iter==1 %temporary solution to make every index excutable
+    iter = 2;
 end
 
 th1 = z(1);
@@ -15,8 +15,7 @@ x_d = traj(iter,1); %desired position
 y_d = traj(iter,2);
 xv_d = (traj(iter,1)-traj(iter-1,1))/dt_phy; %desired velocity
 yv_d = (traj(iter,2)-traj(iter-1,2))/dt_phy;
-xa_d = (traj(iter,1)-2*traj(iter-1,1)+traj(iter-2,1))/(dt_phy^2); %desired acceleration
-ya_d = (traj(iter,2)-2*traj(iter-1,2)+traj(iter-2,2))/(dt_phy^2);
+
 
 %Current disturbance force on end effector
 FxCurrent = p.Fx;
@@ -35,9 +34,9 @@ J_dt = Jdt(p.l1,p.l2,th1,th2,thdot1,thdot2);
 H=[p.I1 0;0 p.I2;];
 Lq = ForwardKin(p.l1,p.l2,th1,th2); % forward kinematics
 
-K = p.Kp; % K stiffness 
-B = p.Kd; % B damping
-M= 2; % M inertia
+K = p.K; % K stiffness 
+B = p.B; % B damping
+M= p.M; % M inertia
 F_int = [p.Fx p.Fy 0]';
 
 %Torque to track our desired point
