@@ -37,13 +37,13 @@ Lq = ForwardKin(p.l1,p.l2,th1,th2); % forward kinematics
 
 K = p.Kp; % K stiffness 
 B = p.Kd; % B damping
-M= 2; % M inertia
-F_int = [p.Fx p.Fy 0]';
+M= [p.I1 p.I2]'; % M inertia
+F_int = [p.Fx p.Fy]';
 
 %Torque to track our desired point
 
-temp = K*([x_d y_d 0]'-Lq)+B*([xv_d yv_d 0]'-J*dq)-F_int;
-T = H*J'*(M^-1*temp-J_dt*dq);
+temp = K*([x_d y_d]'-Lq(1:2))+B*([xv_d yv_d]'-J(1:2,:)*dq)-F_int;
+T = H*J(1:2,:)'*(cross(inv(M),temp)-J_dt*dq);
 T = T+ -J'*F_int;
 
 %Add gravity compensation
