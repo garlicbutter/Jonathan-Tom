@@ -21,7 +21,7 @@ ydotCurrentTar = 0;
 J = Velocity_transformation(p.l1,p.l2,th1,th2);
 %Torque to track our desired point
 T = DBIC(p.Kd,p.Kp,p.l1,p.l2,th1,th2,thdot1,thdot2,xdotCurrentTar,xCurrentTar,ydotCurrentTar,yCurrentTar);
-T = T+ -J'*[p.Fx; p.Fy;0];
+% T = T+ -J'*[p.Fx; p.Fy;0];
 %Add gravity compensation
 T(1) = T(1) + GravityCompT1(0,0,p.d1,p.d2,p.g,p.l1,p.l2,p.m1,p.m2,th1,th2,thdot1,thdot2);
 T(2) = T(2) + GravityCompT2(0,0,p.d2,p.g,p.l1,p.l2,p.m2,th1,th2,thdot1);

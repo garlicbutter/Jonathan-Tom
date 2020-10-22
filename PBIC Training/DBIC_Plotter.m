@@ -69,7 +69,7 @@ end
 if wall
 wall_left = 0.8;
 wall_right = 3;
-wall_stiffness = -15;
+wall_stiffness = -150;
 wall_x = [wall_left wall_right wall_right wall_left];
 wall_y = [-3 -3 3 3];
 patch(wall_x,wall_y,'red','FaceAlpha',.3)
