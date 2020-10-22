@@ -93,7 +93,7 @@ zt = [xt yt 0 ]'; %Trajectory tracked
 ztdot = [xdott ydott 0]'; %velocity tracked
 
 Tau = J'*(Kp*(zt - ra_e) + Kd*(ztdot - J*[thdot1 thdot2]'));
-matlabFunction(Tau, 'file', 'DBIC');
+matlabFunction(Tau, 'file', 'PID');
 
 
 

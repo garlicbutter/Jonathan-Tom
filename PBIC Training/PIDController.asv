@@ -19,7 +19,7 @@ xdotCurrentTar = 0;
 ydotCurrentTar = 0;
 
 %Torque to track our desired point
-T = PID(p.Kd,p.Kp,p.l1,p.l2,th1,th2,thdot1,thdot2,xdotCurrentTar,xCurrentTar,ydotCurrentTar,yCurrentTar);
+T = ImpedenceControl(p.Kd,p.Kp,p.l1,p.l2,th1,th2,thdot1,thdot2,xdotCurrentTar,xCurrentTar,ydotCurrentTar,yCurrentTar);
 
 
 %Add gravity compensation

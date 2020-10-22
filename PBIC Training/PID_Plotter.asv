@@ -120,7 +120,7 @@ traj = Trajectory_planner(p);
 iter = 0;
 iterlen = length(traj);
 
-movegui('center');    
+    
 while (ishandle(f))
     figData = get(f,'UserData');
     
@@ -146,8 +146,15 @@ while (ishandle(f))
         controller_counter = controller_counter + freq_ratio;
         %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
-        tau = PIDController(z1,p);
+        sol_num = 1;
+        [th1_d, th2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
+        th1_d = th1_d(sol_num);
+        th2_d = th2_d(sol_num);
+        theta_desired = [th1_d, th2_d];
+        omega_desired = (theta_desired- theta_desired_prev)/time_passed;
+        tau = PIDController(z1,p,theta_desired, omega_desired);
         %disp("torque has been altered");
+        theta_desired_prev = theta_desired;
         controller_counter = controller_counter -1;
         time_passed = 0;
     end  
