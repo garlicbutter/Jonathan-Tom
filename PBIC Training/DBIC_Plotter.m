@@ -70,7 +70,9 @@ if wall
 wall_left = 0.8;
 wall_right = 3;
 wall_stiffness = -150;
-wall_friction_coefficient = 20;
+wall_damping = 20;
+dir_Fy = 0;
+wall_friction_coefficient = 0.5;
 wall_x = [wall_left wall_right wall_right wall_left];
 wall_y = [-3 -3 3 3];
 patch(wall_x,wall_y,'red','FaceAlpha',.3)
@@ -217,11 +219,15 @@ while (ishandle(f))
     % wall apply force
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
-              p.Fx = wall_stiffness*(figData.xend - wall_left) + wall_friction_coefficient*(vnew(1));
+              p.Fx = wall_stiffness*(figData.xend - wall_left) + wall_damping*(vnew(1));
           end
-          if figData.xend> wall_left && figData.xend<wall_right
-              p.Fy = wall_stiffness*(figData.xend - wall_left) + wall_friction_coefficient*(vnew(1));
-          end
+%           if figData.xend> wall_left && figData.xend<wall_right
+%               if vnew(2) > 0 
+%                   dir_Fy = -1;
+%               else dir_Fy = 1;
+%               end
+%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
+%           end
     end
     
     %On screen timer.
