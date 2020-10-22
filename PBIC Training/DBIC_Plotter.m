@@ -71,6 +71,7 @@ wall_left = 0.8;
 wall_right = 3;
 wall_stiffness = -150;
 wall_damping = 20;
+dir_Fy = 0;
 wall_friction_coefficient = 0.5;
 wall_x = [wall_left wall_right wall_right wall_left];
 wall_y = [-3 -3 3 3];
@@ -220,9 +221,13 @@ while (ishandle(f))
           if figData.xend> wall_left && figData.xend<wall_right
               p.Fx = wall_stiffness*(figData.xend - wall_left) + wall_damping*(vnew(1));
           end
-          if figData.xend> wall_left && figData.xend<wall_right
-              p.Fy = wall_friction_coefficient*p.Fx;
-          end
+%           if figData.xend> wall_left && figData.xend<wall_right
+%               if vnew(2) > 0 
+%                   dir_Fy = -1;
+%               else dir_Fy = 1;
+%               end
+%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
+%           end
     end
     
     %On screen timer.
