@@ -3,6 +3,7 @@ function [T] = DBIController(z,p,traj,iter,dt_phy)
 
 if iter==1 %temporary solution to make every index excutable
     iter = 2;
+
 end
 
 th1 = z(1);
@@ -15,6 +16,7 @@ x_d = traj(iter,1); %desired position
 y_d = traj(iter,2);
 xv_d = (traj(iter,1)-traj(iter-1,1))/dt_phy; %desired velocity
 yv_d = (traj(iter,2)-traj(iter-1,2))/dt_phy;
+
 
 %Current disturbance force on end effector
 FxCurrent = p.Fx;

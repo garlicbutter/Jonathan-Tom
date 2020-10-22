@@ -31,9 +31,9 @@ clc; close all; clear;
 %Controller Gains and type
 p.Kp = 3*50;
 p.Kd = 2*10;
-p.K = 5; % K stiffness coeff
+p.K = 150; % K stiffness coeff
 p.B = 2; % B damping coeff
-p.M = 3; % M inertia coeff
+p.M = 1; % M inertia coeff
 
 controller_type = "DBIC"; %DBIC/ PBIC/ PID
 
