@@ -1,5 +1,5 @@
 function [T] = PBIController(z,p,traj,iter,dt_phy)
-%Controller that uses DB-IC to calculate the torque needed
+%Controller that uses PB-IC to calculate the torque needed
 %traj = desired trajectory (x,y,z)
 %iter = iteration number in the trajectory 
 

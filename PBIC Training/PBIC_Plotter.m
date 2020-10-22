@@ -20,7 +20,6 @@ show_solution = true;
 f = figure;
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
 
-traj = [];
 figData.Fx = [];
 figData.Fy = [];
 figData.xend = [];
