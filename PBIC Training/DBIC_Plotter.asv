@@ -69,7 +69,7 @@ end
 if wall
 wall_left = 0.95;
 wall_right = 3;
-wall_stiffness = 300;
+wall_stiffness = 150;
 wall_damping = 20;
 dir_Fy = 0;
 wall_friction_coefficient = 0.5;
@@ -219,13 +219,10 @@ while (ishandle(f))
     % wall apply force
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
-              p.Fx = wall_stiffness*(figData.xend - wall_left);
-%               if vnew(1) > 0
-%                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
-%               else
-%                   p.Fx = wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1));
-          else
-              p.Fx = 0;
+              if vnew(1) > 0
+                  p.Fx = -(wall_stiffness*(xnew(1) - wall_left) + wall_damping*(vnew(1)));
+              else
+                  p.Fx = wall_stiffness*(xnew(1) - wall_left) + wall_damping*(vnew(1));
           end
 %           if figData.xend> wall_left && figData.xend<wall_right
 %               if vnew(2) > 0 
