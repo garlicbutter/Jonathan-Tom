@@ -22,8 +22,9 @@ xv_d = (traj(iter,1)-traj(iter-1,1))/dt_phy; %desired velocity
 yv_d = (traj(iter,2)-traj(iter-1,2))/dt_phy;
 xa_d = (traj(iter,1)-2*traj(iter-1,1)+traj(iter-2,1))/(dt_phy^2); %desired acceleration
 ya_d = (traj(iter,2)-2*traj(iter-1,2)+traj(iter-2,2))/(dt_phy^2);
-q_d = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget); % joint value desirexd
-
+[q1_d, q2_d] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget); % joint value desired
+solution_select = 1;
+q_d = [q1_d(solution_select)-pi/2, q2_d(solution_select)];
 qdt_d = pinv(J)*[xv_d yv_d 0]';% joint value derivative desired
 qddt_d =pinv(J)*[xa_d ya_d 0]'+J_dt'*[xv_d yv_d 0]';% joint value second derivative desired
 

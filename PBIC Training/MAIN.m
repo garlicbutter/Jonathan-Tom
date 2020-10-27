@@ -29,13 +29,13 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
-p.Kp = 3*50; % for PID
-p.Kd = 2*10; % for PID
-p.K = 45; % K stiffness coeff
-p.B = 22; % B damping coeff
-p.M = 0.08; % M inertia coeff
+p.Kp = 150; % for PID,PBIC
+p.Kd = 50; % for PID,PBIC
+p.K = 45; % for DBIC,PBIC, K stiffness coeff
+p.B = 22; % for DBIC,PBIC, B damping coeff
+p.M = 0.08; % for DBIC,PBIC, M inertia coeff
 
-controller_type = "DBIC"; %DBIC/ PBIC/ PID
+controller_type = "PBIC"; %DBIC/ PBIC/ PID
 
 
 %%%%%%%% System Parameters %%%%%%%%
@@ -59,15 +59,15 @@ p.ytarget = y0;
 
 
 %octagon trajectory
-% p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
+p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
 
 %star pentagon trajectory
 % R = 1.8;
 % p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
 
 %trapezoid trajectory
-R = 0.5;
-p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
+% R = 0.5;
+% p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
 
 %%%%%%%% Run Derivers %%%%%%%%
 rederive = false;
