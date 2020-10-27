@@ -84,9 +84,7 @@ plot(diff_x,'r');
 xlabel("time lapse");
 ylabel("Difference of x [m]");
 str_rmsx = {'RMS of x: ',RMS_x};
-ylim=get(gca,'ylim');
-xlim=get(gca,'xlim');
-text(xlim(1),ylim(2),str_rmsx);
+text(500,-0.5,str_rmsx)
 
 subplot(2,1,2);
 hold on
@@ -96,9 +94,7 @@ plot(diff_y,'r');
 xlabel("time lapse");
 ylabel("Difference of y [m]");
 str_rmsy = {'RMS of y: ',RMS_y};
-ylim=get(gca,'ylim');
-xlim=get(gca,'xlim');
-text(xlim(1),ylim(2),str_rmsy);
+text(500,-0.5,str_rmsy)
 
 figure(5);
 movegui('southeast');    
@@ -110,9 +106,7 @@ plot(diff_q1,'r');
 xlabel("time lapse");
 ylabel("Difference of q1 [rad]");
 str_rmsx = {'RMS of q1: ',RMS_q1};
-ylim=get(gca,'ylim');
-xlim=get(gca,'xlim');
-text(xlim(1),ylim(2),str_rmsx);
+text(0,0,str_rmsx)
 
 subplot(2,1,2);
 hold on
@@ -122,6 +116,8 @@ plot(diff_q2,'r');
 xlabel("time lapse");
 ylabel("Difference of q2 [rad]");
 str_rmsy = {'RMS of q2: ',RMS_q2};
+text(0,0,str_rmsy)
+
 ylim=get(gca,'ylim');
-xlim=get(gca,'xlim');
-text(xlim(1),ylim(2),str_rmsy);
+xlim=get(gca,'xlim')
+text(xlim(1),ylim(2),str_rmsy)
