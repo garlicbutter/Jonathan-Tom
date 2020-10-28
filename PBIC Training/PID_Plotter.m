@@ -14,11 +14,15 @@
 function PID_Plotter(p)
 close all
 
+% show and implement wall
+wall = false;
+
 % show inverse kinematics solution
 show_solution = true;
 %Name the whole window and define the mouse callback function
 f = figure;
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);
+
 
 figData.Fx = [];
 figData.Fy = [];
@@ -55,6 +59,19 @@ sol_width2 = p.l2*0.05;
 sol_xdat2 = 0.5*sol_width2*[-1 1 1 -1];
 sol_ydat2 = p.l2*[0 0 1 1];
 sol_link2 = patch(sol_xdat2,sol_ydat2, [0 0 0 0], 'LineStyle', '--');
+end
+
+% Create wall object
+if wall
+wall_left = 0.95;
+wall_right = 3;
+wall_stiffness = 300;
+wall_damping = 20;
+dir_Fy = 0;
+wall_friction_coefficient = 0.5;
+wall_x = [wall_left wall_right wall_right wall_left];
+wall_y = [-3 -3 3 3];
+patch(wall_x,wall_y,'red','FaceAlpha',.3)
 end
 
 %Create pendulum link1 object:
@@ -120,6 +137,20 @@ traj = Trajectory_planner(p);
 iter = 0;
 iterlen = length(traj);
 
+
+%End efftor movement and joint values
+EndEff_x = zeros(1,iterlen);
+EndEff_y = zeros(1,iterlen);
+traj_x = zeros(1,iterlen);
+traj_y = zeros(1,iterlen);
+q1_ideal = zeros(1,iterlen);
+q2_ideal = zeros(1,iterlen);
+q1_real = zeros(1,iterlen);
+q2_real = zeros(1,iterlen);
+round_counter_1 = 0;
+round_counter_2 = 0;
+
+
 movegui('center');    
 while (ishandle(f))
     figData = get(f,'UserData');
@@ -180,6 +211,27 @@ while (ishandle(f))
     p.Fy = figData.Fy;
     end
     
+    
+       % wall apply force
+    if wall 
+          if figData.xend> wall_left && figData.xend<wall_right
+              p.Fx = -wall_stiffness*(figData.xend - wall_left);
+%               if vnew(1) > 0
+%                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
+%               else
+%                   p.Fx = wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1));
+          else
+              p.Fx = 0;
+          end
+%           if figData.xend> wall_left && figData.xend<wall_right
+%               if vnew(2) > 0 
+%                   dir_Fy = -1;
+%               else dir_Fy = 1;
+%               end
+%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
+%           end
+    end 
+   
     %On screen timer.
     set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
     
@@ -202,6 +254,37 @@ while (ishandle(f))
     set(sol_link2,'xData',rot2_sol(1,:)+(rot1_sol(1,3)+rot1_sol(1,4))/2);
     set(sol_link2,'yData',rot2_sol(2,:)+(rot1_sol(2,3)+rot1_sol(2,4))/2);
     end
+    
+    
+    
+    
+    %For the record
+    traj_x(iter) = traj(iter,1);
+    traj_y(iter) = traj(iter,2);
+    EndEff_x(iter) = ra_e(1);
+    EndEff_y(iter) = ra_e(2);
+    q1_real(iter) = z1(1);
+    q2_real(iter) = z1(3);
+    if iter>1
+        if q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) >= pi
+            round_counter_1 = round_counter_1 + 1;
+        elseif q1_ideal(iter-1) - (q1_sol + 2*pi*round_counter_1) <= -pi
+                 round_counter_1 = round_counter_1 -1;
+        end
+        if q2_ideal(iter-1) - (q2_sol+ 2*pi*round_counter_2) >= pi
+            round_counter_2 = round_counter_2 + 1;
+        elseif q2_ideal(iter-1) - (q2_sol+ 2*pi*round_counter_2) <= -pi
+                 round_counter_2 = round_counter_2 -1;
+        end
+    end
+    q1_ideal(iter) = q1_sol + 2*pi*round_counter_1;
+    q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
+    %Position & Trajectory Record for further analysis
+    if iterlen == iter
+        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
+    end     
+    
+    
     
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.

@@ -29,8 +29,8 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
-p.Kp = 150; % for PID,PBIC
-p.Kd = 50; % for PID,PBIC
+p.Kp = 200; % for PID,PBIC
+p.Kd = 20; % for PID,PBIC
 p.K = 45; % for DBIC,PBIC, K stiffness coeff
 p.B = 22; % for DBIC,PBIC, B damping coeff
 p.M = 0.08; % for DBIC,PBIC, M inertia coeff
