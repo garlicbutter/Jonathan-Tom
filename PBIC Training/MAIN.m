@@ -59,15 +59,15 @@ p.ytarget = y0;
 
 
 %octagon trajectory
-p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
+% p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
 
 %star pentagon trajectory
 % R = 1.8;
 % p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
 
-%trapezoid trajectory
-% R = 0.5;
-% p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
+% trapezoid trajectory
+R = 0.5;
+p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
 
 %%%%%%%% Run Derivers %%%%%%%%
 rederive = false;

@@ -269,6 +269,18 @@ while (ishandle(f))
         save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end     
     
+    real_time_recording = true;
+    if iterlen == iter
+        real_time_recording = false;
+    end 
+    if real_time_recording
+        F_int_x(iter) = p.Fx;
+        F_int_y(iter) = p.Fy;
+        save('Real_time_F_int_data.mat','F_int_x','F_int_y','iter','dt_phy',);
+    end
+    
+    
+    
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.
     rot1 = [cos(z1(1)), -sin(z1(1)); sin(z1(1)),cos(z1(1))]*[xdat1;ydat1];
