@@ -176,7 +176,9 @@ while (ishandle(f))
         tau = PBIController(z1,p,traj, iter, dt_phy);
         %disp("torque has been altered");
         controller_counter = controller_counter -1;
-    end    
+    end
+    
+    
     %%%%%%%%%%%%%%%%%%%%
     
     % trajectory follower
@@ -269,16 +271,7 @@ while (ishandle(f))
         save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end     
     
-    real_time_recording = true;
-    if iterlen == iter
-        real_time_recording = false;
-    end 
-    if real_time_recording
-        F_int_x(iter) = p.Fx;
-        F_int_y(iter) = p.Fy;
-        save('Real_time_F_int_data.mat','F_int_x','F_int_y','iter','dt_phy',);
-    end
-    
+
     
     
     %Rotation matrices to manipulate the vertices of the patch objects
