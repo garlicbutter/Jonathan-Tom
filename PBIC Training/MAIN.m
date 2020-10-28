@@ -35,11 +35,23 @@ p.K = 45; % for DBIC,PBIC, K stiffness coeff
 p.B = 22; % for DBIC,PBIC, B damping coeff
 p.M = 0.08; % for DBIC,PBIC, M inertia coeff
 
-controller_type = "PBIC"; %DBIC/ PBIC/ PID
+controller_type = "DBIC"; %DBIC/ PBIC/ PID
+
+%%%%%%%% trajectory %%%%%%%%%%
+
+%octagon trajectory
+% p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
+
+%star pentagon trajectory
+% R = 1.8;
+% p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
+
+%trapezoid trajectory
+R = 0.5;
+p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
 
 
 %%%%%%%% System Parameters %%%%%%%%
-p.init = [0.5900-pi/2    0.0    1.3181  0.0]'; %Initial conditions:
 p.g = 9.81;
 p.m1 = 1; %Mass of link 1.
 p.m2 = 1; %Mass of link 2.
@@ -51,23 +63,13 @@ p.I1 = 1/12*p.m1*p.l1^2; %Moment of inertia of link 1 about COM
 p.I2 = 1/12*p.m2*p.l2^2; %Moment of inertia of link 2 about COM
 p.Fx = 0;
 p.Fy = 0;
+[tmp1 tmp2] = InverseKin(p.l1,p.l2,p.traj(1,1),p.traj(1,2));
+p.init = [tmp1(1)-pi/2    0.0    tmp2(1)  0.0]'; %Initial conditions:
 endZ = ForwardKin(p.l1,p.l2,p.init(1),p.init(3));
 x0 = endZ(1); %End effector initial position in world frame.
 y0 = endZ(2);
 p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
-
-
-%octagon trajectory
-p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
-
-%star pentagon trajectory
-% R = 1.8;
-% p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
-
-%trapezoid trajectory
-% R = 0.5;
-% p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
 
 %%%%%%%% Run Derivers %%%%%%%%
 rederive = false;
