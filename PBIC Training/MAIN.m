@@ -31,11 +31,11 @@ clc; close all; clear;
 %Controller Gains and type
 p.Kp = 12; % for PID,PBIC
 p.Kd = 6; % for PID,PBIC
-p.K = 10; % for DBIC,PBIC, K stiffness coeff
-p.B = 2; % for DBIC,PBIC, B damping coeff
+p.K = 20; % for DBIC,PBIC, K stiffness coeff
+p.B = 5; % for DBIC,PBIC, B damping coeff
 p.M = 0.08; % for DBIC, M inertia coeff
 
-controller_type = "PBIC"; %DBIC/ PBIC/ PID
+controller_type = "DBIC"; %DBIC/ PBIC/ PID
 if controller_type == "PBIC"
     p.M = 2; % for PBIC, M inertia coeff
 end
