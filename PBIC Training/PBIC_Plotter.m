@@ -121,7 +121,7 @@ set(f,'UserData',figData);
 % differs from the frequency of the physics.
 current_time = 0;
 physics_freq = 100;
-controller_freq = 80;
+controller_freq = 100;
 freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
 theta_desired_prev = [0, 0]; % for PID
@@ -130,7 +130,7 @@ x_m = [0 0]; %initial condition for desired impedance model
 xd_m = [0 0]; %initial condition for desired impedance model
 x_0 = [0 0]; %initial condition for virtual value
 xd_0 = [0 0]; %initial condition for virtual value
-if freq_ratio<=0 || freq_ratio>=1
+if freq_ratio<=0 || freq_ratio>1
 error("controller frequency is not valid")
 end
 
@@ -180,6 +180,8 @@ while (ishandle(f))
         if iter >= 2
         xd_0 = [traj(iter,1) traj(iter,2)]-[traj(iter-1,1) traj(iter-1,2)];
         xd_0 = xd_0 / dt_phy;
+        elseif iter == 1
+        xd_0 = [traj(2,1) traj(2,2)]-[traj(1,1) traj(1,2)];
         end
         [tau, x_m, xd_m] = PBIController(z1, p, x_m, xd_m, x_0, xd_0, dt_phy);
         %disp("torque has been altered");
@@ -262,7 +264,7 @@ while (ishandle(f))
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
+        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy');
     end     
     
     %Rotation matrices to manipulate the vertices of the patch objects
