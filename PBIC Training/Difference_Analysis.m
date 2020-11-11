@@ -125,3 +125,23 @@ str_rmsy = {'RMS of q2: ',RMS_q2};
 ylim=get(gca,'ylim');
 xlim=get(gca,'xlim');
 text(xlim(1),ylim(2),str_rmsy);
+
+figure(6);    
+subplot(2,1,1);
+hold on
+title("Value of velocity in x direction");
+plot(diff(EndEff_x)/dt_phy,'r');
+plot(diff(traj_x)/dt_phy,'b');
+legend("End Effector","Required");
+xlabel("time");
+ylabel("v_x");
+
+
+subplot(2,1,2);
+hold on
+title("Value of velocity in y direction");
+plot(diff(EndEff_y)/dt_phy,'r');
+plot(diff(traj_y)/dt_phy,'b');
+legend("End Effector","Required");
+xlabel("time");
+ylabel("v_y");
