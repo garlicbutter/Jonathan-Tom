@@ -49,8 +49,9 @@ plot(Traj(:,1),Traj(:,2),'b');
 xlabel("x [m]");
 ylabel("y [m]");
 legend("End Effector","Required");
-str = {'RMS: ',RMS};
-text(-0.25,-0.25,str)
+% str = {'RMS: ',RMS};
+% text(0,-0.25,str)
+RMS
 
 figure(3);
 movegui('northeast');    
