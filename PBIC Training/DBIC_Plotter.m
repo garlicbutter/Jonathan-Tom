@@ -219,7 +219,7 @@ while (ishandle(f))
     % wall apply force
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
-              p.Fx = wall_stiffness*(figData.xend - wall_left);
+              p.Fx = -wall_stiffness*(figData.xend - wall_left)
 %               if vnew(1) > 0
 %                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
 %               else

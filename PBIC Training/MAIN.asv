@@ -29,10 +29,10 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
-p.Kp = 12; % for PID,PBIC
-p.Kd = 2; % for PID,PBIC
-p.K = 12; % for DBIC,PBIC, K stiffness coeff
-p.B = 3; % for DBIC,PBIC, B damping coeff
+p.Kp = 30; % for PID,PBIC
+p.Kd = 6; % for PID,PBIC
+p.K = 3; % for DBIC,PBIC, K stiffness coeff
+p.B = 1; % for DBIC,PBIC, B damping coeff
 p.M = 2; % for DBIC, M inertia coeff
 
 controller_type = "DBIC"; %DBIC/ PBIC/ PID

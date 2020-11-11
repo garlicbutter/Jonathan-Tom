@@ -31,7 +31,7 @@ x_m = x_m + xd_m*dt_phy;
  
 [q1_d, q2_d] = InverseKin(p.l1, p.l2, x_m(1), x_m(2)); % joint value desired  
 solution_select = 1; % TODO: write a code that select the inverseK solution set
-q_d = [q1_d(solution_select), q2_d(solution_select)];
+q_d = [q1_d(solution_select)-pi/2, q2_d(solution_select)];
 qdt_d = pinv(J)*[xd_m 0]';% joint value desired derivative 
 qddt_d =pinv(J)*[xdd_m 0]'+J_dt'*[xd_m 0]';% joint value desired second derivative 
 

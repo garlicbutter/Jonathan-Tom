@@ -17,18 +17,6 @@ y_d = traj(iter,2);
 xv_d = (traj(iter,1)-traj(iter-1,1))/dt_phy; %desired velocity
 yv_d = (traj(iter,2)-traj(iter-1,2))/dt_phy;
 
-
-%Current disturbance force on end effector
-FxCurrent = p.Fx;
-FyCurrent = p.Fy;
-
-%Current Target
-xCurrentTar = p.xtarget;
-yCurrentTar = p.ytarget;
-
-xdotCurrentTar = 0;
-ydotCurrentTar = 0;
-
 % J  =Jacobian
 J = Velocity_transformation(p.l1,p.l2,th1,th2);
 J_dt = Jdt(p.l1,p.l2,th1,th2,thdot1,thdot2);
@@ -40,11 +28,11 @@ B = p.B; % B damping
 M= p.M; % M inertia
 
 F_int = [p.Fx p.Fy 0]';
-
+    
 %Torque to track our desired point
 
 temp = K*([x_d y_d 0]'-Lq)+B*([xv_d yv_d 0]'-J*dq)-F_int;
-T = H*J'*(M^-1*temp-J_dt*dq);
+T = H*pinv(J)*(M^-1*temp-J_dt*dq);
 T = T+ -J'*F_int;
 
 %Add gravity compensation
