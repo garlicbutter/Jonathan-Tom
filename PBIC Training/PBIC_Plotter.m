@@ -126,6 +126,10 @@ freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
 theta_desired_prev = [0, 0]; % for PID
 controller_counter = 0; % to track when the controller frequency hit
+x_m = [0 0]; %initial condition for desired impedance model
+xd_m = [0 0]; %initial condition for desired impedance model
+x_0 = [0 0]; %initial condition for virtual value
+xd_0 = [0 0]; %initial condition for virtual value
 if freq_ratio<=0 || freq_ratio>=1
 error("controller frequency is not valid")
 end
@@ -153,7 +157,7 @@ while (ishandle(f))
     
     %%%% INTEGRATION %%%%%%%%%
     %Old velocity and position
-    xold = [z1(1),z1(3)];
+    xold = [z1(1),z1(3)]; % z1 = [theta1_d, theta2_d ,theta1, theta2], state vector.
     vold = [z1(2),z1(4)];
    
     %Call RHS given old state
@@ -167,13 +171,17 @@ while (ishandle(f))
     z1 = [xnew(1) vnew(1) xnew(2) vnew(2)];
     %%%%%%%%%%%%%%%%%%%%
     
-    
     %%%%CONTROLLER%%%%%%%%%%
     if controller_counter<1   % do nothing
         controller_counter = controller_counter + freq_ratio;
         %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
-        tau = PBIController(z1,p,traj, iter, dt_phy);
+        x_0 = [traj(iter,1) traj(iter,2)];
+        if iter >= 2
+        xd_0 = [traj(iter,1) traj(iter,2)]-[traj(iter-1,1) traj(iter-1,2)];
+        xd_0 = xd_0 / dt_phy;
+        end
+        [tau, x_m, xd_m] = PBIController(z1, p, x_m, xd_m, x_0, xd_0, dt_phy);
         %disp("torque has been altered");
         controller_counter = controller_counter -1;
     end
@@ -182,7 +190,7 @@ while (ishandle(f))
     %%%%%%%%%%%%%%%%%%%%
     
     % trajectory follower
-     if iter < iterlen
+    if iter < iterlen
         iter = iter+1;
     else
         iter = 1;
@@ -192,8 +200,6 @@ while (ishandle(f))
     set(targetPt,'xData',p.xtarget); %Change the target point graphically.
     set(targetPt,'yData',p.ytarget);
    
-    
-
     ra_e = ForwardKin(p.l1,p.l2,z1(1),z1(3));
     figData.xend = ra_e(1);
     figData.yend = ra_e(2);
@@ -211,22 +217,10 @@ while (ishandle(f))
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
               p.Fx = wall_stiffness*(figData.xend - wall_left);
-%               if vnew(1) > 0
-%                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
-%               else
-%                   p.Fx = wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1));
           else
               p.Fx = 0;
           end
-%           if figData.xend> wall_left && figData.xend<wall_right
-%               if vnew(2) > 0 
-%                   dir_Fy = -1;
-%               else dir_Fy = 1;
-%               end
-%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
-%           end
     end
-    
     
     %On screen timer.
     set(timer,'string',strcat(num2str(current_time,'%.2f'),'s'))
@@ -270,9 +264,6 @@ while (ishandle(f))
     if iterlen == iter
         save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real');
     end     
-    
-
-    
     
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.
