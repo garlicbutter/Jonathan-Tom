@@ -268,7 +268,7 @@ while (ishandle(f))
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record');
+        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall');
     end     
     
     %Rotation matrices to manipulate the vertices of the patch objects

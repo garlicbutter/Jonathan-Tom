@@ -21,7 +21,7 @@ end
 show_solution = true;
 
 % show and implement wall
-wall = true;
+wall = false;
 
 %Name the whole window and define the mouse callback function
 f = figure;
@@ -219,7 +219,7 @@ while (ishandle(f))
     % wall apply force
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
-              p.Fx = -wall_stiffness*(figData.xend - wall_left)
+              p.Fx = wall_stiffness*(figData.xend - wall_left)
 %               if vnew(1) > 0
 %                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
 %               else
@@ -283,7 +283,11 @@ while (ishandle(f))
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy');
+        if wall
+        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','wall','wall_x','wall_y');
+        else 
+            save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy');
+        end 
     end     
     
     

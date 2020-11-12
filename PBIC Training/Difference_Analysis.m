@@ -41,6 +41,8 @@ ylabel("Value of y");
 
 
 figure(2);
+xlim([0 3]);
+ylim([-2 2]);
 movegui('west');    
 title("trajectory comparison");
 hold on
@@ -48,7 +50,13 @@ plot(End_Efftor(:,1),End_Efftor(:,2),'r');
 plot(Traj(:,1),Traj(:,2),'b');
 xlabel("x [m]");
 ylabel("y [m]");
-legend("End Effector","Required");
+if exist('wall')
+%     patch(wall_x,wall_y,'red','FaceAlpha',.3);
+    patch([0.95,1.75,1.75,0.95],[-2,-2,2,2],'red','FaceAlpha',.3);
+    legend("End Effector","Required","wall");
+else
+    legend("End Effector","Required");
+end
 % str = {'RMS: ',RMS};
 % text(0,-0.25,str)
 RMS
