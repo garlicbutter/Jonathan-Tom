@@ -19,7 +19,7 @@ show_solution = true;
 
 
 % show and implement wall
-wall = false;
+wall = true;
 
 
 %Name the whole window and define the mouse callback function
@@ -126,7 +126,7 @@ freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
 theta_desired_prev = [0, 0]; % for PID
 controller_counter = 0; % to track when the controller frequency hit
-x_m = [0 0]; %initial condition for desired impedance model
+x_m = [p.xtarget  p.ytarget]; %initial condition for desired impedance model
 xd_m = [0 0]; %initial condition for desired impedance model
 x_0 = [0 0]; %initial condition for virtual value
 xd_0 = [0 0]; %initial condition for virtual value
@@ -144,6 +144,8 @@ EndEff_x = zeros(1,iterlen);
 EndEff_y = zeros(1,iterlen);
 traj_x = zeros(1,iterlen);
 traj_y = zeros(1,iterlen);
+x_m_record = zeros(1,iterlen);
+y_m_record = zeros(1,iterlen);
 q1_ideal = zeros(1,iterlen);
 q2_ideal = zeros(1,iterlen);
 q1_real = zeros(1,iterlen);
@@ -244,6 +246,8 @@ while (ishandle(f))
     %For the record
     traj_x(iter) = traj(iter,1);
     traj_y(iter) = traj(iter,2);
+    x_m_record(iter) = x_m(1);
+    y_m_record(iter) = x_m(2);
     EndEff_x(iter) = ra_e(1);
     EndEff_y(iter) = ra_e(2);
     q1_real(iter) = z1(1);
@@ -264,7 +268,7 @@ while (ishandle(f))
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy');
+        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record');
     end     
     
     %Rotation matrices to manipulate the vertices of the patch objects

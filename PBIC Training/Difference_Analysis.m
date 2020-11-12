@@ -146,3 +146,16 @@ plot(diff(traj_y)/dt_phy,'b');
 legend("End Effector","Required");
 xlabel("time");
 ylabel("v_y");
+
+if exist('x_m_record','var')
+    
+figure(7);   
+title("impedance model comparison");
+hold on
+plot(x_m_record,y_m_record,'r*');
+plot(Traj(:,1),Traj(:,2),'b');
+xlabel("x [m]");
+ylabel("y [m]");
+legend("x_m","Required");
+
+end
