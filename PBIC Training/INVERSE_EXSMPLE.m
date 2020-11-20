@@ -27,8 +27,8 @@ showdetails(robot)
 
 t = (0:0.2:20)'; % Time
 count = length(t);
-center = [0.3 0.1 0];
-radius = 0.15;
+center = [0.3 0 0];
+radius = 0.3;
 theta = 2*t*(2*pi/t(end));
 points = center + radius*[cos(theta) sin(theta) zeros(size(theta))];
 
