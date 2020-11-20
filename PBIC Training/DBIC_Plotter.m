@@ -21,7 +21,7 @@ end
 show_solution = true;
 
 % show and implement wall
-wall = true;
+wall = false;
 
 %Name the whole window and define the mouse callback function
 f = figure;
