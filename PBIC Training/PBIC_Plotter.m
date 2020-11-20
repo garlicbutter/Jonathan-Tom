@@ -20,7 +20,8 @@ show_solution = true;
 
 % show and implement wall
 wall = false;
-
+temp1 =[];
+temp2 =[];
 
 %Name the whole window and define the mouse callback function
 f = figure;
@@ -178,12 +179,14 @@ while (ishandle(f))
         controller_counter = controller_counter + freq_ratio;
         %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
-        x_0 = [traj(iter,1) traj(iter,2)];
+        x_0 = traj(iter,:);
+        temp1 = [temp1 x_0(1)];
         if iter >= 2
-        xd_0 = [traj(iter,1) traj(iter,2)]-[traj(iter-1,1) traj(iter-1,2)];
-        xd_0 = xd_0 / dt_phy;
+        xd_0 = (traj(iter,:)-traj(iter-1,:))/ dt_phy;
+        temp2 = [temp2 xd_0(1)];
         elseif iter == 1
-        xd_0 = [traj(2,1) traj(2,2)]-[traj(1,1) traj(1,2)];
+        x_0 = traj(1,:);
+        xd_0 = (traj(1,:) - traj(2,:))/ dt_phy;
         end
         [tau, x_m, xd_m] = PBIController(z1, p, x_m, xd_m, x_0, xd_0, dt_phy);
         %disp("torque has been altered");

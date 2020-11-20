@@ -33,7 +33,7 @@ x_m = x_m + xd_m*dt_phy;
 solution_select = 1; % TODO: write a code that select the inverseK solution set
 q_d = [q1_d(solution_select)-pi/2, q2_d(solution_select)];
 qdt_d = pinv(J)*[xd_m 0]';% joint value desired derivative 
-qddt_d =pinv(J)*[xdd_m 0]'+J_dt'*[xd_m 0]';% joint value desired second derivative 
+qddt_d =pinv(J)*([xdd_m 0]'-J_dt*qdt_d);% joint value desired second derivative 
 
 
 % Torque to track our desired point
