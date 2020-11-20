@@ -43,26 +43,18 @@ p.K = 25*2; % for DBIC,PBIC, K stiffness coeff
 p.B = 10*1.3; % for DBIC,PBIC, B damping coeff
 p.M = 0.1; % for DBIC, M inertia coeff
     
-controller_type = "PBIC"; %DBIC/ PBIC/ PID
+controller_type = "DBIC"; %DBIC/ PBIC/ PID
 
 %%%%%%%% trajectory %%%%%%%%%%
-% p.traj contains vertices of the trajectory.
-% It will automatically turn into a minimum jerk trajectory over time
-% via function.
-%
-% Below are some example trajectories.
-%
-%octagon trajectory
-p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
-
-%star pentagon trajectory
-% R = 1.8;
-% p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
-
-%trapezoid trajectory
-% R = 0.5;
-% p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R]; 
-
+% See trajectory_example for more information
+p.traj = [0.5 0;
+    0.8 0;
+    1.2 -1;
+    1.5 -0.3;
+    1 -0.3;
+    0.9 0;
+    1.9 0;
+    1.2 -1.5;];
 
 %%%%%%%% System Parameters %%%%%%%%
 p.g = 9.81;
