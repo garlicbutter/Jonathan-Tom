@@ -38,7 +38,7 @@ qddt_d =pinv(J)*[xdd_m 0]'+J_dt'*[xd_m 0]';% joint value desired second derivati
 
 % Torque to track our desired point
 T = H*(qddt_d+p.Kd*(qdt_d'-[thdot1 thdot2]')+p.Kp*(q_d'-[th1 th2]'));
-T = T + -J'*[p.Fx; p.Fy;0];
+T = T + -J'*[F_int 0]';
 
 % Add gravity compensation , h(q)
 T(1) = T(1) + GravityCompT1(0,0,p.d1,p.d2,p.g,p.l1,p.l2,p.m1,p.m2,th1,th2,thdot1,thdot2);

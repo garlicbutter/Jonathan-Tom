@@ -41,22 +41,16 @@ ylabel("Value of y");
 
 
 figure(2);
-xlim([0 3]);
-ylim([-2 2]);
 movegui('west');    
 title("trajectory comparison");
 hold on
+
+
 plot(End_Efftor(:,1),End_Efftor(:,2),'r');
 plot(Traj(:,1),Traj(:,2),'b');
 xlabel("x [m]");
 ylabel("y [m]");
-if wall
-%     patch(wall_x,wall_y,'red','FaceAlpha',.3);
-    patch([0.95,1.75,1.75,0.95],[-2,-2,2,2],'red','FaceAlpha',.3);
-    legend("End Effector","Required","wall");
-else
-    legend("End Effector","Required");
-end
+legend("End Effector","Required");
 
 
 figure(3);
@@ -67,7 +61,7 @@ title("Joint Value");
 plot(q1_real,'r');
 plot(q1_ideal,'b');
 
-legend(" Result","Required");
+legend("End effector","Required");
 xlabel("time lapse");
 ylabel("Joint value of q1 [rad]");
 
@@ -76,7 +70,7 @@ subplot(2,1,2);
 hold on
 plot(q2_real,'r');
 plot(q2_ideal,'b');
-legend(" Result","Required");
+legend("End effector","Required");
 xlabel("time lapse");
 ylabel("Joint value of q2 [rad]");
 

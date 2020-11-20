@@ -189,8 +189,6 @@ while (ishandle(f))
         %disp("torque has been altered");
         controller_counter = controller_counter -1;
     end
-    
-    
     %%%%%%%%%%%%%%%%%%%%
     
     % trajectory follower
@@ -201,7 +199,9 @@ while (ishandle(f))
     end
     p.xtarget = traj(iter,1);
     p.ytarget = traj(iter,2);
-    set(targetPt,'xData',p.xtarget); %Change the target point graphically.
+    
+    %Change the target point graphically.
+    set(targetPt,'xData',p.xtarget); 
     set(targetPt,'yData',p.ytarget);
    
     ra_e = ForwardKin(p.l1,p.l2,z1(1),z1(3));
@@ -243,7 +243,7 @@ while (ishandle(f))
     set(sol_link2,'yData',rot2_sol(2,:)+(rot1_sol(2,3)+rot1_sol(2,4))/2);
     end
     
-    %For the record
+    % For the record
     traj_x(iter) = traj(iter,1);
     traj_y(iter) = traj(iter,2);
     x_m_record(iter) = x_m(1);
@@ -266,6 +266,7 @@ while (ishandle(f))
     end
     q1_ideal(iter) = q1_sol + 2*pi*round_counter_1;
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
+    
     %Position & Trajectory Record for further analysis
     if iterlen == iter
         save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall');
@@ -274,10 +275,12 @@ while (ishandle(f))
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.
     rot1 = [cos(z1(1)), -sin(z1(1)); sin(z1(1)),cos(z1(1))]*[xdat1;ydat1];
+    %rot1 = [0 ;0]
     set(link1,'xData',rot1(1,:))
     set(link1,'yData',rot1(2,:))
     
     rot2 = [cos(z1(3)+z1(1)), -sin(z1(3)+z1(1)); sin(z1(3)+z1(1)),cos(z1(3)+z1(1))]*[xdat2;ydat2];
+    %rot2 = [0 ;0]
     
     set(link2,'xData',rot2(1,:)+(rot1(1,3)+rot1(1,4))/2); %We want to add the midpoint of the far edge of the first link to all points in link 2.
     set(link2,'yData',rot2(2,:)+(rot1(2,3)+rot1(2,4))/2);
