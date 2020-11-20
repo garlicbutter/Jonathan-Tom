@@ -287,7 +287,8 @@ while (ishandle(f))
         save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','wall','wall_x','wall_y');
         else 
             save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy');
-        end 
+        end
+        disp('New data is saved to End_effector_data.mat. Open Difference_Analysis.m to see the plot') 
     end     
     
     

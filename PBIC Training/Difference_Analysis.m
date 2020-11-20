@@ -41,7 +41,7 @@ ylabel("Value of y");
 
 
 figure(2);
-movegui('west');    
+movegui('northwest');    
 title("trajectory comparison");
 hold on
 
@@ -128,7 +128,8 @@ ylim=get(gca,'ylim');
 xlim=get(gca,'xlim');
 text(xlim(1),ylim(2),str_rmsy);
 
-figure(6);    
+figure(6);
+movegui('center');    
 subplot(2,1,1);
 hold on
 title("Value of velocity in x direction");
@@ -150,7 +151,8 @@ ylabel("v_y");
 
 if exist('x_m_record','var')
     
-figure(7);   
+figure(7);
+movegui('southwest');    
 title(" model comparison");
 hold on
 plot(x_m_record,y_m_record,'r*');

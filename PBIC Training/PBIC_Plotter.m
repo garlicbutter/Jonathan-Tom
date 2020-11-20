@@ -20,8 +20,6 @@ show_solution = true;
 
 % show and implement wall
 wall = false;
-temp1 =[];
-temp2 =[];
 
 %Name the whole window and define the mouse callback function
 f = figure;
@@ -118,6 +116,11 @@ z1 = p.init;
 
 set(f,'UserData',figData);
 
+% trajectory planner
+traj = Trajectory_planner(p);
+iter = 0;
+iterlen = length(traj);
+
 % current_time is where physics take place. the controller frequency
 % differs from the frequency of the physics.
 current_time = 0;
@@ -125,20 +128,14 @@ physics_freq = 100;
 controller_freq = 100;
 freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
-theta_desired_prev = [0, 0]; % for PID
 controller_counter = 0; % to track when the controller frequency hit
 x_m = [p.xtarget  p.ytarget]; %initial condition for desired impedance model
 xd_m = [0 0]; %initial condition for desired impedance model
-x_0 = [0 0]; %initial condition for virtual value
-xd_0 = [0 0]; %initial condition for virtual value
+x_0 = traj(1,:);
+xd_0 = (traj(1,:) - traj(2,:))/ dt_phy;
 if freq_ratio<=0 || freq_ratio>1
 error("controller frequency is not valid")
 end
-
-% trajectory planner
-traj = Trajectory_planner(p);
-iter = 0;
-iterlen = length(traj);
 
 %End efftor movement and joint values
 EndEff_x = zeros(1,iterlen);
@@ -180,13 +177,8 @@ while (ishandle(f))
         %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
         x_0 = traj(iter,:);
-        temp1 = [temp1 x_0(1)];
         if iter >= 2
         xd_0 = (traj(iter,:)-traj(iter-1,:))/ dt_phy;
-        temp2 = [temp2 xd_0(1)];
-        elseif iter == 1
-        x_0 = traj(1,:);
-        xd_0 = (traj(1,:) - traj(2,:))/ dt_phy;
         end
         [tau, x_m, xd_m] = PBIController(z1, p, x_m, xd_m, x_0, xd_0, dt_phy);
         %disp("torque has been altered");
@@ -273,6 +265,7 @@ while (ishandle(f))
     %Position & Trajectory Record for further analysis
     if iterlen == iter
         save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall');
+        disp('New data is saved to End_effector_data.mat. Open Difference_Analysis.m to see the plot') 
     end     
     
     %Rotation matrices to manipulate the vertices of the patch objects
