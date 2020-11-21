@@ -18,7 +18,7 @@ close all
 wall = p.wall;
 
 % show inverse kinematics solution
-show_solution = true;
+show_solution = p.showsolution;
 %Name the whole window and define the mouse callback function
 f = figure;
 set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonUpFcn',@ClickUp,'KeyPressFc',@KeyPress);

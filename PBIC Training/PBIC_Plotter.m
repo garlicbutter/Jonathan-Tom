@@ -14,7 +14,7 @@
 function PBIC_Plotter(p)
 close all
 % show inverse kinematics solution
-show_solution = true;
+show_solution = p.showsolution;
 
 
 % show and implement wall

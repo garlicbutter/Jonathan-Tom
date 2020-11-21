@@ -18,7 +18,7 @@ if isfile('End_Effector_data')
 end 
 
 % show inverse kinematics solution
-show_solution = true;
+show_solution = p.showsolution;
 
 % show and implement wall
 wall = p.wall;
