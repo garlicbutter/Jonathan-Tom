@@ -15,7 +15,7 @@ function PID_Plotter(p)
 close all
 
 % show and implement wall
-wall = true;
+wall = p.wall;
 
 % show inverse kinematics solution
 show_solution = true;
@@ -63,12 +63,9 @@ end
 
 % Create wall object
 if wall
-wall_left = 0.95;
-wall_right = 3;
-wall_stiffness = 1500;
-wall_damping = 20;
-dir_Fy = 0;
-wall_friction_coefficient = 0.5;
+wall_left = p.wallleft;
+wall_right = p.wallright;
+wall_stiffness = p.wallstiffness;
 wall_x = [wall_left wall_right wall_right wall_left];
 wall_y = [-3 -3 3 3];
 patch(wall_x,wall_y,'red','FaceAlpha',.3)
@@ -125,7 +122,6 @@ physics_freq = 100;
 controller_freq = 99;
 freq_ratio = controller_freq/physics_freq;
 dt_phy = 1/physics_freq;
-theta_desired_prev = [0, 0]; % for PID
 time_passed = 0; % for PID
 controller_counter = 0; % to track when the controller frequency hit
 if freq_ratio<=0 || freq_ratio>=1
@@ -216,20 +212,10 @@ while (ishandle(f))
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
               p.Fx = -wall_stiffness*(figData.xend - wall_left);
-%               if vnew(1) > 0
-%                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
-%               else
-%                   p.Fx = wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1));
+
           else
               p.Fx = 0;
           end
-%           if figData.xend> wall_left && figData.xend<wall_right
-%               if vnew(2) > 0 
-%                   dir_Fy = -1;
-%               else dir_Fy = 1;
-%               end
-%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
-%           end
     end 
    
     %On screen timer.
@@ -244,7 +230,7 @@ while (ishandle(f))
     %Draw the inverse kinematics solution
     if show_solution
     [q1_sol, q2_sol] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-    sol_num = 1; % 1 = lower arm, 2 = upper arm
+    sol_num = p.invKsol; % 1 = lower arm, 2 = upper arm
     q1_sol =  q1_sol(sol_num)-pi/2;
     q2_sol =  q2_sol(sol_num);
     rot1_sol = [cos(q1_sol), -sin(q1_sol); sin(q1_sol),cos(q1_sol)]*[sol_xdat1;sol_ydat1];

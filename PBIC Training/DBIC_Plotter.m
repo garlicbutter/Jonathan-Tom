@@ -21,7 +21,7 @@ end
 show_solution = true;
 
 % show and implement wall
-wall = false;
+wall = p.wall;
 
 %Name the whole window and define the mouse callback function
 f = figure;
@@ -67,12 +67,9 @@ end
 
 % Create wall object
 if wall
-wall_left = 0.95;
-wall_right = 3;
-wall_stiffness = 300;
-wall_damping = 20;
-dir_Fy = 0;
-wall_friction_coefficient = 0.5;
+wall_left = p.wallleft;
+wall_right = p.wallright;
+wall_stiffness = p.wallstiffness;
 wall_x = [wall_left wall_right wall_right wall_left];
 wall_y = [-3 -3 3 3];
 patch(wall_x,wall_y,'red','FaceAlpha',.3)
@@ -219,21 +216,10 @@ while (ishandle(f))
     % wall apply force
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
-              p.Fx = wall_stiffness*(figData.xend - wall_left)
-%               if vnew(1) > 0
-%                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
-%               else
-%                   p.Fx = wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1));
+              p.Fx = wall_stiffness*(figData.xend - wall_left);
           else
               p.Fx = 0;
           end
-%           if figData.xend> wall_left && figData.xend<wall_right
-%               if vnew(2) > 0 
-%                   dir_Fy = -1;
-%               else dir_Fy = 1;
-%               end
-%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
-%           end
     end
     
     %On screen timer.
@@ -246,7 +232,7 @@ while (ishandle(f))
 %     sol_num = invKselector(q_sol_history, sol_select, p.init); % 1 = lower arm, 2 = upper arm
 %     sol_select = [sol_select(2:3) sol_num];
 
-    sol_num = 1; % choose the solution manually before i finish the function. 1 = lower arm, 2 = upper arm
+    sol_num = p.invKsol; % choose the solution manually before i finish the function. 1 = lower arm, 2 = upper arm
 
     q1_sol =  q1_sol(sol_num)-pi/2;
     q2_sol =  q2_sol(sol_num);
