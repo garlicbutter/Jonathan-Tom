@@ -1,7 +1,7 @@
 robot = rigidBodyTree('DataFormat','column','MaxNumBodies',3);
 
-L1 = 0.3;
-L2 = 0.3;
+L1 = 1;
+L2 = 1;
 
 body = rigidBody('link1');
 joint = rigidBodyJoint('joint1', 'revolute');
@@ -27,10 +27,14 @@ showdetails(robot)
 
 t = (0:0.2:20)'; % Time
 count = length(t);
-center = [0.3 0 0];
-radius = 0.3;
-theta = 2*t*(2*pi/t(end));
-points = center + radius*[cos(theta) sin(theta) zeros(size(theta))];
+% center = [0.25 0.15 0];
+% radius = 0.2;
+% theta = 2*t*(2*pi/t(end));
+% points = center + radius*[cos(theta) sin(theta) zeros(size(theta))];
+% R = 0.5;
+% p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R];
+% points = Trajectory_planner(p); 
+
 
 q0 = homeConfiguration(robot);
 ndof = length(q0);
