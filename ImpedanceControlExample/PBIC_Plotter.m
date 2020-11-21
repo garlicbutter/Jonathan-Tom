@@ -11,17 +11,14 @@
 %   global variables so, this version is the result.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function DBIC_Plotter(p)
+function PBIC_Plotter(p)
 close all
-if isfile('End_Effector_data')
-    delete('End_Effector_data');
-end 
-
 % show inverse kinematics solution
-show_solution = true;
+show_solution = p.showsolution;
+
 
 % show and implement wall
-wall = false;
+wall = p.wall;
 
 %Name the whole window and define the mouse callback function
 f = figure;
@@ -29,11 +26,10 @@ set(f,'WindowButtonMotionFcn','','WindowButtonDownFcn',@ClickDown,'WindowButtonU
 
 figData.Fx = [];
 figData.Fy = [];
-figData.xend = [p.xtarget];
-figData.yend = [p.ytarget];
+figData.xend = [];
+figData.yend = [];
 figData.fig = f;
 figData.tarControl = true;
-
 
 %%%%%%%% 1st Subplot -- the pendulum animation %%%%%%%
 figData.simArea = subplot(1,1,1); %Eliminated other subplots, but left this for syntax consistency.
@@ -42,13 +38,13 @@ hold on
 grid on
 
 
+
+
 %Plot trajectory :
 p.traj = [p.traj; p.traj(1,:)];
 p.xtarget = p.traj(1,1);
 p.ytarget = p.traj(1,2);
 plot(p.traj(:,1), p.traj(:,2),'r--');
-
-
 
 % Create solution object for inverse kinematics
 if show_solution
@@ -67,17 +63,13 @@ end
 
 % Create wall object
 if wall
-wall_left = 0.95;
-wall_right = 3;
-wall_stiffness = 300;
-wall_damping = 20;
-dir_Fy = 0;
-wall_friction_coefficient = 0.5;
+wall_left = p.wallleft;
+wall_right = p.wallright;
+wall_stiffness = p.wallstiffness;
 wall_x = [wall_left wall_right wall_right wall_left];
 wall_y = [-3 -3 3 3];
 patch(wall_x,wall_y,'red','FaceAlpha',.3)
 end
-
 
 %Create pendulum link1 object:
 width1 = p.l1*0.05;
@@ -102,9 +94,6 @@ trace = plot(0,0,'.g','MarkerSize',10); %First link anchor
 %Timer label:
 timer = text(-3.2,-3.2,'0.00','FontSize',28);
 
-%Std of effector - x
-std_x = text(-3.2,-0.2,'0.00','FontSize',28);
-
 %Torque meters on screen
 tmeter1 = text(0.6,-3.2,'0.00','FontSize',22,'Color', 'r');
 tmeter2 = text(2.2,-3.2,'0.00','FontSize',22,'Color', 'b');
@@ -123,29 +112,34 @@ z1 = p.init;
 
 set(f,'UserData',figData);
 
-% current_time is where physics take place. the controller frequency
-% differs from the frequency of the physics.
-current_time = 0;
-physics_freq = 100;
-controller_freq = 80;
-freq_ratio = controller_freq/physics_freq;
-dt_phy = 1/physics_freq;
-controller_counter = 0; % to track when the controller frequency hit
-if freq_ratio<=0 || freq_ratio>=1
-error("controller frequency is not valid")
-end
-
 % trajectory planner
 traj = Trajectory_planner(p);
 iter = 0;
 iterlen = length(traj);
 
+% current_time is where physics take place. the controller frequency
+% differs from the frequency of the physics.
+current_time = 0;
+physics_freq = 100;
+controller_freq = 100;
+freq_ratio = controller_freq/physics_freq;
+dt_phy = 1/physics_freq;
+controller_counter = 0; % to track when the controller frequency hit
+x_m = [p.xtarget  p.ytarget]; %initial condition for desired impedance model
+xd_m = [0 0]; %initial condition for desired impedance model
+x_0 = traj(1,:);
+xd_0 = (traj(1,:) - traj(2,:))/ dt_phy;
+if freq_ratio<=0 || freq_ratio>1
+error("controller frequency is not valid")
+end
 
 %End efftor movement and joint values
 EndEff_x = zeros(1,iterlen);
 EndEff_y = zeros(1,iterlen);
 traj_x = zeros(1,iterlen);
 traj_y = zeros(1,iterlen);
+x_m_record = zeros(1,iterlen);
+y_m_record = zeros(1,iterlen);
 q1_ideal = zeros(1,iterlen);
 q2_ideal = zeros(1,iterlen);
 q1_real = zeros(1,iterlen);
@@ -153,18 +147,13 @@ q2_real = zeros(1,iterlen);
 round_counter_1 = 0;
 round_counter_2 = 0;
 
-
-% for inv k solution select
-q_sol_history = [0 0 0 0;0 0 0 0;0 0 0 0];
-sol_select = [0 0 0];
-
-movegui('center');    
+movegui('center');        
 while (ishandle(f))
     figData = get(f,'UserData');
     
     %%%% INTEGRATION %%%%%%%%%
     %Old velocity and position
-    xold = [z1(1),z1(3)];
+    xold = [z1(1),z1(3)]; % z1 = [theta1_d, theta2_d ,theta1, theta2], state vector.
     vold = [z1(2),z1(4)];
    
     %Call RHS given old state
@@ -178,35 +167,38 @@ while (ishandle(f))
     z1 = [xnew(1) vnew(1) xnew(2) vnew(2)];
     %%%%%%%%%%%%%%%%%%%%
     
-    
-    %%%%CONTROLLER%%%%%%%%%%  
+    %%%%CONTROLLER%%%%%%%%%%
     if controller_counter<1   % do nothing
         controller_counter = controller_counter + freq_ratio;
         %disp("torque hasn't changed");
     elseif controller_counter >=1   % change tau
-        tau = DBIController(z1,p,traj, iter, dt_phy);
+        x_0 = traj(iter,:);
+        if iter >= 2
+        xd_0 = (traj(iter,:)-traj(iter-1,:))/ dt_phy;
+        end
+        [tau, x_m, xd_m] = PBIController(z1, p, x_m, xd_m, x_0, xd_0, dt_phy);
         %disp("torque has been altered");
         controller_counter = controller_counter -1;
-    end    
+    end
     %%%%%%%%%%%%%%%%%%%%
     
     % trajectory follower
-     if iter < iterlen
+    if iter < iterlen
         iter = iter+1;
     else
         iter = 1;
     end
     p.xtarget = traj(iter,1);
     p.ytarget = traj(iter,2);
-    set(targetPt,'xData',p.xtarget); %Change the target point graphically.
+    
+    %Change the target point graphically.
+    set(targetPt,'xData',p.xtarget); 
     set(targetPt,'yData',p.ytarget);
-
+   
     ra_e = ForwardKin(p.l1,p.l2,z1(1),z1(3));
     figData.xend = ra_e(1);
     figData.yend = ra_e(2);
     set(f,'UserData',figData);
-    
-    
     
     %When you hit a key, it changes to force mode, where the mouse will
     %pull things.
@@ -216,24 +208,13 @@ while (ishandle(f))
     if ~isempty(figData.Fy)
     p.Fy = figData.Fy;
     end
-    % wall apply force
+    
     if wall 
           if figData.xend> wall_left && figData.xend<wall_right
-              p.Fx = wall_stiffness*(figData.xend - wall_left)
-%               if vnew(1) > 0
-%                   p.Fx = -(wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1)));
-%               else
-%                   p.Fx = wall_stiffness*(xnew(1) - wall_left)+ wall_damping*(vnew(1));
+              p.Fx = wall_stiffness*(figData.xend - wall_left);
           else
               p.Fx = 0;
           end
-%           if figData.xend> wall_left && figData.xend<wall_right
-%               if vnew(2) > 0 
-%                   dir_Fy = -1;
-%               else dir_Fy = 1;
-%               end
-%               p.Fy = dir_Fy * wall_friction_coefficient * p.Fx;
-%           end
     end
     
     %On screen timer.
@@ -242,12 +223,7 @@ while (ishandle(f))
     %Draw the inverse kinematics solution
     if show_solution
     [q1_sol, q2_sol] = InverseKin(p.l1, p.l2, p.xtarget, p.ytarget);
-%     q_sol_history = [q_sol_history(2:3,:);q1_sol q2_sol];
-%     sol_num = invKselector(q_sol_history, sol_select, p.init); % 1 = lower arm, 2 = upper arm
-%     sol_select = [sol_select(2:3) sol_num];
-
-    sol_num = 1; % choose the solution manually before i finish the function. 1 = lower arm, 2 = upper arm
-
+    sol_num = p.invKsol; % 1 = lower arm, 2 = upper arm
     q1_sol =  q1_sol(sol_num)-pi/2;
     q2_sol =  q2_sol(sol_num);
     rot1_sol = [cos(q1_sol), -sin(q1_sol); sin(q1_sol),cos(q1_sol)]*[sol_xdat1;sol_ydat1];
@@ -258,11 +234,11 @@ while (ishandle(f))
     set(sol_link2,'yData',rot2_sol(2,:)+(rot1_sol(2,3)+rot1_sol(2,4))/2);
     end
     
-    
-    
-    %For the record
+    % For the record
     traj_x(iter) = traj(iter,1);
     traj_y(iter) = traj(iter,2);
+    x_m_record(iter) = x_m(1);
+    y_m_record(iter) = x_m(2);
     EndEff_x(iter) = ra_e(1);
     EndEff_y(iter) = ra_e(2);
     q1_real(iter) = z1(1);
@@ -281,25 +257,22 @@ while (ishandle(f))
     end
     q1_ideal(iter) = q1_sol + 2*pi*round_counter_1;
     q2_ideal(iter) = q2_sol + 2*pi*round_counter_2;
+    
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        if wall
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','wall','wall_x','wall_y');
-        else 
-            save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy');
-        end
+        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall');
         disp('New data is saved to End_effector_data.mat. Open Difference_Analysis.m to see the plot') 
     end     
-    
-    
     
     %Rotation matrices to manipulate the vertices of the patch objects
     %using theta1 and theta2 from the output state vector.
     rot1 = [cos(z1(1)), -sin(z1(1)); sin(z1(1)),cos(z1(1))]*[xdat1;ydat1];
+    %rot1 = [0 ;0]
     set(link1,'xData',rot1(1,:))
     set(link1,'yData',rot1(2,:))
     
     rot2 = [cos(z1(3)+z1(1)), -sin(z1(3)+z1(1)); sin(z1(3)+z1(1)),cos(z1(3)+z1(1))]*[xdat2;ydat2];
+    %rot2 = [0 ;0]
     
     set(link2,'xData',rot2(1,:)+(rot1(1,3)+rot1(1,4))/2); %We want to add the midpoint of the far edge of the first link to all points in link 2.
     set(link2,'yData',rot2(2,:)+(rot1(2,3)+rot1(2,4))/2);
@@ -313,13 +286,11 @@ while (ishandle(f))
     set(tmeter2,'string',strcat(num2str(tau(2),2),' Nm'));
         
     %Keep the trace drawing
-    set(trace,'xData',(rot2(1,3)+rot2(1,4))/2+(rot1(1,3)+rot1(1,4))/2)
-    set(trace,'yData',(rot2(2,3)+rot2(2,4))/2+(rot1(2,3)+rot1(2,4))/2)
+    set(trace,'xData',rot2(1,3)+(rot1(1,3)+rot1(1,4))/2)
+    set(trace,'yData',rot2(2,3)+(rot1(2,3)+rot1(2,4))/2)
 
     drawnow;
     current_time = current_time + dt_phy;
-
-    
 end
 end
 

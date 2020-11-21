@@ -83,17 +83,9 @@ matlabFunction(T2Eq, 'file', 'GravityCompT2');
 
 %Jacobian relating end effector velocity to joint space vel
 % ie Ve = J*qv
-
 J = jacobian(Ve,[thdot1 thdot2]);
 matlabFunction(J, 'file', 'Velocity_transformation');
 
-syms Kp Kd xt yt xdott ydott real
-
-zt = [xt yt 0 ]'; %Trajectory tracked
-ztdot = [xdott ydott 0]'; %velocity tracked
-
-Tau = J'*(Kp*(zt - ra_e) + Kd*(ztdot - J*[thdot1 thdot2]'));
-matlabFunction(Tau, 'file', 'PID');
 
 
 
@@ -110,33 +102,3 @@ matlabFunction(q1, q2, 'file', 'InverseKin');
 
 
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%AA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%% Energy eqns %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Turned this off after making sure stuff worked:
-
-% syms k1 k2 real
-% 
-% PE = g*dot(ra_c2,j)*m2 + g*dot(ra_c1,j)*m1;
-% KE = 1/2*I1*thdot1^2 + 1/2*I2*(thdot2+thdot1)^2 + 1/2*m1*dot(Vc1,Vc1) + 1/2*m2*dot(Vc2,Vc2);
-% 
-% Etot = PE + KE;
-% 
-% matlabFunction(Etot, 'file', 'TotEnergy');
-
-% syms x0 y0;
-% syms Sq2 Cq2;
-% Cq2 = (x0^2+y0^2-l1^2-l2^2)/2/l1;
-% Sq2 = sqrt(1-((x0^2+y0^2-l1^2-l2^2)/2/l1)^2);
-% q2 = atan2(Sq2,Cq2)
-% syms Sq1 Cq1;
-% eqns = [x0 == l1*Cq1+l2*(cos(q2)*Cq1-sin(q2)*Sq1), y0 == l1*Sq1 + l2*Sq1*cos(q2)+l2*sin(q2)*Cq1];
-% q1 = solve(eqns,[Sq1 Cq1]); 
-% q1 = atan2(double(q1.Sq1),double(q1.Cq1));
-
-% matlabFunction 

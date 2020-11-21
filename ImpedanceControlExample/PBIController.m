@@ -30,14 +30,25 @@ x_m = x_m + xd_m*dt_phy;
     
  
 [q1_d, q2_d] = InverseKin(p.l1, p.l2, x_m(1), x_m(2)); % joint value desired  
-solution_select = 1; % TODO: write a code that select the inverseK solution set
-q_d = [q1_d(solution_select)-pi/2, q2_d(solution_select)];
+solution_select = p.invKsol; % TODO: write a code that select the inverseK solution set
+q_d = [q1_d(solution_select)-pi/2; q2_d(solution_select)];
 qdt_d = pinv(J)*[xd_m 0]';% joint value desired derivative 
 qddt_d =pinv(J)*([xdd_m 0]'-J_dt*qdt_d);% joint value desired second derivative 
 
 
 % Torque to track our desired point
-T = H*(qddt_d+p.Kd*(qdt_d'-[thdot1 thdot2]')+p.Kp*(q_d'-[th1 th2]'));
+qdt_diff = qdt_d - [thdot1 thdot2]';
+q_diff = mod(q_d - [th1 th2]', 2*pi);
+for i = 1:length(q_diff)
+    if q_diff(i) > pi
+        q_diff(i) = mod(q_diff(i), 2*pi) - 2*pi;
+    end
+    if q_diff(i) < -pi
+        q_diff(i) = mod(q_diff(i), 2*pi);
+    end
+end
+
+T = H*(qddt_d + p.Kd*qdt_diff + p.Kp*q_diff);
 T = T + -J'*[F_int 0]';
 
 % Add gravity compensation , h(q)
