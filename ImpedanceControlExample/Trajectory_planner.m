@@ -12,7 +12,7 @@ function [traj] =Trajectory_planner(p)
 % end
 
 traj = [];
-traj_follow_rate = 200; %lower the rate faster it tracks
+traj_follow_rate = p.trajfollowrate; %lower the rate faster it tracks
 for traj_counter = 1: length(p.traj)-1
     traj_time = ceil(pdist(p.traj(traj_counter:traj_counter+1,:))*traj_follow_rate);
     tmax = traj_time/100;

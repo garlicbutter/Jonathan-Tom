@@ -70,7 +70,7 @@ x0 = endZ(1); %End effector initial position in world frame.
 y0 = endZ(2);
 p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
-
+p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 %%%%%%%% wall parameters %%%%%%%%%
 p.wall = true;
 p.wallleft = 0.95;
@@ -78,7 +78,7 @@ p.wallright = 3;
 p.wallstiffness = 1000;
 
 %%%%%%%% Run Derivers %%%%%%%%
-rederive = true;
+rederive = false;
 if rederive
 %If the gain matrix hasn't been found yet, then we assume derivation hasn't
 %happened yet.
