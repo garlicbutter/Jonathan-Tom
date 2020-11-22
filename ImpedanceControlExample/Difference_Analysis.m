@@ -52,6 +52,13 @@ xlabel("x [m]");
 ylabel("y [m]");
 legend("End Effector","Required");
 
+%%%%% For writing report, don't delete it %%%%%%%%%
+xlim([0 3]);
+ylim([-2 2]);
+if  wall
+    patch([1,1,1.75,1.75],[-2,2,2,-2],'red','FaceAlpha',.3)
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 figure(3);
 movegui('northeast');    

@@ -37,17 +37,21 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
-p.Kp = 150; % for PID,PBIC
-p.Kd = 30; % for PID,PBIC
+p.Kp = 150*5; % for PID,PBIC
+p.Kd = 30*2; % for PID,PBIC
 p.K = 25*2; % for DBIC,PBIC, K stiffness coeff
 p.B = 10*1.3; % for DBIC,PBIC, B damping coeff
 p.M = 0.1; % for DBIC, M inertia coeff
     
 controller_type = "PBIC"; % DBIC/ PBIC/ PID
 p.showsolution = true; % show inverseK solution
+
 %%%%%%%% trajectory %%%%%%%%%%
 % See trajectory_example for more information
-p.traj = [-1.5, 0;-1, 1; 0, 1.5; 1, 1;1.5, 0; 1, -1; 0, -1.5;-1,-1];
+% trapezoid 
+R = 1.8;
+p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
+
 
 
 %%%%%%%% System Parameters %%%%%%%%
@@ -72,7 +76,7 @@ p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
 p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 %%%%%%%% wall parameters %%%%%%%%%
-p.wall = true;
+p.wall = false;
 p.wallleft = 0.95;
 p.wallright = 3;
 p.wallstiffness = 1000;
