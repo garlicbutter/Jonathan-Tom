@@ -49,9 +49,8 @@ p.showsolution = true; % show inverseK solution
 %%%%%%%% trajectory %%%%%%%%%%
 % See trajectory_example for more information
 % trapezoid 
-R = 1.8;
-p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
-
+R = 0.5;
+p.traj = [1*R,3*R; 3*R,2*R; 3*R,-2*R; 1*R,-3*R];
 
 
 %%%%%%%% System Parameters %%%%%%%%
@@ -76,7 +75,7 @@ p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
 p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 %%%%%%%% wall parameters %%%%%%%%%
-p.wall = false;
+p.wall = true;
 p.wallleft = 0.95;
 p.wallright = 3;
 p.wallstiffness = 1000;
