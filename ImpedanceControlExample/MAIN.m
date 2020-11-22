@@ -48,9 +48,15 @@ p.showsolution = true; % show inverseK solution
 
 %%%%%%%% trajectory %%%%%%%%%%
 % See trajectory_example for more information
-% trapezoid 
-R = 1.8;
-p.traj = [R*cos(pi/2),R*sin(pi/2);R*cos(pi/2+0.8*pi),R*sin(pi/2+0.8*pi);R*cos(pi/2+1.6*pi),R*sin(pi/2+1.6*pi);R*cos(pi/2+0.4*pi),R*sin(pi/2+0.4*pi);R*cos(pi/2+1.2*pi),R*sin(pi/2+1.2*pi)];
+
+p.traj = [0.5 0;
+    0.8 0;
+    1.2 -1;
+    1.5 -0.3;
+    1 -0.3;
+    0.9 0;
+    1.9 0;
+    1.2 -1.5;];
 
 
 
