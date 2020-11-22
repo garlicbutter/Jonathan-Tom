@@ -40,11 +40,9 @@ qddt_d =pinv(J)*([xdd_m 0]'-J_dt*qdt_d);% joint value desired second derivative
 qdt_diff = qdt_d - [thdot1 thdot2]';
 q_diff = mod(q_d - [th1 th2]', 2*pi);
 for i = 1:length(q_diff)
+    q_diff(i) = mod(q_diff(i), 2*pi);
     if q_diff(i) > pi
-        q_diff(i) = mod(q_diff(i), 2*pi) - 2*pi;
-    end
-    if q_diff(i) < -pi
-        q_diff(i) = mod(q_diff(i), 2*pi);
+        q_diff(i) = q_diff(i) - 2*pi;
     end
 end
 
