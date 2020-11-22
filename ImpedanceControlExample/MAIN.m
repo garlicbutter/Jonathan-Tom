@@ -82,7 +82,7 @@ p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
 p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 %%%%%%%% wall parameters %%%%%%%%%
-p.wall = false;
+p.wall = true;
 p.wallleft = 0.95;
 p.wallright = 3;
 p.wallstiffness = 1000;
