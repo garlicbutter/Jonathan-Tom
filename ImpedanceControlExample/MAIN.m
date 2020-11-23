@@ -37,7 +37,7 @@ clc; close all; clear;
 
 %%%%%%%% Control Parameters %%%%%%%%
 %Controller Gains and type
-p.Kp = 150*5; % for PID,PBIC
+p.Kp = 150*2; % for PID,PBIC
 p.Kd = 30*1; % for PID,PBIC
 p.K = 25*2; % for DBIC,PBIC, K stiffness coeff
 p.B = 10*1.3; % for DBIC,PBIC, B damping coeff
@@ -75,7 +75,7 @@ p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
 p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 %%%%%%%% wall parameters %%%%%%%%%
-p.wall = false;
+p.wall = true;
 p.wallleft = 0.95;
 p.wallright = 3;
 p.wallstiffness = 1000;
