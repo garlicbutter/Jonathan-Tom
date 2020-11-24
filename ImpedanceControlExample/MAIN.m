@@ -40,10 +40,10 @@ clc; close all; clear;
 p.Kp = 150*2; % for PID,PBIC
 p.Kd = 30*1; % for PID,PBIC
 p.K = 25*2; % for DBIC,PBIC, K stiffness coeff
-p.B = 10*1.3; % for DBIC,PBIC, B damping coeff
-p.M = 0.1; % for DBIC, M inertia coeff
+p.B = 10*1; % for DBIC,PBIC, B damping coeff
+p.M = 0.08; % for DBIC, M inertia coeff
     
-controller_type = "PBIC"; % DBIC/ PBIC/ PID
+controller_type = "DBIC"; % DBIC/ PBIC/ PID
 p.showsolution = true; % show inverseK solution
 
 %%%%%%%% trajectory %%%%%%%%%%
@@ -75,10 +75,10 @@ p.xtarget = x0; %What points are we shooting for in WORLD SPACE?
 p.ytarget = y0;
 p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 %%%%%%%% wall parameters %%%%%%%%%
-p.wall = true;
+p.wall = false;
 p.wallleft = 0.95;
 p.wallright = 3;
-p.wallstiffness = 1000;
+p.wallstiffness = 500;
 
 %%%%%%%% Run Derivers %%%%%%%%
 rederive = false;

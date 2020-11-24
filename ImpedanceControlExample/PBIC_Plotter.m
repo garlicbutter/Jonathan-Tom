@@ -260,7 +260,11 @@ while (ishandle(f))
     
     %Position & Trajectory Record for further analysis
     if iterlen == iter
-        save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall');
+        if wall
+            save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall','wall_x','wall_y');
+        else
+           save('End_Effector_data.mat','EndEff_x','EndEff_y','traj_x','traj_y','q1_ideal','q2_ideal','q1_real','q2_real','dt_phy','x_m_record','y_m_record','wall'); 
+        end
         disp('New data is saved to End_effector_data.mat. Open Difference_Analysis.m to see the plot') 
     end     
     
