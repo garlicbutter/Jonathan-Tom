@@ -43,7 +43,7 @@ p.K = 25*2; % for DBIC,PBIC, K stiffness coeff
 p.B = 10*1; % for DBIC,PBIC, B damping coeff
 p.M = 0.08; % for DBIC, M inertia coeff
     
-controller_type = "DBIC"; % DBIC/ PBIC/ PID
+controller_type = "PID"; % DBIC/ PBIC/ PID
 p.showsolution = true; % show inverseK solution
 
 %%%%%%%% trajectory %%%%%%%%%%
@@ -78,7 +78,7 @@ p.trajfollowrate = 150; %lower the rate faster the end effector track the traj
 p.wall = false;
 p.wallleft = 0.95;
 p.wallright = 3;
-p.wallstiffness = 500;
+p.wallstiffness = 1000;
 
 %%%%%%%% Run Derivers %%%%%%%%
 rederive = false;
