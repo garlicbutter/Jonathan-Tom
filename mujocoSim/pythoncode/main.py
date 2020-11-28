@@ -1,4 +1,5 @@
-import mujoco_py
-import os
+# import mujoco_py
+# import os
 
-print 
+from gym import envs
+print(envs.registry.all())
