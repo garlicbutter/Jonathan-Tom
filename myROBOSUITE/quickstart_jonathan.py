@@ -39,8 +39,13 @@ world.merge(mujoco_robot)
 
 
 # Step 4: Adding the object.
-# For details of MujocoObject, refer to the documentations about MujocoObject, we can create a ball and add it to the world.
-# It is a bit more complicated than before because we are adding a free joint to the object (so it can move) and we want to place the object properly.
+# self.cube = BoxObject(
+#     name="cube",
+#     size_min=[0.020, 0.020, 0.020],  # [0.015, 0.015, 0.015],
+#     size_max=[0.022, 0.022, 0.022],  # [0.018, 0.018, 0.018])
+#     rgba=[1, 0, 0, 1],
+#     material=redwood,
+# )
 
 
 # Step 5: Running Simulation. Once we have created the object, we can obtain a mujoco_py model by running
