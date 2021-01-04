@@ -5,8 +5,23 @@ from robosuite.models import MujocoWorldBase
 world = MujocoWorldBase()
 
 
+# Step 2: Creating the table. We can initialize the TableArena instance that creates a table and the floorplane
 
-# Step 2: Creating the robot. The class housing the xml of a robot can be created as follows.
+from robosuite.models.arenas import TableArena
+
+
+mujoco_arena = TableArena(
+            table_full_size=self.table_full_size,
+            table_friction=self.table_friction,
+            table_offset=self.table_offset,
+        )
+mujoco_arena.set_origin([0.8, 0, 0])
+world.merge(mujoco_arena)
+# self.table_full_size = table_full_size
+# self.table_friction = table_friction
+# self.table_offset = np.array((0, 0, 0.8))
+
+# Step 3: Creating the robot. The class housing the xml of a robot can be created as follows.
 
 from robosuite.models.robots import UR5e
 
@@ -21,18 +36,16 @@ mujoco_robot.add_gripper(gripper)
 
 # To add the robot to the world, we place the robot on to a desired position and merge it into the world
 
-mujoco_robot.set_base_xpos([0, 0, 0])
+
+xpos = table_offset.tolist()
+mujoco_robot.set_base_xpos(xpos)
+        # self.table_full_size = table_full_size
+        # self.table_friction = table_friction
+        # self.table_offset = np.array((0, 0, 0.8))
+# mujoco_robot.set_base_xpos = self.robots[0].robot_model.base_xpos_offset["table"](self.table_full_size[0])
+# self.robots[0].robot_model.set_base_xpos(xpos)
 world.merge(mujoco_robot)
 
-
-
-# Step 3: Creating the table. We can initialize the TableArena instance that creates a table and the floorplane
-
-from robosuite.models.arenas import TableArena
-
-mujoco_arena = TableArena()
-mujoco_arena.set_origin([0.8, 0, 0])
-world.merge(mujoco_arena)
 
 
 # Step 4: Adding the object. 
