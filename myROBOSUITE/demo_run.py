@@ -68,11 +68,8 @@ env.reset()
 
 
 # action setting
-# Define variables for each controller test
-action_dim = 6
-test_value = 0.5
 
-# Define neutral value
+action_dim = 6
 gripper_dim = 1
 neutral = np.zeros(action_dim + gripper_dim)
 
@@ -80,7 +77,7 @@ neutral = np.zeros(action_dim + gripper_dim)
 # simulate
 for i in range(1000):
     action = neutral.copy()
-    action[0] = test_value
+    action = [0, 0, 0, 0, 0, 0, 0]
     env.step(action)
     env.render()
 
