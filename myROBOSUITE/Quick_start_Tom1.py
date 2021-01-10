@@ -6,7 +6,7 @@ from robosuite import load_controller_config
 env_name = "Lift"
 robot_type = "UR5e"
 # Load the desired controller's default config as a dict
-controller_name = 'OSC_POSE'
+controller_name = 'JOINT_POSITION'
 controller_configs = load_controller_config(default_controller=controller_name)
 gripper_types = "default"
 initialization_noise = "default"
@@ -76,13 +76,14 @@ test_value = 0.5
 gripper_dim = 1
 neutral = np.zeros(action_dim + gripper_dim)
 
-
+# set_goal(self, action, set_qpos)
 # simulate
 for i in range(2000):
     action = neutral.copy()
-    action = [0, 0, 0, 0, 0.1, 0, 0]
+    action = [0.5, 0, 0, 0, 0, 0, 0]
     env.step(action)
     env.render()
+    # set_qpos (Iterable):
 
 
 # Shut down this env before starting the next test
