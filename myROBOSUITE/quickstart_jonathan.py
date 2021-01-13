@@ -1,64 +1,86 @@
 import numpy as np
-from mujoco_py import MjSim, MjViewer
-from robosuite.models.grippers import gripper_factory
-from robosuite.models import MujocoWorldBase
-from robosuite.models.arenas import TableArena
-from robosuite.models.robots import UR5e
+import robosuite as suite
+from robosuite import load_controller_config
 
-# Step 1: Creating the world. All mujoco object definitions are housed in an xml. We create a MujocoWorldBase class to do it.
-world = MujocoWorldBase()
-
-# Step 2: Creating the table. We can initialize the TableArena instance that creates a table and the floorplane
-# load model for table top workspace
+# env setting
+env_name = "Lift"
+robot_type = "UR5e"
+# Load the desired controller's default config as a dict
+controller_name = 'JOINT_POSITION'
+controller_configs = load_controller_config(default_controller=controller_name)
+gripper_types = "default"
+initialization_noise = "default"
 table_full_size = (0.8, 0.8, 0.05)
 table_friction = (1., 5e-3, 1e-4)
-table_offset = np.array((0, 0, 0.8))
+use_camera_obs = False
+use_object_obs = False
+reward_scale = 1.0
+reward_shaping = False
+placement_initializer = None
+has_renderer = True
+has_offscreen_renderer = False
+render_camera = "frontview"
+render_collision_mesh = False
+render_visual_mesh = True
+render_gpu_device_id = -1
+control_freq = 20
+horizon = 1000
+ignore_done = False
+hard_reset = True
+camera_names = "agentview"
+camera_heights = 256
+camera_widths = 256
+camera_depths = False
 
-mujoco_arena = TableArena(
+
+# create environment instance
+env = suite.make(
+    env_name=env_name,
+    robots=robot_type,
+    controller_configs=controller_configs,
+    gripper_types=gripper_types,
+    initialization_noise=initialization_noise,
     table_full_size=table_full_size,
     table_friction=table_friction,
-    table_offset=table_offset,
+    use_camera_obs=use_camera_obs,
+    use_object_obs=use_object_obs,
+    reward_scale=reward_scale,
+    reward_shaping=reward_shaping,
+    placement_initializer=placement_initializer,
+    has_renderer=has_renderer,
+    has_offscreen_renderer=has_offscreen_renderer,
+    render_camera=render_camera,
+    render_collision_mesh=render_collision_mesh,
+    render_visual_mesh=render_visual_mesh,
+    render_gpu_device_id=render_gpu_device_id,
+    control_freq=control_freq,
+    horizon=horizon,
+    ignore_done=ignore_done,
+    hard_reset=hard_reset,
+    camera_names=camera_names,
+    camera_heights=camera_heights,
+    camera_widths=camera_widths,
+    camera_depths=camera_depths,
 )
 
-# Arena always gets set to zero origin
-mujoco_arena.set_origin([0, 0, 0])
-world.merge(mujoco_arena)
+# reset the environment
+env.reset()
 
 
-# Step 3: Creating the robot. The class housing the xml of a robot can be created as follows.
-mujoco_robot = UR5e()
+# action setting
 
-# We can add a gripper to the robot by creating a gripper instance and calling the add_gripper method on a robot.
-gripper = gripper_factory("Robotiq85Gripper")
-mujoco_robot.add_gripper(gripper)
-
-# To add the robot to the world, we place the robot on to a desired position and merge it into the world
-xpos = table_offset.tolist()
-mujoco_robot.set_base_xpos(xpos)
-world.merge(mujoco_robot)
+action_dim = 6
+gripper_dim = 1
+neutral = np.zeros(action_dim + gripper_dim)
 
 
-# Step 4: Adding the object.
-# self.cube = BoxObject(
-#     name="cube",
-#     size_min=[0.020, 0.020, 0.020],  # [0.015, 0.015, 0.015],
-#     size_max=[0.022, 0.022, 0.022],  # [0.018, 0.018, 0.018])
-#     rgba=[1, 0, 0, 1],
-#     material=redwood,
-# )
+# simulate
+for i in range(1000):
+    action = neutral.copy()
+    action = [0, 0.5, 0, 0, 0, 0, 0]
+    env.step(action)
+    env.render()
 
 
-# Step 5: Running Simulation. Once we have created the object, we can obtain a mujoco_py model by running
-model = world.get_model(mode="mujoco_py")
-
-# This is an MjModel instance that can then be used for simulation. For example,
-
-
-sim = MjSim(model)
-viewer = MjViewer(sim)
-viewer.vopt.geomgroup[0] = 0  # disable visualization of collision mesh
-
-for i in range(10000):
-    sim.data.ctrl[:] = 0
-    sim.step()
-    viewer.render()
+# Shut down this env before starting the next test
+env.close()

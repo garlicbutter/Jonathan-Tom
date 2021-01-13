@@ -3,7 +3,7 @@ import robosuite as suite
 from robosuite import load_controller_config
 
 # env setting
-env_name = "Lift"
+env_name = "NistTask"
 robot_type = "UR5e"
 # Load the desired controller's default config as a dict
 controller_name = 'JOINT_POSITION'
@@ -52,7 +52,6 @@ env = suite.make(
     render_camera=render_camera,
     render_collision_mesh=render_collision_mesh,
     render_visual_mesh=render_visual_mesh,
-    render_gpu_device_id=render_gpu_device_id,
     control_freq=control_freq,
     horizon=horizon,
     ignore_done=ignore_done,
