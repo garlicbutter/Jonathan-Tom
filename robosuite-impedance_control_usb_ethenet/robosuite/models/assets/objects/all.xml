@@ -1,0 +1,12 @@
+<mujoco model="all">
+
+    <include file="Board_loading.xml"/>
+	
+	<include file="usb_cable.xml"/> 
+	
+	<include file="ethernet_cable.xml"/>
+	
+	<include file="electric_cable.xml"/>
+	<include file="electric_cable_3_pin.xml"/> 
+	
+</mujoco>

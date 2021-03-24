@@ -1,0 +1,733 @@
+<mujoco model="hole">
+
+        <!--  <geom pos="0 0 0" size="0.1 0.25 0.02" type="box" rgba="1 0 0 1"/>
+        <geom pos="0.3 0 0" size="0.1 0.25 0.02" type="box" rgba="1 0 0 1"/>
+        <geom pos="0.15 0.15 0" size="0.05 0.1 0.02" type="box" rgba="1 0 0 1"/>
+        <geom pos="0.15 -0.15 0" size="0.05 0.1 0.02" type="box" rgba="1 0 0 1"/>-->
+	
+ <asset>
+   <!---------------------------------  box ------------------------------------------------>
+    <mesh file="all_board_export6/all_boardcube_000.stl" name="box1"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_001.stl" name="box2"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_002.stl" name="box3"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_003.stl" name="box4"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_004.stl" name="box5"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_005.stl" name="box6"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_006.stl" name="box7"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_007.stl" name="box8"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_008.stl" name="box9"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_009.stl" name="box10"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_010.stl" name="box11"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_011.stl" name="box12"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_012.stl" name="box13"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_013.stl" name="box14"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_014.stl" name="box15"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_015.stl" name="box16"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_016.stl" name="box17"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_017.stl" name="box18"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_018.stl" name="box19"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_019.stl" name="box20"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_020.stl" name="box21"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_021.stl" name="box22"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_022.stl" name="box23"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_023.stl" name="box24"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_024.stl" name="box25"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_025.stl" name="box26"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_026.stl" name="box27"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_027.stl" name="box28"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_028.stl" name="box29"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_029.stl" name="box30"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_030.stl" name="box31"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_031.stl" name="box32"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_032.stl" name="box33"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_033.stl" name="box34"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_034.stl" name="box35"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_035.stl" name="box36"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_036.stl" name="box37"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_037.stl" name="box38"  scale="1e-3 1e-3 1e-3"/>
+	 <mesh file="all_board_export6/all_boardcube_038.stl" name="box39"  scale="1e-3 1e-3 1e-3"/>
+	 
+   <!---------------------------------  USB2 ------------------------------------------------>
+	 <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_1.stl" name="usb_1"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_1_001.stl" name="usb_2"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_2.stl" name="usb_3"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_2_001.stl" name="usb_4"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_3.stl" name="usb_5"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_3_001.stl" name="usb_6"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_4.stl" name="usb_7"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_4_001.stl" name="usb_8"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_5.stl" name="usb_9"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_5_001.stl" name="usb_10"  scale="1e-3 1e-3 1e-3"/>
+	
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_8.stl" name="usb_15"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_8_001.stl" name="usb_16"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_9.stl" name="usb_17"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_9_001.stl" name="usb_18"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_10.stl" name="usb_19"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_10_001.stl" name="usb_20"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_11.stl" name="usb_21"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_11_001.stl" name="usb_22"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_12.stl" name="usb_23"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_12_001.stl" name="usb_24"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_13.stl" name="usb_25"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_13_001.stl" name="usb_26"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_14.stl" name="usb_27"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_14_001.stl" name="usb_28"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_15.stl" name="usb_29"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_15_001.stl" name="usb_30"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_16.stl" name="usb_31"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_16_001.stl" name="usb_32"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_17.stl" name="usb_33"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_17_001.stl" name="usb_34"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_18.stl" name="usb_35"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_18_001.stl" name="usb_36"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_19.stl" name="usb_37"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_19_001.stl" name="usb_38"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_20.stl" name="usb_39"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_20_001.stl" name="usb_40"  scale="1e-3 1e-3 1e-3"/>
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_22.stl" name="usb_43"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_22_001.stl" name="usb_44"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_23.stl" name="usb_45"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_23_001.stl" name="usb_46"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_24.stl" name="usb_47"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_24_001.stl" name="usb_48"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_25.stl" name="usb_49"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_25_001.stl" name="usb_50"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_26.stl" name="usb_51"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_26_001.stl" name="usb_52"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_27.stl" name="usb_53"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_27_001.stl" name="usb_54"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_28.stl" name="usb_55"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_28_001.stl" name="usb_56"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_29.stl" name="usb_57"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_29_001.stl" name="usb_58"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_30.stl" name="usb_59"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_30_001.stl" name="usb_60"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_31.stl" name="usb_61"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_31_001.stl" name="usb_62"  scale="1e-3 1e-3 1e-3"/>
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_33.stl" name="usb_65"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_33_001.stl" name="usb_66"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_34.stl" name="usb_67"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_34_001.stl" name="usb_68"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_35.stl" name="usb_69"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_35_001.stl" name="usb_70"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_36.stl" name="usb_71"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_36_001.stl" name="usb_72"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_37.stl" name="usb_73"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_37_001.stl" name="usb_74"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_38.stl" name="usb_75"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_38_001.stl" name="usb_76"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_39.stl" name="usb_77"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_39_001.stl" name="usb_78"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_40.stl" name="usb_79"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_40_001.stl" name="usb_80"  scale="1e-3 1e-3 1e-3"/>
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_42.stl" name="usb_83"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_42_001.stl" name="usb_84"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_43.stl" name="usb_85"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_43_001.stl" name="usb_86"  scale="1e-3 1e-3 1e-3"/>
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_45.stl" name="usb_89"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_45_001.stl" name="usb_90"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_46.stl" name="usb_91"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_46_001.stl" name="usb_92"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_47.stl" name="usb_93"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_47_001.stl" name="usb_94"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_48.stl" name="usb_95"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_48_001.stl" name="usb_96"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_49.stl" name="usb_97"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_49_001.stl" name="usb_98"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_50.stl" name="usb_99"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_50_001.stl" name="usb_100"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_51.stl" name="usb_101"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledallUSB2_0_panelowe_hull_51_001.stl" name="usb_102"  scale="1e-3 1e-3 1e-3"/>
+	
+	
+   <!---------------------------------------------------------  Ethernet---------- ------------------------------------------------>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_1.stl" name="ether_1"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_1_001.stl" name="ether_2"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_2.stl" name="ether_3"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_2_001.stl" name="ether_4"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_3.stl" name="ether_5"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_3_001.stl" name="ether_6"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_4.stl" name="ether_7"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_4_001.stl" name="ether_8"  scale="1e-3 1e-3 1e-3"/>
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_6.stl" name="ether_11"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_6_001.stl" name="ether_12"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_7.stl" name="ether_13"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_7_001.stl" name="ether_14"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_8.stl" name="ether_15"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_8_001.stl" name="ether_16"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_9.stl" name="ether_17"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_9_001.stl" name="ether_18"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_10.stl" name="ether_19"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_10_001.stl" name="ether_20"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_11.stl" name="ether_21"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_11_001.stl" name="ether_22"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_12.stl" name="ether_23"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_12_001.stl" name="ether_24"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_13.stl" name="ether_25"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_13_001.stl" name="ether_26"  scale="1e-3 1e-3 1e-3"/>
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_15.stl" name="ether_29"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_15_001.stl" name="ether_30"  scale="1e-3 1e-3 1e-3"/>
+
+
+
+
+
+
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_20.stl" name="ether_39"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_20_001.stl" name="ether_40"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_21.stl" name="ether_41"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_21_001.stl" name="ether_42"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_22.stl" name="ether_43"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_22_001.stl" name="ether_44"  scale="1e-3 1e-3 1e-3"/>
+
+
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_25.stl" name="ether_49"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitledANKER_USB_3_0_Ethernet_002_hull_25_001.stl" name="ether_50"  scale="1e-3 1e-3 1e-3"/>
+	
+	
+	 <!---------------------------------------------------------  Power---------- ------------------------------------------------>
+	 <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_1.stl" name="elec_1"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_1_001.stl" name="elec_2"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_2.stl" name="elec_3"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_2_001.stl" name="elec_4"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_3.stl" name="elec_5"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_3_001.stl" name="elec_6"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_4.stl" name="elec_7"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_4_001.stl" name="elec_8"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_5.stl" name="elec_9"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_5_001.stl" name="elec_10"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_6.stl" name="elec_11"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_6_001.stl" name="elec_12"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_7.stl" name="elec_13"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_7_001.stl" name="elec_14"  scale="1e-3 1e-3 1e-3"/>
+
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_9.stl" name="elec_17"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_9_001.stl" name="elec_18"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_10.stl" name="elec_19"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_10_001.stl" name="elec_20"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_11.stl" name="elec_21"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_11_001.stl" name="elec_22"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_12.stl" name="elec_23"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_12_001.stl" name="elec_24"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_13.stl" name="elec_25"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_13_001.stl" name="elec_26"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_14.stl" name="elec_27"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_14_001.stl" name="elec_28"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_15.stl" name="elec_29"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_15_001.stl" name="elec_30"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_16.stl" name="elec_31"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_16_001.stl" name="elec_32"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_17.stl" name="elec_33"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_17_001.stl" name="elec_34"  scale="1e-3 1e-3 1e-3"/>
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_19.stl" name="elec_37"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_19_001.stl" name="elec_38"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_20.stl" name="elec_39"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_20_001.stl" name="elec_40"  scale="1e-3 1e-3 1e-3"/>
+
+
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_22.stl" name="elec_43"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_22_001.stl" name="elec_44"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_23.stl" name="elec_45"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_23_001.stl" name="elec_46"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_24.stl" name="elec_47"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_24_001.stl" name="elec_48"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_25.stl" name="elec_49"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_25_001.stl" name="elec_50"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_26.stl" name="elec_51"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_26_001.stl" name="elec_52"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_27.stl" name="elec_53"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_27_001.stl" name="elec_54"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_28.stl" name="elec_55"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_28_001.stl" name="elec_56"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_29.stl" name="elec_57"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_29_001.stl" name="elec_58"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_30.stl" name="elec_59"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_30_001.stl" name="elec_60"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_31.stl" name="elec_61"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_31_001.stl" name="elec_62"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_32.stl" name="elec_63"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_32_001.stl" name="elec_64"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_33.stl" name="elec_65"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_33_001.stl" name="elec_66"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_34.stl" name="elec_67"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_34_001.stl" name="elec_68"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_35.stl" name="elec_69"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_35_001.stl" name="elec_70"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_36.stl" name="elec_71"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_36_001.stl" name="elec_72"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_37.stl" name="elec_73"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_37_001.stl" name="elec_74"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_38.stl" name="elec_75"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_38_001.stl" name="elec_76"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_39.stl" name="elec_77"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_39_001.stl" name="elec_78"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_40.stl" name="elec_79"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_40_001.stl" name="elec_80"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_41.stl" name="elec_81"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_41_001.stl" name="elec_82"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_42.stl" name="elec_83"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_42_001.stl" name="elec_84"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_43.stl" name="elec_85"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_43_001.stl" name="elec_86"  scale="1e-3 1e-3 1e-3"/>
+
+  
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_45.stl" name="elec_89"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_45_001.stl" name="elec_90"  scale="1e-3 1e-3 1e-3"/>
+	
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_47.stl" name="elec_93"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_47_001.stl" name="elec_94"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_48.stl" name="elec_95"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_48_001.stl" name="elec_96"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_49.stl" name="elec_97"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_49_001.stl" name="elec_98"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_50.stl" name="elec_99"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_50_001.stl" name="elec_100"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_51.stl" name="elec_101"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_51_001.stl" name="elec_102"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_52.stl" name="elec_103"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_52_001.stl" name="elec_104"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_53.stl" name="elec_105"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_53_001.stl" name="elec_106"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_54.stl" name="elec_107"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_54_001.stl" name="elec_108"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_55.stl" name="elec_109"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_55_001.stl" name="elec_110"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_56.stl" name="elec_111"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_56_001.stl" name="elec_112"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_57.stl" name="elec_113"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_57_001.stl" name="elec_114"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_58.stl" name="elec_115"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_58_001.stl" name="elec_116"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_59.stl" name="elec_117"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_59_001.stl" name="elec_118"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_60.stl" name="elec_119"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_60_001.stl" name="elec_120"  scale="1e-3 1e-3 1e-3"/>
+	
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_62.stl" name="elec_123"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_62_001.stl" name="elec_124"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_63.stl" name="elec_125"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_63_001.stl" name="elec_126"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_64.stl" name="elec_127"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_64_001.stl" name="elec_128"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_65.stl" name="elec_129"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_65_001.stl" name="elec_130"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_66.stl" name="elec_131"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_66_001.stl" name="elec_132"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_67.stl" name="elec_133"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_67_001.stl" name="elec_134"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_68.stl" name="elec_135"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_68_001.stl" name="elec_136"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_69.stl" name="elec_137"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_69_001.stl" name="elec_138"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_70.stl" name="elec_139"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_70_001.stl" name="elec_140"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_71.stl" name="elec_141"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_71_001.stl" name="elec_142"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_72.stl" name="elec_143"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_72_001.stl" name="elec_144"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_73.stl" name="elec_145"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_73_001.stl" name="elec_146"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_74.stl" name="elec_147"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_74_001.stl" name="elec_148"  scale="1e-3 1e-3 1e-3"/>
+	<mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_75.stl" name="elec_149"  scale="1e-3 1e-3 1e-3"/>
+    <mesh file="all_board_export6/all_boarduntitleduntitleduntitledDetrompeur_hull_75_001.stl" name="elec_150"  scale="1e-3 1e-3 1e-3"/>
+	
+
+	 
+	 
+		<texture file="ceramic.png" name="tex-ceramic"/>
+		<texture file="metal.png" name="tex-metal"/>
+    <material name="ceramic" reflectance="0.5" texrepeat="1 1" texture="tex-ceramic" texuniform="true"/>
+	 <material name="metal" reflectance="0.5" texrepeat="1 1" texture="tex-metal" texuniform="true"/>
+  </asset>
+  
+  
+  <worldbody>
+
+    <body>
+		<body name="collision">
+			 <!---------------------------------------------------------  box---------- ------------------------------------------------>
+		<geom pos="0 0 -0.03" mesh="box1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="box3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="box8" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box9" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box10" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box11" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box12" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="box13" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box14" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box15" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box16" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+				
+		<geom pos="0 0 -0.03" mesh="box17" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box18" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="box19" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box20" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box21" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box22" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box23" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="box24" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box25" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box26" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box27" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box28" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="box29" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box30" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="box31" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box32" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box33" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box34" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box35" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box36" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box37" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box38" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="box39" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<!-----------------------------------------------------------------------------------------  USB---------- ------------------------------------------------>
+		 <geom pos="0 0 -0.03" mesh="usb_1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="usb_3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_8" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_9" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_10" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 
+		
+	
+		 <geom pos="0 0 -0.03" mesh="usb_15" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_16" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_17" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_18" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_19" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_20" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_21" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_22" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_23" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_24" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_25" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_26" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_27" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_28" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_29" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="usb_30" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_31" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_32" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_33" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_34" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_35" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_36" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_37" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_38" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_39" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="usb_40" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		<geom pos="0 0 -0.03" mesh="usb_43" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_44" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_45" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_46" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_47" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_48" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_49" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_50" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 			
+					<!---------------------------------------------------------  Electric---------- ------------------------------------------------>
+		 <geom pos="0 0 -0.03" mesh="elec_1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_8" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_9" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_10" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 
+		 <geom pos="0 0 -0.03" mesh="elec_11" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_12" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_13" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_14" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+	
+		
+		<geom pos="0 0 -0.03" mesh="elec_17" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_18" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_19" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_20" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_21" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_22" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_23" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_24" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_25" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_26" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_27" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_28" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_29" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_30" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_31" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_32" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_33" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_34" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_37" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_38" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_39" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_40" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		<geom pos="0 0 -0.03" mesh="elec_43" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_44" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_45" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_46" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_47" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_48" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_49" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_50" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		 <geom pos="0 0 -0.03" mesh="elec_51" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_52" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_53" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_54" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_55" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_56" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_57" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_58" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_59" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_60" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		 <geom pos="0 0 -0.03" mesh="elec_61" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_62" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_63" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_64" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_65" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_66" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_67" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_68" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_69" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_70" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+
+		 <geom pos="0 0 -0.03" mesh="elec_71" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_72" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_73" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_74" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_75" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_76" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_77" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_78" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_79" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_80" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+
+		 <geom pos="0 0 -0.03" mesh="elec_81" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_82" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_83" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_84" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_85" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_86" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_89" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_90" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		 <geom pos="0 0 -0.03" mesh="elec_93" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_94" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_95" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_96" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_97" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_98" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_99" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_100" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		 <geom pos="0 0 -0.03" mesh="elec_81" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_82" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_83" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_84" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_85" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_86" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		<geom pos="0 0 -0.03" mesh="elec_89" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_90" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		 <geom pos="0 0 -0.03" mesh="elec_101" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_102" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_103" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_104" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_105" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_106" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_107" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_108" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_109" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_110" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_111" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_112" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="elec_113" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_114" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		 <geom pos="0 0 -0.03" mesh="elec_115" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_116" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_117" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_118" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_119" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_120" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_123" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_124" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_125" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_126" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_127" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_128" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_129" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_130" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_131" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_132" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_133" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_134" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_135" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_136" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_137" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_138" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_139" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="elec_140" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		<geom pos="0 0 -0.03" mesh="elec_143" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_144" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_145" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_146" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_147" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_148" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="elec_149" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="elec_150" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+			<!---------------------------------------------------------  ethernet---------- ------------------------------------------------>
+		
+		<geom pos="0 0 -0.03" mesh="ether_1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="ether_2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="ether_3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_8" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		
+		 
+		 <geom pos="0 0 -0.03" mesh="ether_11" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="ether_12" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="ether_13" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_14" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+	     <geom pos="0 0 -0.03" mesh="ether_15" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_16" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_17" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_18" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_19" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_20" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_21" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_22" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_23" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_24" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		
+		<geom pos="0 0 -0.03" mesh="ether_25" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_26" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="ether_29" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="ether_30" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		
+		<geom pos="0 0 -0.03" mesh="ether_39" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<geom pos="0 0 -0.03" mesh="ether_40" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		<geom pos="0 0 -0.03" mesh="ether_43" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_44" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		<geom pos="0 0 -0.03" mesh="ether_49" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="ether_50" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="ceramic" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		
+		
+		
+		<!------------------------------------sites_definitions----------------------------------------------->
+		
+		<site name="middle_cube" pos="0.062 -0.042 0.115" size="0.002 0.002 0.002" />
+		<site name="middle_cylinder" pos="0.2355 -0.042 0.115" size="0.002 0.002 0.002" />
+		<site name="middle_triangle" pos="0.1485 -0.042 0.115" size="0.002 0.002 0.002" />
+		
+		<site name="middle_usb_socket_1" pos="0.0085 -0.0095 -0.028" size="0.5e-3 0.5e-3 0.5e-3" zaxis="0 1 0" rgba="1 0 0 1"/>
+		<site name="middle_usb_socket_2" pos="-0.014 -0.0095 -0.028" size="0.5e-3 0.5e-3 0.5e-3" zaxis="0 1 0" rgba="1 0 0 1"/>
+		
+		<site name="middle_ethernet_socket_1" pos="-0.0305 -0.006 -0.028" size="0.5e-3 0.5e-3 0.5e-3" zaxis="0 1 0" rgba="1 0 0 1"/>
+		<site name="middle_ethernet_socket_2" pos="-0.0305 -0.000 -0.028" size="0.5e-3 0.5e-3 0.5e-3" zaxis="0 1 0" rgba="1 0 0 1"/>
+		
+		<site name="middle_electric_socket_1" pos="0.008 0.008 -0.022" size="0.5e-3 0.5e-3 0.5e-3" zaxis="0 1 0" rgba="1 0 0 1"/>
+		<site name="middle_electric_socket_2" pos="-0.0136 0.008 -0.022" size="0.5e-3 0.5e-3 0.5e-3" zaxis="0 1 0" rgba="1 0 0 1"/>
+		
+		
+		
+		<body name="asdasasd" pos="0.264 0.077 -0.03">
+			<geom density="3000" friction="1.0 0.005 0.0001" group="1" name="cube23"  rgba="1 0 0 1" size="0.002 0.002 0.002" type="box" />
+	
+		</body>
+		
+		<body name="asdaasds" pos="0.24 0.07 -0.03">
+			<geom density="3000" friction="1.0 0.005 0.0001" group="1" name="cube3"  rgba="1 0 0 1" size="0.002 0.002 0.002" type="box" />
+	
+		</body>
+		
+
+		
+		
+		</body>
+
+      <body name="visual">
+
+        <!--  <geom pos="0 0 0" size="0.1 0.25 0.02" type="box" rgba="1 0 0 1"/>
+        <geom pos="0.3 0 0" size="0.1 0.25 0.02" type="box" rgba="1 0 0 1"/>
+        <geom pos="0.15 0.15 0" size="0.05 0.1 0.02" type="box" rgba="1 0 0 1"/>
+        <geom pos="0.15 -0.15 0" size="0.05 0.1 0.02" type="box" rgba="1 0 0 1"/>-->
+      </body>
+
+
+
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.02" name="bottom_site"/>
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0.02" name="top_site"/>
+      <site rgba="0 0 0 0" size="0.005" pos="0.25 0.25 0.1" name="horizontal_radius_site"/>
+    </body>
+  </worldbody>
+</mujoco>

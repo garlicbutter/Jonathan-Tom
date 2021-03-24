@@ -1,0 +1,88 @@
+<mujoco model="PS_World">
+    <compiler angle="radian" />
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <mesh name="Convex_1_2_40_3" file="Convex_1_2_40_3.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_2_2_40_4" file="Convex_2_2_40_4.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_3_2_40_5" file="Convex_3_2_40_5.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_4_2_40_6" file="Convex_4_2_40_6.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_5_2_40_7" file="Convex_5_2_40_7.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_6_2_40_8" file="Convex_6_2_40_8.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_7_2_40_9" file="Convex_7_2_40_9.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_8_2_40_10" file="Convex_8_2_40_10.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_9_2_40_11" file="Convex_9_2_40_11.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_10_2_40_12" file="Convex_10_2_40_12.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_11_2_40_13" file="Convex_11_2_40_13.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_12_2_40_14" file="Convex_12_2_40_14.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_13_2_40_15" file="Convex_13_2_40_15.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_14_2_40_16" file="Convex_14_2_40_16.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_15_2_40_17" file="Convex_15_2_40_17.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_16_2_40_18" file="Convex_16_2_40_18.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_17_2_40_19" file="Convex_17_2_40_19.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_18_2_40_20" file="Convex_18_2_40_20.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_19_2_40_21" file="Convex_19_2_40_21.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_20_2_40_22" file="Convex_20_2_40_22.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_21_2_40_23" file="Convex_21_2_40_23.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_22_2_40_24" file="Convex_22_2_40_24.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_23_2_40_25" file="Convex_23_2_40_25.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_24_2_40_26" file="Convex_24_2_40_26.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_25_2_40_27" file="Convex_25_2_40_27.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_26_2_40_28" file="Convex_26_2_40_28.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_27_2_40_29" file="Convex_27_2_40_29.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_28_2_40_30" file="Convex_28_2_40_30.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_29_2_40_31" file="Convex_29_2_40_31.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_30_2_40_32" file="Convex_30_2_40_32.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_31_2_40_33" file="Convex_31_2_40_33.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_32_2_40_34" file="Convex_32_2_40_34.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_33_2_40_35" file="Convex_33_2_40_35.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_34_2_40_36" file="Convex_34_2_40_36.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_35_2_40_37" file="Convex_35_2_40_37.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_36_2_40_38" file="Convex_36_2_40_38.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_37_2_40_39" file="Convex_37_2_40_39.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_38_2_40_40" file="Convex_38_2_40_40.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_39_2_40_41" file="Convex_39_2_40_41.stl" scale="0.001 0.001 0.001" />
+        <mesh name="Convex_40_2_40_42" file="Convex_40_2_40_42.stl" scale="0.001 0.001 0.001" />
+    </asset>
+    <worldbody>
+        <geom type="mesh" mesh="Convex_1_2_40_3" />
+        <geom type="mesh" mesh="Convex_2_2_40_4" />
+        <geom type="mesh" mesh="Convex_3_2_40_5" />
+        <geom type="mesh" mesh="Convex_4_2_40_6" />
+        <geom type="mesh" mesh="Convex_5_2_40_7" />
+        <geom type="mesh" mesh="Convex_6_2_40_8" />
+        <geom type="mesh" mesh="Convex_7_2_40_9" />
+        <geom type="mesh" mesh="Convex_8_2_40_10" />
+        <geom type="mesh" mesh="Convex_9_2_40_11" />
+        <geom type="mesh" mesh="Convex_10_2_40_12" />
+        <geom type="mesh" mesh="Convex_11_2_40_13" />
+        <geom type="mesh" mesh="Convex_12_2_40_14" />
+        <geom type="mesh" mesh="Convex_13_2_40_15" />
+        <geom type="mesh" mesh="Convex_14_2_40_16" />
+        <geom type="mesh" mesh="Convex_15_2_40_17" />
+        <geom type="mesh" mesh="Convex_16_2_40_18" />
+        <geom type="mesh" mesh="Convex_17_2_40_19" />
+        <geom type="mesh" mesh="Convex_18_2_40_20" />
+        <geom type="mesh" mesh="Convex_19_2_40_21" />
+        <geom type="mesh" mesh="Convex_20_2_40_22" />
+        <geom type="mesh" mesh="Convex_21_2_40_23" />
+        <geom type="mesh" mesh="Convex_22_2_40_24" />
+        <geom type="mesh" mesh="Convex_23_2_40_25" />
+        <geom type="mesh" mesh="Convex_24_2_40_26" />
+        <geom type="mesh" mesh="Convex_25_2_40_27" />
+        <geom type="mesh" mesh="Convex_26_2_40_28" />
+        <geom type="mesh" mesh="Convex_27_2_40_29" />
+        <geom type="mesh" mesh="Convex_28_2_40_30" />
+        <geom type="mesh" mesh="Convex_29_2_40_31" />
+        <geom type="mesh" mesh="Convex_30_2_40_32" />
+        <geom type="mesh" mesh="Convex_31_2_40_33" />
+        <geom type="mesh" mesh="Convex_32_2_40_34" />
+        <geom type="mesh" mesh="Convex_33_2_40_35" />
+        <geom type="mesh" mesh="Convex_34_2_40_36" />
+        <geom type="mesh" mesh="Convex_35_2_40_37" />
+        <geom type="mesh" mesh="Convex_36_2_40_38" />
+        <geom type="mesh" mesh="Convex_37_2_40_39" />
+        <geom type="mesh" mesh="Convex_38_2_40_40" />
+        <geom type="mesh" mesh="Convex_39_2_40_41" />
+        <geom type="mesh" mesh="Convex_40_2_40_42" />
+    </worldbody>
+</mujoco>

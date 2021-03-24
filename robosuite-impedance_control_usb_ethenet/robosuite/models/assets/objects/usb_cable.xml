@@ -1,0 +1,63 @@
+<mujoco model="usb">
+    <!--  Copyright © 2018, Roboti LLC
+
+          This file is licensed under the MuJoCo Resource License (the "License").
+          You may not use this file except in compliance with the License.
+          You may obtain a copy of the License at
+
+            https://www.roboti.us/resourcelicense.txt
+    -->
+ <asset>
+   <!--  USB -->
+    <mesh file="usb_cable/untitledallusb_Cable_Hull_1.stl" name="usb_cable_1"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	 <mesh file="usb_cable/untitledallusb_Cable_Hull_2.stl" name="usb_cable_2"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	 <mesh file="usb_cable/untitledallusb_Cable_Hull_3.stl" name="usb_cable_3"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	 <mesh file="usb_cable/untitledallusb_Cable_Hull_4.stl" name="usb_cable_4"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	 <mesh file="usb_cable/untitledallusb_Cable_Hull_5.stl" name="usb_cable_5"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	 <mesh file="usb_cable/untitledallusb_Cable_Hull_6.stl" name="usb_cable_6"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	 <mesh file="usb_cable/untitledallusb_Cable_Hull_7.stl" name="usb_cable_7"  scale="1.8e-3 1.8e-3 1.8e-3"/>
+	
+	 
+	</asset>
+	
+   
+
+
+
+    <worldbody>
+
+<body>
+		<body name="usb1" pos="-0.054 -0.024 -0.024">
+			 <!--  USB-->
+		<geom pos="0 0 -0.03" mesh="usb_cable_1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_cable_2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="usb_cable_3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_cable_4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_cable_5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_cable_6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_cable_7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		
+		<joint axis="1 0 0" name="cubex" type="slide" /><joint axis="0 1 0" name="cubey" type="slide" /><joint axis="0 0 1" name="cubez" type="slide" />
+		</body>
+		
+		<body name="usb12" pos="-0.0094 -0.024 -0.024">
+			 <!--  USB		-->
+		<geom pos="0 0 -0.03" mesh="usb_cable_1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_cable_2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		 <geom pos="0 0 -0.03" mesh="usb_cable_3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_cable_4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="usb_cable_5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_cable_6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="usb_cable_7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+
+		<joint axis="1 0 0" name="cubex2" type="slide" /><joint axis="0 1 0" name="cubey2" type="slide" /><joint axis="0 0 1" name="cubez2" type="slide" />
+		</body>
+
+
+		
+
+
+    </body> 
+
+    </worldbody>
+</mujoco>

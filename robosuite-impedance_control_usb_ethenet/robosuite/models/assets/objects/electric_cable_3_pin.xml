@@ -1,0 +1,201 @@
+<mujoco model="electric_3pin">
+    <!--  Copyright © 2018, Roboti LLC
+
+          This file is licensed under the MuJoCo Resource License (the "License").
+          You may not use this file except in compliance with the License.
+          You may obtain a copy of the License at
+
+            https://www.roboti.us/resourcelicense.txt
+    -->
+ <asset>
+	<mesh file="electric_plug_3_last_3/PIN1.stl" name="3_elec_cable_P1"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/PIN2.stl" name="3_elec_cable_P2"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/PIN3.stl" name="3_elec_cable_P3"  scale="2e-3 2e-3 2e-3"/>
+	
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_1.stl" name="3_elec_cable1"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_2.stl" name="3_elec_cable2"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_3.stl" name="3_elec_cable3"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_4.stl" name="3_elec_cable4"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_5.stl" name="3_elec_cable5"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_6.stl" name="3_elec_cable6"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_7.stl" name="3_elec_cable7"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_8.stl" name="3_elec_cable8"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_9.stl" name="3_elec_cable9"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_10.stl" name="3_elec_cable10"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_11.stl" name="3_elec_cable11"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_12.stl" name="3_elec_cable12"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_13.stl" name="3_elec_cable13"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_14.stl" name="3_elec_cable14"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_15.stl" name="3_elec_cable15"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_16.stl" name="3_elec_cable16"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_17.stl" name="3_elec_cable17"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_18.stl" name="3_elec_cable18"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_19.stl" name="3_elec_cable19"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_20.stl" name="3_elec_cable20"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_21.stl" name="3_elec_cable21"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_22.stl" name="3_elec_cable22"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_23.stl" name="3_elec_cable23"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_24.stl" name="3_elec_cable24"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_25.stl" name="3_elec_cable25"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_26.stl" name="3_elec_cable26"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_27.stl" name="3_elec_cable27"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_28.stl" name="3_elec_cable28"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_29.stl" name="3_elec_cable29"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_30.stl" name="3_elec_cable30"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_31.stl" name="3_elec_cable31"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_32.stl" name="3_elec_cable32"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_33.stl" name="3_elec_cable33"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_34.stl" name="3_elec_cable34"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_35.stl" name="3_elec_cable35"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_36.stl" name="3_elec_cable36"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_37.stl" name="3_elec_cable37"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledLower_Lid_hull_38.stl" name="3_elec_cable38"  scale="2e-3 2e-3 2e-3"/>
+
+	<mesh file="electric_plug_3_last_3/untitleduntitleduntitledENCHUFE_PLANO_V1_001_hull_1.stl" name="3_elec_cable39"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitleduntitledENCHUFE_PLANO_V1_001_hull_2.stl" name="3_elec_cable40"  scale="2e-3 2e-3 2e-3"/>
+
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	 
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_1.stl" name="3_elec_cable158"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_2.stl" name="3_elec_cable159"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_3.stl" name="3_elec_cable160"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_4.stl" name="3_elec_cable161"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_5.stl" name="3_elec_cable162"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_6.stl" name="3_elec_cable163"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_7.stl" name="3_elec_cable164"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_8.stl" name="3_elec_cable165"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_9.stl" name="3_elec_cable166"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_10.stl" name="3_elec_cable167"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_11.stl" name="3_elec_cable168"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_12.stl" name="3_elec_cable169"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_13.stl" name="3_elec_cable170"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_14.stl" name="3_elec_cable171"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_15.stl" name="3_elec_cable172"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_16.stl" name="3_elec_cable173"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_17.stl" name="3_elec_cable174"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_18.stl" name="3_elec_cable175"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_19.stl" name="3_elec_cable176"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_20.stl" name="3_elec_cable177"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_21.stl" name="3_elec_cable178"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_22.stl" name="3_elec_cable179"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_23.stl" name="3_elec_cable180"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_24.stl" name="3_elec_cable181"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_25.stl" name="3_elec_cable182"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_26.stl" name="3_elec_cable183"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_27.stl" name="3_elec_cable184"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_28.stl" name="3_elec_cable185"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_29.stl" name="3_elec_cable186"  scale="2e-3 2e-3 2e-3"/>
+	<mesh file="electric_plug_3_last_3/untitleduntitledUpper-Lid-For_3D_Print_hull_30.stl" name="3_elec_cable187"  scale="2e-3 2e-3 2e-3"/>
+
+	</asset>
+	
+    <worldbody>
+
+<body>
+		<body name="3elec1" pos="-0.0272 0.024 0.008">
+		<geom pos="0 0 -0.03" mesh="3_elec_cable_P1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable_P2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable_P3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+			 <!--											 USB														-->
+		<geom pos="0 0 -0.03" mesh="3_elec_cable1" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable2" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable3" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable4" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable5" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable6" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable7" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable8" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable9" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable10" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable11" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable12" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable13" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable14" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable15" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable16" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable17" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable18" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable20" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable21" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable22" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable23" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable24" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable25" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable26" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable27" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable28" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable29" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable30" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="3_elec_cable31" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable32" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable33" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable34" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable35" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable36" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable37" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable38" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="3_elec_cable39" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		
+		
+
+		
+
+
+
+	
+	
+		<geom pos="0 0 -0.03" mesh="3_elec_cable158" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable159" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable160" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable161" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable162" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable163" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable164" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable165" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable166" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable167" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable168" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable169" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="3_elec_cable170" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable171" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable172" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable173" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable174" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable175" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable176" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable177" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="3_elec_cable178" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		
+		<geom pos="0 0 -0.03" mesh="3_elec_cable179" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable180" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable181" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable182" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable183" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		 <geom pos="0 0 -0.03" mesh="3_elec_cable184" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable185" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"   zaxis="0 1 0"/>
+		<geom pos="0 0 -0.03" mesh="3_elec_cable186" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		<geom pos="0 0 -0.03" mesh="3_elec_cable187" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="6700" friction="0.95 0.3 0.1" material="metal" group="1" condim="4"  zaxis="0 1 0" />
+		
+		
+		<joint axis="1 0 0" name="3elecx1" type="slide" /><joint axis="0 1 0" name="3elecy1" type="slide" /><joint axis="0 0 1" name="3elecz1" type="slide" />
+		</body>
+		
+		
+
+
+
+
+    </body> 
+
+    </worldbody>
+</mujoco>
