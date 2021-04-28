@@ -28,11 +28,13 @@ class Plate_course_Object(MujocoXMLObject):
                          name=name, joints=[dict(type="free", damping="0.0005")],
                          obj_type="all", duplicate_collision_geoms=True)
 
-class GMC_Laser_Plate_Virtual_Object(MujocoXMLObject):
+class GMC_Laser_Plate_fine_mm_Object(MujocoXMLObject):
     '''
-    GMC_Laser_Plate_Virtual
+    GMC_Laser_Plate_fine_mm
     '''
     def __init__(self, name):
-        super().__init__("./assets/XML_files/GMC_Laser_Plate_Virtual.xml",
+        super().__init__("./assets/XML_files/GMC_Laser_Plate_fine_mm.xml",
                          name=name, joints=[dict(type="free", damping="0.0005")],
                          obj_type="all", duplicate_collision_geoms=True)
+
+
