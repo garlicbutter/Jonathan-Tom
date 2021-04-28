@@ -7,7 +7,7 @@ from robosuite.utils.mjcf_utils import CustomMaterial
 from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
 
 from robosuite.models.arenas import TableArena
-from robosuite.models.objects import BoxObject
+from myobject import GMCPlateObject
 from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.placement_samplers import UniformRandomSampler
 from robosuite.utils.observables import Observable, sensor
@@ -108,38 +108,19 @@ class MyEnv(SingleArmEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
-        # initialize objects of interest
-        tex_attrib = {
-            "type": "cube",
-        }
-        mat_attrib = {
-            "texrepeat": "1 1",
-            "specular": "0.4",
-            "shininess": "0.1",
-        }
-        redwood = CustomMaterial(
-            texture="WoodRed",
-            tex_name="redwood",
-            mat_name="redwood_mat",
-            tex_attrib=tex_attrib,
-            mat_attrib=mat_attrib,
+        # initialize GMC plate
+        self.plate = GMCPlateObject(
+            name="plate",
         )
-        self.cube = BoxObject(
-            name="cube",
-            size_min=[0.020, 0.020, 0.020],  # [0.015, 0.015, 0.015],
-            size_max=[0.022, 0.022, 0.022],  # [0.018, 0.018, 0.018])
-            rgba=[1, 0, 0, 1],
-            material=redwood,
-        )
-
+    
         # Create placement initializer
         if self.placement_initializer is not None:
             self.placement_initializer.reset()
-            self.placement_initializer.add_objects(self.cube)
+            self.placement_initializer.add_objects(self.plate)
         else:
             self.placement_initializer = UniformRandomSampler(
                 name="ObjectSampler",
-                mujoco_objects=self.cube,
+                mujoco_objects=self.plate,
                 x_range=[-0.03, 0.03],
                 y_range=[-0.03, 0.03],
                 rotation=None,
@@ -153,7 +134,7 @@ class MyEnv(SingleArmEnv):
         self.model = ManipulationTask(
             mujoco_arena=mujoco_arena,
             mujoco_robots=[robot.robot_model for robot in self.robots], 
-            mujoco_objects=self.cube,
+            mujoco_objects=self.plate,
         )
 
     def _setup_references(self):
@@ -165,7 +146,49 @@ class MyEnv(SingleArmEnv):
         super()._setup_references()
 
         # Additional object references from this env
-        self.cube_body_id = self.sim.model.body_name2id(self.cube.root_body)
+        self.plate_body_id = self.sim.model.body_name2id(self.plate.root_body)
+
+    def _setup_observables(self):
+        """
+        Sets up observables to be used for this environment. Creates object-based observables if enabled
+
+        Returns:
+            OrderedDict: Dictionary mapping observable names to its corresponding Observable object
+        """
+        observables = super()._setup_observables()
+
+        # low-level object information
+        if self.use_object_obs:
+            # Get robot prefix and define observables modality
+            pf = self.robots[0].robot_model.naming_prefix
+            modality = "object"
+
+            # plate-related observables
+            @sensor(modality=modality)
+            def plate_pos(obs_cache):
+                return np.array(self.sim.data.body_xpos[self.plate_body_id])
+
+            @sensor(modality=modality)
+            def plate_quat(obs_cache):
+                return convert_quat(np.array(self.sim.data.body_xquat[self.plate_body_id]), to="xyzw")
+
+            @sensor(modality=modality)
+            def gripper_to_plate_pos(obs_cache):
+                return obs_cache[f"{pf}eef_pos"] - obs_cache["plate_pos"] if \
+                    f"{pf}eef_pos" in obs_cache and "plate_pos" in obs_cache else np.zeros(3)
+
+            sensors = [plate_pos, plate_quat, gripper_to_plate_pos]
+            names = [s.__name__ for s in sensors]
+
+            # Create observables
+            for name, s in zip(names, sensors):
+                observables[name] = Observable(
+                    name=name,
+                    sensor=s,
+                    sampling_rate=self.control_freq,
+                )
+
+        return observables
 
     def _reset_internal(self):
         """
@@ -184,17 +207,7 @@ class MyEnv(SingleArmEnv):
                 self.sim.data.set_joint_qpos(obj.joints[0], np.concatenate([np.array(obj_pos), np.array(obj_quat)]))
 
     def visualize(self, vis_settings):
-        """
-        In addition to super call, visualize gripper site proportional to the distance to the cube.
+        pass
 
-        Args:
-            vis_settings (dict): Visualization keywords mapped to T/F, determining whether that specific
-                component should be visualized. Should have "grippers" keyword as well as any other relevant
-                options specified.
-        """
-        # Run superclass method first
-        super().visualize(vis_settings=vis_settings)
-
-        # Color the gripper visualization site according to its distance to the cube
-        if vis_settings["grippers"]:
-            self._visualize_gripper_to_target(gripper=self.robots[0].gripper, target=self.cube)
+    def _check_success(self):
+        pass

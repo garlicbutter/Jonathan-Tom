@@ -14,4 +14,4 @@ if __name__ == "__main__":
 	for i in range(10000):
 		action = np.random.randn(env.robots[0].dof) # sample random action
 		obs, reward, done, info = env.step(action)  # take action in the environment
-		env.render()  # render on display
+		env.render()  #we
