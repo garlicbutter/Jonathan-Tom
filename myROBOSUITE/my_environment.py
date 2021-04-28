@@ -1,17 +1,14 @@
 from collections import OrderedDict
 import numpy as np
-
 from robosuite.utils.transform_utils import convert_quat
 from robosuite.utils.mjcf_utils import CustomMaterial
-
 from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
-
 from robosuite.models.arenas import TableArena
 from myobject import GMCPlateObject
+from myobject import GMC_Competition_Task_Board_Virtual
 from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.placement_samplers import UniformRandomSampler
 from robosuite.utils.observables import Observable, sensor
-
 
 class MyEnv(SingleArmEnv):
     '''
@@ -21,6 +18,7 @@ class MyEnv(SingleArmEnv):
         self,
         robots,
         env_configuration="default",
+        task_configs=None,
         controller_configs=None,
         gripper_types="default",
         initialization_noise="default",
@@ -46,7 +44,7 @@ class MyEnv(SingleArmEnv):
         camera_widths=256,
         camera_depths=False,
     ):
-    # settings for table top
+        # settings for table top
         self.table_full_size = table_full_size
         self.table_friction = table_friction
         self.table_offset = np.array((0, 0, 0.8))
@@ -60,6 +58,9 @@ class MyEnv(SingleArmEnv):
 
         # object placement initializer
         self.placement_initializer = placement_initializer
+
+        # task configuration
+        self.task_configs = task_configs
 
         super().__init__(
             robots=robots,
@@ -108,11 +109,16 @@ class MyEnv(SingleArmEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
-        # initialize GMC plate
-        self.plate = GMCPlateObject(
+        # # initialize GMC plate
+        # self.plate = GMCPlateObject(
+        #     name="plate",
+        # )
+
+        # initialize GMC plate (assembly)
+        self.plate = GMC_Competition_Task_Board_Virtual(
             name="plate",
         )
-    
+
         # Create placement initializer
         if self.placement_initializer is not None:
             self.placement_initializer.reset()
@@ -124,12 +130,13 @@ class MyEnv(SingleArmEnv):
                 x_range=[-0.03, 0.03],
                 y_range=[-0.03, 0.03],
                 rotation=None,
-                ensure_object_boundary_in_range=False,
+                rotation_axis='z',
+                ensure_object_boundary_in_range=True,
                 ensure_valid_placement=True,
                 reference_pos=self.table_offset,
                 z_offset=0.01,
             )
-
+        
         # task includes arena, robot, and objects of interest
         self.model = ManipulationTask(
             mujoco_arena=mujoco_arena,
