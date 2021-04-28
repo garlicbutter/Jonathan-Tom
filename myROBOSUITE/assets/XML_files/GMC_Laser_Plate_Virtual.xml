@@ -1,6 +1,6 @@
-<mujoco model="GMC_Competition_Task_Board_Virtual">
+<mujoco model="GMC_Laser_Plate_Virtual">
   <asset>
-    <mesh file="../task1_stl_files_correct_pos/GMC_Competition_Task_Board_Virtual.STL" name="gmcplate mesh" scale="0.8 0.8 0.8"/>
+    <mesh file="../task1_stl_files_correct_pos/GMC_Laser_Plate_Virtual.stl" name="gmcplate mesh" scale="0.8 0.8 0.8"/>
     <texture file="../textures/red-wood.png" type="2d" name="tex-gmcplate" />
     <material name="gmcplate" reflectance="0.7" texrepeat="15 15" texture="tex-gmcplate" texuniform="true"/>
   </asset>

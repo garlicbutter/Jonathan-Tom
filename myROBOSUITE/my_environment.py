@@ -1,11 +1,10 @@
 from collections import OrderedDict
 import numpy as np
+import myobject
 from robosuite.utils.transform_utils import convert_quat
 from robosuite.utils.mjcf_utils import CustomMaterial
 from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
 from robosuite.models.arenas import TableArena
-from myobject import GMCPlateObject
-from myobject import GMC_Competition_Task_Board_Virtual
 from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.placement_samplers import UniformRandomSampler
 from robosuite.utils.observables import Observable, sensor
@@ -109,13 +108,8 @@ class MyEnv(SingleArmEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
-        # # initialize GMC plate
-        # self.plate = GMCPlateObject(
-        #     name="plate",
-        # )
-
-        # initialize GMC plate (assembly)
-        self.plate = GMC_Competition_Task_Board_Virtual(
+        # initialize GMC plate
+        self.plate = myobject.GMC_Plate_Object(
             name="plate",
         )
 
