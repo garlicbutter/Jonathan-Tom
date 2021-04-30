@@ -1,6 +1,6 @@
 from collections import OrderedDict
 import numpy as np
-import myobject
+import my_object
 from robosuite.utils.transform_utils import convert_quat
 from robosuite.utils.mjcf_utils import CustomMaterial
 from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
@@ -108,10 +108,15 @@ class MyEnv(SingleArmEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
-        # initialize GMC plate
-        self.plate = myobject.GMC_Plate_Object(
-            name="plate",
-        )
+        # initialize plate with the corresponding option
+        if self.task_configs['board'] == 'Hole12mm':
+            self.plate = my_object.GMC_Plate_Object(
+                name="plate",
+            )
+        elif self.task_configs['board'] == 'Hole9mm':
+            pass
+        elif self.task_configs['board'] == 'Hole6mm':
+            pass
 
         # Create placement initializer
         if self.placement_initializer is not None:

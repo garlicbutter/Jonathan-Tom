@@ -3,8 +3,13 @@ from my_controller import controller_config
 import numpy as np
 
 if __name__ == "__main__":
-	# Task configuration (peg, usb, etc...)
-	task_config = {'board':True}
+	# Task configuration
+	# option:
+	# 			board	: Hole 12mm, Hole 9mm
+	#			peg		: 12mm, 9mm
+	#			USB		: USB-C
+	task_config = {'board': 'Hole12mm',
+					'peg': '12mm'}
 
 	# create environment instance
 	env = MyEnv(robots="UR5e",
@@ -26,6 +31,7 @@ if __name__ == "__main__":
 
 	# simulation loop
 	while not done:
-		action = np.zeros(dof) 						# action
+		# action = np.zeros(dof) 					
+		action = np.array([0, 0, 0, 0, 0, 0, 0])
 		obs, reward, done, info = env.step(action)  # take action in the environment
 		env.render()  								# render
