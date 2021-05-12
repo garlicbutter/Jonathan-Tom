@@ -6,10 +6,10 @@ if __name__ == "__main__":
 	# Task configuration
 	# option:
 	# 			board	: Hole 12mm, Hole 9mm
-	#			peg		: 12mm, 9mm
+	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
 	task_config = {'board': 'Hole12mm',
-					'peg': '12mm'}
+					'peg': '16mm'}
 
 	# create environment instance
 	env = MyEnv(robots="UR5e",
@@ -19,9 +19,6 @@ if __name__ == "__main__":
 				has_offscreen_renderer=False,
 				use_camera_obs=False,
 				render_camera=None)
-
-	# reset the environment
-	env.reset()
 
 	# define useful variables
 	dof = env.robots[0].dof

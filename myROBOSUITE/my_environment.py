@@ -61,6 +61,9 @@ class MyEnv(SingleArmEnv):
         # task configuration
         self.task_configs = task_configs
 
+        # list of MujocoObject that will be used in the task
+        self.objects_of_interest = []
+
         super().__init__(
             robots=robots,
             env_configuration=env_configuration,
@@ -110,22 +113,28 @@ class MyEnv(SingleArmEnv):
 
         # initialize plate with the corresponding option
         if self.task_configs['board'] == 'Hole12mm':
-            self.plate = my_object.GMC_Plate_Object(
-                name="plate",
-            )
+            self.plate = my_object.GMC_Plate_Object(name="plate",)
+            if not any(isinstance(x, my_object.GMC_Plate_Object) for x in self.objects_of_interest):
+                self.objects_of_interest.append(self.plate)
+        
         elif self.task_configs['board'] == 'Hole9mm':
             pass
         elif self.task_configs['board'] == 'Hole6mm':
             pass
 
+        if self.task_configs['peg'] == '16mm':
+            self.peg = my_object.Round_peg_16mm_Object(name="peg",)
+            if not any(isinstance(x, my_object.Round_peg_16mm_Object) for x in self.objects_of_interest):
+                self.objects_of_interest.append(self.peg)
+
         # Create placement initializer
         if self.placement_initializer is not None:
             self.placement_initializer.reset()
-            self.placement_initializer.add_objects(self.plate)
+            # self.placement_initializer.add_objects(self.plate)
         else:
             self.placement_initializer = UniformRandomSampler(
                 name="ObjectSampler",
-                mujoco_objects=self.plate,
+                mujoco_objects=self.objects_of_interest,
                 x_range=[-0.03, 0.03],
                 y_range=[-0.03, 0.03],
                 rotation=None,
@@ -140,7 +149,7 @@ class MyEnv(SingleArmEnv):
         self.model = ManipulationTask(
             mujoco_arena=mujoco_arena,
             mujoco_robots=[robot.robot_model for robot in self.robots], 
-            mujoco_objects=self.plate,
+            mujoco_objects=self.objects_of_interest,
         )
 
     def _setup_references(self):
@@ -152,7 +161,11 @@ class MyEnv(SingleArmEnv):
         super()._setup_references()
 
         # Additional object references from this env
-        self.plate_body_id = self.sim.model.body_name2id(self.plate.root_body)
+        if self.plate is not None:
+            self.plate_body_id = self.sim.model.body_name2id(self.plate.root_body)
+        
+        if self.peg is not None:
+            self.peg_body_id = self.sim.model.body_name2id(self.peg.root_body)
 
     def _setup_observables(self):
         """
@@ -168,23 +181,48 @@ class MyEnv(SingleArmEnv):
             # Get robot prefix and define observables modality
             pf = self.robots[0].robot_model.naming_prefix
             modality = "object"
-
+            
+            sensors = []
+            names = []
             # plate-related observables
-            @sensor(modality=modality)
-            def plate_pos(obs_cache):
-                return np.array(self.sim.data.body_xpos[self.plate_body_id])
+            if self.plate is not None:
+                @sensor(modality=modality)
+                def plate_pos(obs_cache):
+                    return np.array(self.sim.data.body_xpos[self.plate_body_id])
 
-            @sensor(modality=modality)
-            def plate_quat(obs_cache):
-                return convert_quat(np.array(self.sim.data.body_xquat[self.plate_body_id]), to="xyzw")
+                @sensor(modality=modality)
+                def plate_quat(obs_cache):
+                    return convert_quat(np.array(self.sim.data.body_xquat[self.plate_body_id]), to="xyzw")
 
-            @sensor(modality=modality)
-            def gripper_to_plate_pos(obs_cache):
-                return obs_cache[f"{pf}eef_pos"] - obs_cache["plate_pos"] if \
-                    f"{pf}eef_pos" in obs_cache and "plate_pos" in obs_cache else np.zeros(3)
+                @sensor(modality=modality)
+                def gripper_to_plate_pos(obs_cache):
+                    return obs_cache[f"{pf}eef_pos"] - obs_cache["plate_pos"] if \
+                        f"{pf}eef_pos" in obs_cache and "plate_pos" in obs_cache else np.zeros(3)
 
-            sensors = [plate_pos, plate_quat, gripper_to_plate_pos]
-            names = [s.__name__ for s in sensors]
+                sensors_plate = [plate_pos, plate_quat, gripper_to_plate_pos]
+                names_plate = [s.__name__ for s in sensors_plate]
+                sensors.extend(sensors_plate)
+                names.extend(names_plate)
+            
+            # peg-related observables
+            if self.peg is not None:
+                @sensor(modality=modality)
+                def peg_pos(obs_cache):
+                    return np.array(self.sim.data.body_xpos[self.peg_body_id])
+
+                @sensor(modality=modality)
+                def peg_quat(obs_cache):
+                    return convert_quat(np.array(self.sim.data.body_xquat[self.peg_body_id]), to="xyzw")
+
+                @sensor(modality=modality)
+                def gripper_to_peg_pos(obs_cache):
+                    return obs_cache[f"{pf}eef_pos"] - obs_cache["peg_pos"] if \
+                        f"{pf}eef_pos" in obs_cache and "peg_pos" in obs_cache else np.zeros(3)
+
+                sensors_peg = [peg_pos, peg_quat, gripper_to_peg_pos]
+                names_peg = [s.__name__ for s in sensors_peg]
+                sensors.extend(sensors_peg)
+                names.extend(names_peg)
 
             # Create observables
             for name, s in zip(names, sensors):
