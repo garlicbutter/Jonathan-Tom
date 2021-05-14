@@ -61,7 +61,7 @@ class MyEnv(SingleArmEnv):
         # task configuration
         self.task_configs = task_configs
 
-        # list of MujocoObject that will be used in the task
+        # list of MujocoObject that will be usedf in the task
         self.objects_of_interest = []
 
         super().__init__(
@@ -113,8 +113,8 @@ class MyEnv(SingleArmEnv):
 
         # initialize plate with the corresponding option
         if self.task_configs['board'] == 'Hole12mm':
-            self.plate = my_object.GMC_Plate_Object(name="plate",)
-            if not any(isinstance(x, my_object.GMC_Plate_Object) for x in self.objects_of_interest):
+            self.plate = my_object.GMC_Assembly_Object(name="plate",)
+            if not any(isinstance(x, my_object.GMC_Assembly_Object) for x in self.objects_of_interest):
                 self.objects_of_interest.append(self.plate)
         
         elif self.task_configs['board'] == 'Hole9mm':
