@@ -12,7 +12,7 @@ if __name__ == "__main__":
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
 	task_config = {'board': 'GMC',
-					'peg': '12mm'}
+					'peg': '16mm'}
 
 	# create environment instance
 	env = MyEnv(robots="UR5e",
