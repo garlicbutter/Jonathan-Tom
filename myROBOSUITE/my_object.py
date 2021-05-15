@@ -65,3 +65,12 @@ class Round_peg_16mm_Object(MujocoXMLObject):
                          name=name, joints=[dict(type="free", damping="0.0001")],
                          obj_type="all", duplicate_collision_geoms=True)
 
+class Round_peg_12mm_Object(MujocoXMLObject):
+    '''
+    Round_peg_12mm
+    '''
+    def __init__(self, name):
+        super().__init__("./assets/XML_files/Round_peg_12mm.xml",
+                         name=name, joints=[dict(type="free", damping="0.0001")],
+                         obj_type="all", duplicate_collision_geoms=True)
+
