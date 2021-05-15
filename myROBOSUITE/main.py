@@ -33,7 +33,7 @@ if __name__ == "__main__":
 	action = np.zeros(dof)
 	grabbed = False
 	raised = False
-
+	
 	# simulation loop
 	while not done:
 		obs, reward, done, _ = env.step(action)	# take action in the environment
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 		eef_to_peg_pos 	= peg_pos - eef_pos							# array 1x3
 		eef_to_peg_quat = peg_quat - eef_quat						# array 1x3
 
-		hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.0473,0.3437,0.1])	# array 1x3
+		hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.155636,0.1507,0.1])	# array 1x3
 		eef_to_hole_pos = hole_pos - eef_pos						# array 1x3
 
 		# dt				= env.control_timestep

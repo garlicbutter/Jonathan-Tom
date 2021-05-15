@@ -116,7 +116,7 @@ class MyEnv(SingleArmEnv):
             self.register_object(my_object.GMC_Assembly_Object,'plate',xrange=[0,0],yrange=[0,0])
 
         if self.task_configs['peg'] == '16mm':
-            self.register_object(my_object.Round_peg_16mm_Object,'peg',xrange=[0,0],yrange=[0,0])
+            self.register_object(my_object.Round_peg_16mm_Object,'peg',xrange=[0.1,0.13],yrange=[0.3,0.33])
         elif self.task_configs['peg'] == '12mm':
             raise NotImplementedError
         elif self.task_configs['peg'] == '9mm':
