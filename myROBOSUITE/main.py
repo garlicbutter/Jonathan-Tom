@@ -11,7 +11,7 @@ if __name__ == "__main__":
 	# 			board	: Hole 12mm, Hole 9mm
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
-	task_config = {'board': 'Hole12mm',
+	task_config = {'board': 'GMC',
 					'peg': '16mm'}
 
 	# create environment instance
@@ -69,7 +69,7 @@ if __name__ == "__main__":
 		if grabbed and raised and np.linalg.norm(eef_to_hole_pos[0:2]) > 0.01:
 			action = np.concatenate( (eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) )
 		elif grabbed and raised and np.linalg.norm(eef_to_hole_pos[0:2]) < 0.01:
-			action = np.array([0, 0, -0.2, 0, 0, 0, 1])
+			action = np.array([0, 0, -0.1, 0, 0, 0, 1])
 
 
 

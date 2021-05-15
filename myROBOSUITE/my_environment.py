@@ -6,7 +6,7 @@ from robosuite.utils.mjcf_utils import CustomMaterial
 from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
 from robosuite.models.arenas import TableArena
 from robosuite.models.tasks import ManipulationTask
-from robosuite.utils.placement_samplers import UniformRandomSampler
+from robosuite.utils.placement_samplers import UniformRandomSampler, SequentialCompositeSampler
 from robosuite.utils.observables import Observable, sensor
 
 class MyEnv(SingleArmEnv):
@@ -27,7 +27,6 @@ class MyEnv(SingleArmEnv):
         use_object_obs=True,
         reward_scale=1.0,
         reward_shaping=False,
-        placement_initializer=None,
         has_renderer=False,
         has_offscreen_renderer=True,
         render_camera="frontview",
@@ -55,14 +54,15 @@ class MyEnv(SingleArmEnv):
         # whether to use ground-truth object states
         self.use_object_obs = use_object_obs
 
-        # object placement initializer
-        self.placement_initializer = placement_initializer
-
         # task configuration
         self.task_configs = task_configs
 
         # list of MujocoObject that will be usedf in the task
-        self.objects_of_interest = []
+        self.objects_of_interest = [] # for object
+        self.objectsName_of_interest = [] # for name
+        self.objectsXrange_of_interest = [] # x range for placement
+        self.objectsYrange_of_interest = [] # y range for placement
+
 
         super().__init__(
             robots=robots,
@@ -111,32 +111,26 @@ class MyEnv(SingleArmEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
-        # initialize plate with the corresponding option
-        if self.task_configs['board'] == 'Hole12mm':
-            self.plate = my_object.GMC_Assembly_Object(name="plate",)
-            if not any(isinstance(x, my_object.GMC_Assembly_Object) for x in self.objects_of_interest):
-                self.objects_of_interest.append(self.plate)
-        
-        elif self.task_configs['board'] == 'Hole9mm':
-            pass
-        elif self.task_configs['board'] == 'Hole6mm':
-            pass
+        # register object with the corresponding option (objectClass, name, xrange, yrange)
+        if self.task_configs['board'] == 'GMC':
+            self.register_object(my_object.GMC_Assembly_Object,'plate',xrange=[0,0],yrange=[0,0])
 
         if self.task_configs['peg'] == '16mm':
-            self.peg = my_object.Round_peg_16mm_Object(name="peg",)
-            if not any(isinstance(x, my_object.Round_peg_16mm_Object) for x in self.objects_of_interest):
-                self.objects_of_interest.append(self.peg)
+            self.register_object(my_object.Round_peg_16mm_Object,'peg',xrange=[0,0],yrange=[0,0])
+        elif self.task_configs['peg'] == '12mm':
+            raise NotImplementedError
+        elif self.task_configs['peg'] == '9mm':
+            raise NotImplementedError
 
-        # Create placement initializer
-        if self.placement_initializer is not None:
-            self.placement_initializer.reset()
-            # self.placement_initializer.add_objects(self.plate)
-        else:
-            self.placement_initializer = UniformRandomSampler(
-                name="ObjectSampler",
-                mujoco_objects=self.objects_of_interest,
-                x_range=[-0.03, 0.03],
-                y_range=[-0.03, 0.03],
+        # Create Sequential Sampler. The order is same as the order of register.
+        # Create individual samplers per object
+        self.placement_initializer = SequentialCompositeSampler(name="ObjectSampler")
+        for obj_name, default_xy_range in zip(self.objectsName_of_interest,zip(self.objectsXrange_of_interest ,self.objectsYrange_of_interest)):
+            self.placement_initializer.append_sampler(
+            sampler=UniformRandomSampler(
+                name=f"{obj_name}Sampler",
+                x_range=default_xy_range[0],
+                y_range=default_xy_range[1],
                 rotation=None,
                 rotation_axis='z',
                 ensure_object_boundary_in_range=True,
@@ -144,6 +138,10 @@ class MyEnv(SingleArmEnv):
                 reference_pos=self.table_offset,
                 z_offset=0.01,
             )
+            )
+        # Add objects to the sampler
+        for obj_to_put, obj_name in zip(self.objects_of_interest,self.objectsName_of_interest):
+            self.placement_initializer.add_objects_to_sampler(sampler_name=f"{obj_name}Sampler", mujoco_objects=obj_to_put)
         
         # task includes arena, robot, and objects of interest
         self.model = ManipulationTask(
@@ -249,6 +247,14 @@ class MyEnv(SingleArmEnv):
             # Loop through all objects and reset their positions
             for obj_pos, obj_quat, obj in object_placements.values():
                 self.sim.data.set_joint_qpos(obj.joints[0], np.concatenate([np.array(obj_pos), np.array(obj_quat)]))
+
+    def register_object(self,objectClass,name,xrange=[0,0],yrange=[0,0]):
+        # initialize object with the corresponding option
+        exec('self.{} = objectClass(name=name)'.format(name))
+        exec('self.objects_of_interest.append(self.{})'.format(name))
+        self.objectsName_of_interest.append(name)
+        self.objectsXrange_of_interest.append(xrange)
+        self.objectsYrange_of_interest.append(yrange)
 
     def visualize(self, vis_settings):
         pass
