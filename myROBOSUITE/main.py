@@ -21,7 +21,8 @@ if __name__ == "__main__":
 				has_renderer=True,
 				has_offscreen_renderer=False,
 				use_camera_obs=False,
-				render_camera=None)
+				render_camera=None,
+				ignore_done=True)
 
 	# define useful variables
 	dof = env.robots[0].dof
