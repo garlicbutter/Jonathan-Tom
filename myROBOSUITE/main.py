@@ -28,10 +28,23 @@ if __name__ == "__main__":
 	action = np.zeros(dof)
 	# done = True when the task is completed
 	done = False
+	action_done = False
+	# eef_pos_history for integrating
+	eef_pos_history = np.array([])
+	# action status
+	action_status = {'moved_to_object':False,
+					'raised':False,
+					'grabbed':False}
 
 	while not done:
-		action = get_policy_action(obs)         # use observation to decide on an action
 		obs, reward, done, _ = env.step(action)	# take action in the environment
+
+		dt = env.control_timestep
+		action, action_done, action_status = get_policy_action(obs,action_status,dt,eef_pos_history)         # use observation to decide on an action
+		if not action_done:
+			eef_pos_history = np.append(eef_pos_history, np.array(obs['robot0_eef_pos']))
+		else:
+			eef_pos_history = np.array([])  # reset the history
 		env.render()  							# render
 
 
