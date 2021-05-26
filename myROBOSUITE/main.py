@@ -47,8 +47,8 @@ if __name__ == "__main__":
 		# 	eef_pos_history = np.array([])  # reset the history
 		# env.render()  							# render
 
-		action = get_policy_action(obs)         # use observation to decide on an action
 		obs, reward, done, _ = env.step(action)	# take action in the environment
+		action, action_status = get_policy_action(obs, action_status)         # use observation to decide on an action
 		env.render()  							# render
 
 
