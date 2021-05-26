@@ -35,17 +35,17 @@ def get_policy_action(obs, action_status, dt ,eef_pos_history):
         return action, action_done, action_status
 
     if np.linalg.norm(eef_to_peg_pos) > 0.002 and not grabbed:
-        x_action = 2 * eef_to_peg_pos + 0.4 * eef_pos_total_error 
+        x_action = 1.5 * eef_to_peg_pos + 0.2 * eef_pos_total_error 
         w_action = 0.1*np.array([0,0,eef_to_peg_quat[2],0])
         action = np.concatenate((x_action,w_action))
         action_done = False
         action_status = {'moved_to_object':moved_to_object,
-					'raised':raised,
-					'grabbed':grabbed}        
+                        'raised':raised,
+                        'grabbed':grabbed}        
         return action, action_done, action_status
      
     elif np.linalg.norm(eef_to_peg_pos) < 0.002 and not grabbed:
-        action = np.concatenate( (eef_to_peg_pos, np.array([0,0,0,1]) ) ) 
+        action = np.concatenate( (eef_to_peg_pos, np.array([0,0,0,1]))) 
         grabbed = True
         action_done = True
         action_status = {'moved_to_object':moved_to_object,

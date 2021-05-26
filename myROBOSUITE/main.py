@@ -1,7 +1,7 @@
 from my_environment import MyEnv
 from my_controller import controller_config
 import numpy as np
-from motion_planning import get_policy_action
+from old_motion_planning import get_policy_action
 
 if __name__ == "__main__":
 	# Task configuration
@@ -10,7 +10,7 @@ if __name__ == "__main__":
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
 	task_config = {'board': 'GMC',
-					'peg': '16mm'}
+					'peg' : '16mm'}
 
 	# create environment instance
 	env = MyEnv(robots="UR5e",
@@ -33,18 +33,22 @@ if __name__ == "__main__":
 	eef_pos_history = np.array([])
 	# action status
 	action_status = {'moved_to_object':False,
-					'raised':False,
-					'grabbed':False}
+					 'raised'		  :False,
+					 'grabbed'		  :False}
 
 	while not done:
-		obs, reward, done, _ = env.step(action)	# take action in the environment
+		# obs, reward, done, _ = env.step(action)	# take action in the environment
 
-		dt = env.control_timestep
-		action, action_done, action_status = get_policy_action(obs,action_status,dt,eef_pos_history)         # use observation to decide on an action
-		if not action_done:
-			eef_pos_history = np.append(eef_pos_history, np.array(obs['robot0_eef_pos']))
-		else:
-			eef_pos_history = np.array([])  # reset the history
+		# dt = env.control_timestep
+		# action, action_done, action_status = get_policy_action(obs,action_status,dt,eef_pos_history)         # use observation to decide on an action
+		# if not action_done:
+		# 	eef_pos_history = np.append(eef_pos_history, np.array(obs['robot0_eef_pos']))
+		# else:
+		# 	eef_pos_history = np.array([])  # reset the history
+		# env.render()  							# render
+
+		action = get_policy_action(obs)         # use observation to decide on an action
+		obs, reward, done, _ = env.step(action)	# take action in the environment
 		env.render()  							# render
 
 
