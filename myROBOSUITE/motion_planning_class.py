@@ -5,7 +5,7 @@ class Policy_action:
     def __init__(
         self,
     ):
-        self.eef_pos_error_total = 0
+        self.eef_pos_error_int = 0
 
     def get_policy_action(self, obs, action_status, dt):
         # Initial action
@@ -28,44 +28,45 @@ class Policy_action:
         hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.155636,0.1507,0.1])	# array 1x3
         eef_to_hole_pos = hole_pos - eef_pos						# array 1x3
 
-        self.eef_pos_error_total += eef_to_peg_pos*dt
+        self.eef_pos_error_int += eef_to_peg_pos*dt
 
         if np.linalg.norm(eef_to_peg_pos) > 0.002 and not grabbed:
-            x_action = 1.5 * eef_to_peg_pos + 0.2 * self.eef_pos_error_total 
-            w_action = 0.1*np.array([0,0,eef_to_peg_quat[2],0])
+            # self.eef_pos_error_int = 0
+            x_action = 1 * eef_to_peg_pos + 0.01 * self.eef_pos_error_int 
+            w_action = 0.01*np.array([0,0,eef_to_peg_quat[2],0])
             action = np.concatenate((x_action,w_action))
-            action_done = False
             action_status = {'moved_to_object':moved_to_object,
                             'raised':raised,
                             'grabbed':grabbed}        
-            return action, action_done, action_status
+            return action, action_status
         
-        elif np.linalg.norm(eef_to_peg_pos) < 0.002 and not grabbed:
+        elif np.linalg.norm(eef_to_peg_pos) < 0.2 and not grabbed:
             action = np.concatenate( (eef_to_peg_pos, np.array([0,0,0,1]))) 
             grabbed = True
-            action_done = True
+            self.eef_pos_error_int = 0 # renew the intergration to 0 for new conduction
             action_status = {'moved_to_object':moved_to_object,
                         'raised':raised,
                         'grabbed':grabbed}
-            return action, action_done, action_status
+            return action, action_status
 
         if grabbed and not raised:
             if eef_pos[2] > 1.1:
                 raised = True
-                action_done = True
+                self.eef_pos_error_int = 0 # renew the intergration to 0 for new conduction
                 action_status = {'moved_to_object':moved_to_object,
                                 'raised':raised,
                                 'grabbed':grabbed}
-                return action, action_done, action_status
+                return action, action_status
             else:
                 action = np.array([0, 0, 0.2, 0, 0, 0, 1])
-                action_done = False
                 action_status = {'moved_to_object':moved_to_object,
                                 'raised':raised,
                                 'grabbed':grabbed}
-                return action, action_done, action_status
+                return action, action_status
 
         if grabbed and raised and np.linalg.norm(eef_to_hole_pos[0:2]) > 0.005:
             action = np.concatenate( (eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) )
+            return action, action_status
         elif grabbed and raised and np.linalg.norm(eef_to_hole_pos[0:2]) < 0.005:
             action = np.array([0, 0, -0.1, 0, 0, 0, 1])
+            return action, action_status

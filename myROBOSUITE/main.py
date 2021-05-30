@@ -31,7 +31,6 @@ if __name__ == "__main__":
 	action = np.zeros(dof)
 	# done = True when the task is completed
 	done = False
-	action_done = False
 	# eef_pos_history for integrating
 	eef_pos_history = np.array([])
 	# action status
@@ -59,8 +58,6 @@ if __name__ == "__main__":
 		env.viewer.add_keypress_callback("any", device.on_press)
 		env.viewer.add_keyup_callback("any", device.on_release)
 		env.viewer.add_keyrepeat_callback("any", device.on_press)
-
-
 
 	while not done:
 		obs, reward, done, _ = env.step(action)	# take action in the environment
