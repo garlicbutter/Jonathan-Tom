@@ -1,6 +1,6 @@
 <mujoco model="Round_peg_16mm">
   <asset>
-    <mesh file="../task1_stl_files_correct_pos/Round_peg_16mm.stl" name="peg mesh" scale="0.001 0.001 0.001"/>
+    <mesh file="../task1_stl_files_correct_pos/Round_peg_16mm.stl" name="peg mesh" scale="0.0009 0.0009 0.0009"/>
     <texture file="../textures/ceramic.png" type="2d" name="tex-peg" />
     <material name="peg" reflectance="0.7" texrepeat="15 15" texture="tex-peg" texuniform="true"/>
   </asset>

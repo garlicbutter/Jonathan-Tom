@@ -9,6 +9,8 @@ from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.placement_samplers import UniformRandomSampler, SequentialCompositeSampler
 from robosuite.utils.observables import Observable, sensor
 
+
+
 class MyEnv(SingleArmEnv):
     '''
     my environment
@@ -62,7 +64,6 @@ class MyEnv(SingleArmEnv):
         self.objectsName_of_interest = [] # for name
         self.objectsXrange_of_interest = [] # x range for placement
         self.objectsYrange_of_interest = [] # y range for placement
-
 
         super().__init__(
             robots=robots,

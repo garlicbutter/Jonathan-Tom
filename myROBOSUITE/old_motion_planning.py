@@ -19,7 +19,7 @@ def get_policy_action(obs,action_status):
     eef_to_peg_pos 	= peg_pos - eef_pos							# array 1x3
     eef_to_peg_quat = peg_quat - eef_quat						# array 1x3
 
-    hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.156536,0.1537,0.1])	# array 1x3
+    hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.156736,0.1547,0.1])	# array 1x3
     eef_to_hole_pos = hole_pos - eef_pos						# array 1x3
 
 
@@ -58,5 +58,5 @@ def get_policy_action(obs,action_status):
         action = np.concatenate( (2*eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) )
         return action, action_status       
     elif grabbed and raised and np.linalg.norm(eef_to_hole_pos[0:2]) < 0.005:
-        action = np.array([0, 0, -0.01, 0, 0, 0, 1])
+        action = np.array([0, 0, -0.1, 0, 0, 0, 1])
         return action, action_status
