@@ -7,7 +7,7 @@
   <worldbody>
     <body>
       <body name="object">
-        <geom pos="0 0 0" mesh="peg mesh" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="50" friction="0.95 0.3 0.1"  material="peg" group="0" condim="4"/>
+        <geom pos="0 0 0" mesh="peg mesh" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="50" friction="2 0.9 0.5"  material="peg" group="0" condim="4"/>
       </body>
       <site rgba="0 0 0 0" size="0.005" pos="0 0 0" name="bottom_site"/>
       <site rgba="0 0 0 0" size="0.005" pos="0 0 0.05" name="top_site"/>

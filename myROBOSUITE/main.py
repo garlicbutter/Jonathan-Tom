@@ -16,6 +16,7 @@ if __name__ == "__main__":
 	env = MyEnv(robots="UR5e",
 				task_configs=task_config,
 				controller_configs=controller_config,
+				gripper_types='Robotiq140Gripper',
 				has_renderer=True,
 				has_offscreen_renderer=False,
 				use_camera_obs=False,
@@ -48,7 +49,7 @@ if __name__ == "__main__":
 	# t-g             rotate arm about y-axis
 	# c-v             rotate arm about z-axis
 	# ESC             quit
-	manual_control = False
+	manual_control = True
 
 	# initialize device
 	if manual_control:

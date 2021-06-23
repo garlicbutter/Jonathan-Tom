@@ -258,7 +258,12 @@ class MyEnv(SingleArmEnv):
         self.objectsYrange_of_interest.append(yrange)
 
     def visualize(self, vis_settings):
-        pass
+        # Run superclass method first
+        super().visualize(vis_settings=vis_settings)
+
+        # Color the gripper visualization site according to its distance to the cube
+        if vis_settings["grippers"]:
+            self._visualize_gripper_to_target(gripper=self.robots[0].gripper, target=self.cube)
 
     def _check_success(self):
         pass
