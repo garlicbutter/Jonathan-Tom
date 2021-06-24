@@ -1,8 +1,8 @@
+import numpy as np
+import os
 from my_environment import MyEnv
 from my_controller import controller_config
-import numpy as np
-from motion_planning_class import Policy_action
-
+from motion_planning import Policy_action
 if __name__ == "__main__":
 	# Task configuration
 	# option:
@@ -11,47 +11,22 @@ if __name__ == "__main__":
 	#			USB		: USB-C
 	task_config = {'board': 'GMC',
 					'peg' : '16mm'}
-
 	# create environment instance
 	env = MyEnv(robots="UR5e",
 				task_configs=task_config,
 				controller_configs=controller_config,
-				gripper_types='Robotiq140Gripper',
+				gripper_types='Robotiq85Gripper',
 				has_renderer=True,
 				has_offscreen_renderer=False,
 				use_camera_obs=False,
 				render_camera=None,
 				ignore_done=True)
-	
-	# initilaize motion planning class
-	motion_planning = Policy_action()
-
-	# define useful variables
-	dof = env.robots[0].dof
-    # Initial action
-	action = np.zeros(dof)
-	# done = True when the task is completed
-	done = False
-	# eef_pos_history for integrating
-	eef_pos_history = np.array([])
-	# action status
-	action_status = {'moved_to_object':False,
-					 'raised'		  :False,
-					 'grabbed'		  :False}
-
+	# create motion planning class
+	motion_planning = Policy_action(env.control_timestep,
+									P=1,
+									I=0.1)
 	# manual control via keyboard
-	# Keys            Command
-	# q               reset simulation
-	# spacebar        toggle gripper (open/close)
-	# w-a-s-d         move arm horizontally in x-y plane
-	# r-f             move arm vertically
-	# z-x             rotate arm about x-axis
-	# t-g             rotate arm about y-axis
-	# c-v             rotate arm about z-axis
-	# ESC             quit
-	manual_control = True
-
-	# initialize device
+	manual_control = False
 	if manual_control:
 		from robosuite.devices import Keyboard
 		from robosuite.utils.input_utils import input2action
@@ -59,26 +34,28 @@ if __name__ == "__main__":
 		env.viewer.add_keypress_callback("any", device.on_press)
 		env.viewer.add_keyup_callback("any", device.on_release)
 		env.viewer.add_keyrepeat_callback("any", device.on_press)
-
+    # Initial action
+	action = np.zeros(env.robots[0].dof)
+	# simulate termination condition
+	done = False
+	# simulation  
 	while not done:
 		obs, reward, done, _ = env.step(action)	# take action in the environment
-		# action, action_status = get_policy_action(obs, action_status)         # use observation to decide on an action
-
 		if manual_control:
-			# Get the newest action
 			action, grasp = input2action(
 				device=device,
 				robot=env.robots[0],
 			)
 		else:
-			action, action_status = motion_planning.get_policy_action(obs, action_status, env.control_timestep)         # use observation to decide on an action
+			# update observation to motion planning
+			motion_planning.update_obs(obs)
+			# decide which action to take for next simulation
+			action = motion_planning.get_policy_action()    
 
-		env.render()  							# render
-
-
-
-
-
-
+		env.render()
 		
-
+		os.system('clear')
+		print("Robot: {}, Gripper:{}".format(env.robots[0].name,env.robots[0].gripper_type))
+		print("Control Frequency:{}".format(env.robots[0].control_freq))
+		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_force))
+		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_torque))
