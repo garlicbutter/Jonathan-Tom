@@ -1,7 +1,6 @@
 import numpy as np
 import os
 from my_environment import MyEnv
-from my_controller import controller_config
 from motion_planning import Policy_action
 if __name__ == "__main__":
 	# Task configuration
@@ -11,6 +10,27 @@ if __name__ == "__main__":
 	#			USB		: USB-C
 	task_config = {'board': 'GMC',
 					'peg' : '16mm'}
+	# IMP_OSC is a custom controller written by us.
+	# find out the source code at https://github.com/garlicbutter/robosuite
+	# Theory based on the paper by Valency: https://doi.org/10.1115/1.1590685
+	controller_config = {
+                    "type": "IMP_POSE",
+                    "input_max": 1,
+                    "input_min": -1,
+                    "output_max": [0.05, 0.05, 0.05, 0.5, 0.5, 0.5],
+                    "output_min": [-0.05, -0.05, -0.05, -0.5, -0.5, -0.5],
+                    "kp": 150,
+                    "damping_ratio": 1,
+                    "impedance_mode": "fixed",
+                    "kp_limits": [0, 300],
+                    "damping_ratio_limits": [0, 10],
+                    "position_limits": None,
+                    "orientation_limits": None,
+                    "uncouple_pos_ori": True,
+                    "control_delta": True,
+                    "interpolation": None,
+                    "ramp_ratio": 0.2
+                    }
 	# create environment instance
 	env = MyEnv(robots="UR5e",
 				task_configs=task_config,
@@ -26,7 +46,7 @@ if __name__ == "__main__":
 									P=1,
 									I=0.1)
 	# manual control via keyboard
-	manual_control = False
+	manual_control = True
 	if manual_control:
 		from robosuite.devices import Keyboard
 		from robosuite.utils.input_utils import input2action
