@@ -8,13 +8,13 @@ if __name__ == "__main__":
 	# 			board	: Hole 12mm, Hole 9mm
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
-	task_config = {'board': 'GMC',
+	task_config = {'board': 'Hole_18mm',
 					'peg' : '16mm'}
 	# IMP_OSC is a custom controller written by us.
 	# find out the source code at https://github.com/garlicbutter/robosuite
 	# Theory based on the paper by Valency: https://doi.org/10.1115/1.1590685
 	controller_config = {
-                    "type": "IMP_POSE",
+                    "type": "OSC_POSE",
                     "input_max": 1,
                     "input_min": -1,
                     "output_max": [0.05, 0.05, 0.05, 0.5, 0.5, 0.5],
@@ -53,7 +53,7 @@ if __name__ == "__main__":
 	if manual_control:
 		from robosuite.devices import Keyboard
 		from robosuite.utils.input_utils import input2action
-		device = Keyboard(pos_sensitivity=0.2, rot_sensitivity=1.0)
+		device = Keyboard(pos_sensitivity=0.05, rot_sensitivity=1.0)
 		env.viewer.add_keypress_callback("any", device.on_press)
 		env.viewer.add_keyup_callback("any", device.on_release)
 		env.viewer.add_keyrepeat_callback("any", device.on_press)

@@ -112,8 +112,12 @@ class MyEnv(SingleArmEnv):
         mujoco_arena.set_origin([0, 0, 0])
 
         # register object with the corresponding option (objectClass, name, xrange, yrange)
-        if self.task_configs['board'] == 'GMC':
+        if self.task_configs['board'] == 'GMC_assembly':
             self.register_object(my_object.GMC_Assembly_Object,'plate',xrange=[0,0],yrange=[0,0])
+        if self.task_configs['board'] == 'GMC_plate':
+            self.register_object(my_object.GMC_Plate_Object,'plate',xrange=[0,0],yrange=[0,0])
+        if self.task_configs['board'] == 'Hole_18mm':
+            self.register_object(my_object.Custom_Hole_18mm_Object,'plate',xrange=[0,0],yrange=[0,0])
 
         if self.task_configs['peg'] == '16mm':
             self.register_object(my_object.Round_peg_16mm_Object,'peg',xrange=[-0.1,-0.13],yrange=[0.3,0.33])

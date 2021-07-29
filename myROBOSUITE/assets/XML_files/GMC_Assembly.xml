@@ -1,6 +1,6 @@
 <mujoco model="GMC_Assembly">
   <asset>
-    <mesh file="../task1_stl_files_correct_pos/GMC_Assembly.stl" name="gmcplate mesh" scale="0.001 0.001 0.001"/>
+    <mesh file="../task1_stl_files_correct_pos/GMC_Assembly.stl" name="gmcplate mesh" scale="0.0012 0.0012 0.0012"/>
     <texture file="../textures/red-wood.png" type="2d" name="tex-gmcplate" />
     <material name="gmcplate" reflectance="0.7" texrepeat="15 15" texture="tex-gmcplate" texuniform="true"/>
   </asset>
