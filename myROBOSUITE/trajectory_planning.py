@@ -72,41 +72,68 @@ class Policy_action:
 
         return self.action_status
 
-    def get_policy_action(self):
+    def get_policy_action(self,trajectory_def):
+        
         '''
-        take obs as input
-        return motion as output
+        take obs and trajecotry_def as inputs
+        
+        obs gives the current position and figures values, and trajecotry_def gives the mode of action and limits for kinematics,
+        such as accelerations and velocities. 
+        
+        eturn motion as output
         '''
+
         # Initial action
         action = np.zeros(7)
-        # update total error for integral control
-        self.eef_pos_overall_error += self.eef_to_peg_pos*self.dt
 
-        if not self.action_status['moved_to_object']:
-            x_action = self.motion_P * self.eef_to_peg_pos + self.motion_I * self.eef_pos_overall_error 
-            w_action = 0.01*np.array([0,0,self.eef_to_peg_quat[2],0])
-            action = np.concatenate((x_action,w_action))      
-            return action
-        
-        if self.action_status['moved_to_object']:
-            action = np.concatenate( (self.eef_to_peg_pos, np.array([0,0,0,1]))) 
-            self.eef_pos_overall_error = 0 # renew the intergration to 0 for new conduction
-            return action
+        '''
+        Two different modes can be chosed:
+        self.mode == 'delta value': The action is given as delta value in @action, close to velocity control
+        self.mode == 'abs_position': The action is given as absolute position value in world frame, close to position control
+        '''
 
-        if self.action_status['grabbed']:
-            if not self.action_status['raised']:
-                action = np.array([0, 0, 0.2, 0, 0, 0, 1])
+        if trajectory_def.mode == 'delta value':
+            # update total error for integral control
+            self.eef_pos_overall_error += self.eef_to_peg_pos*self.dt
+
+            if not self.action_status['moved_to_object']:
+                x_action = self.motion_P * self.eef_to_peg_pos + self.motion_I * self.eef_pos_overall_error 
+                w_action = 0.01*np.array([0,0,self.eef_to_peg_quat[2],0])
+                action = np.concatenate((x_action,w_action))      
                 return action
-
-            if self.action_status['raised']:
+            
+            if self.action_status['moved_to_object']:
+                action = np.concatenate( (self.eef_to_peg_pos, np.array([0,0,0,1]))) 
                 self.eef_pos_overall_error = 0 # renew the intergration to 0 for new conduction
                 return action
-            
-            if not self.action_status['moved_to_target']:
-                action = np.concatenate( (self.eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) )
-                return action
-            
-            if self.action_status['moved_to_target']:
-                action = np.array([0, 0, -0.1, 0, 0, 0, 1])
-                return action
 
+            if self.action_status['grabbed']:
+                if not self.action_status['raised']:
+                    action = np.array([0, 0, 0.2, 0, 0, 0, 1])
+                    return action
+
+                if self.action_status['raised']:
+                    self.eef_pos_overall_error = 0 # renew the intergration to 0 for new conduction
+                    return action
+                
+                if not self.action_status['moved_to_target']:
+                    action = np.concatenate( (self.eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) )
+                    return action
+                
+                if self.action_status['moved_to_target']:
+                    action = np.array([0, 0, -0.1, 0, 0, 0, 1])
+                    return action
+
+        if trajectory_def.mode == 'abs_position':
+            a_max = trajectory_def.a_max
+            v_max = trajectory_def.v_max
+            T = trajectory_def.time_sections
+            q_i = section_pos_init
+            q_f = section_pos_final
+            a0 = q_i
+            a3 = 20*(q_f-q_i)/(2*T**3)
+            a4 = 30*(q_i-q_f)/(2*T**4)
+            a5 = 12*(q_f-q_i)/(2*T**5)
+            action = a0 + a4*t**4 + a5*t**5
+
+            
