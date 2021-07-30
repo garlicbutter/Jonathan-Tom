@@ -1,7 +1,8 @@
 import numpy as np
 import os
 from my_environment import MyEnv
-from motion_planning import Policy_action
+from trajectory_planning import Policy_action
+
 if __name__ == "__main__":
 	# Task configuration
 	# option:

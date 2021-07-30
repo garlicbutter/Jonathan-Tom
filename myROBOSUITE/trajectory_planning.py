@@ -12,6 +12,7 @@ class Policy_action:
         dt,
         P=1,
         I=0.1,
+        time_sections = 5,
     ):
         # Initiallize Observed value
         self.eef_pos_overall_error = 0
@@ -27,6 +28,12 @@ class Policy_action:
         self.dt                 =   dt
         self.motion_P           =   P
         self.motion_I           =   I
+        self.time_sections      =   time_sections
+        self.dt_counter         =   0
+        self.init               =   1
+        self.t_section          =   0
+        # Temporary put it here, can be changed as input in main to decide the action as delta or abs value 
+        self.action_mode        =   "abs_position"
         # action status
         self.action_status      ={'moved_to_object':False,
                                 'grabbed'		  :False,
@@ -47,8 +54,11 @@ class Policy_action:
         self.hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.155636,0.1507,0.1])	# array 1x3
         self.eef_to_hole_pos = self.hole_pos - self.eef_pos						# array 1x3
         # decide status based on the observation
+        record = self.action_status
         self.decide_status()
-
+        if record != self.action_status or self.init:
+            self.change_inital_conditions()
+            self.init = 0
 
     def decide_status(self):
         '''
@@ -63,24 +73,23 @@ class Policy_action:
         '''
         if norm(self.eef_to_peg_pos) < 0.002:
             self.action_status['moved_to_object'] = True
+            self.dt_counter = 0
 
         if self.action_status['moved_to_object'] and not self.action_status['grabbed']:
             self.action_status['grabbed'] = True
+            self.dt_counter = 0
 
         if self.action_status['grabbed'] and norm(self.eef_to_hole_pos[0:2]) < 0.005:
             self.action_status['moved_to_target'] = True
+            self.dt_counter = 0
 
         return self.action_status
 
-    def get_policy_action(self,trajectory_def):
+    def get_policy_action(self):
         
         '''
-        take obs and trajecotry_def as inputs
-        
-        obs gives the current position and figures values, and trajecotry_def gives the mode of action and limits for kinematics,
-        such as accelerations and velocities. 
-        
-        eturn motion as output
+        take obs as inputs
+        return motion as output
         '''
 
         # Initial action
@@ -88,11 +97,11 @@ class Policy_action:
 
         '''
         Two different modes can be chosed:
-        self.mode == 'delta value': The action is given as delta value in @action, close to velocity control
-        self.mode == 'abs_position': The action is given as absolute position value in world frame, close to position control
+        self.action_mode == 'delta value': The action is given as delta value in @action, close to velocity control
+        self.action_mode == 'abs_position': The action is given as absolute position value in world frame, close to position control
         '''
 
-        if trajectory_def.mode == 'delta value':
+        if self.action_mode == 'delta value':
             # update total error for integral control
             self.eef_pos_overall_error += self.eef_to_peg_pos*self.dt
 
@@ -124,16 +133,40 @@ class Policy_action:
                     action = np.array([0, 0, -0.1, 0, 0, 0, 1])
                     return action
 
-        if trajectory_def.mode == 'abs_position':
-            a_max = trajectory_def.a_max
-            v_max = trajectory_def.v_max
-            T = trajectory_def.time_sections
-            q_i = section_pos_init
-            q_f = section_pos_final
+        if self.action_mode == 'abs_position':
+
+            T = self.time_sections
+            q_i = self.section_pos_init
+            q_f = self.section_pos_final
             a0 = q_i
             a3 = 20*(q_f-q_i)/(2*T**3)
             a4 = 30*(q_i-q_f)/(2*T**4)
             a5 = 12*(q_f-q_i)/(2*T**5)
-            action = a0 + a4*t**4 + a5*t**5
+            action = a0 + a3*self.t_section**3 + a4*self.t_section**4 + a5*self.t_section**5
+            self.dt_counter = self.dt_counter+1
+            self.t_section = self.dt_counter * self.dt
 
-            
+            return action
+
+    def change_inital_conditions(self):
+
+        if not self.action_status['moved_to_object']:
+            self.section_pos_init = np.concatenate((self.eef_pos,[0,0,0,0]))
+            self.section_pos_final = np.concatenate((self.peg_pos,[0,0,0,0]))
+
+        if self.action_status['moved_to_object']:
+            self.section_pos_init = np.concatenate((self.eef_pos,[0,0,0,1]))
+            self.section_pos_final = np.concatenate((self.hole_pos,[0,0,0,1]))
+
+        if self.action_status['grabbed']:
+            if not self.action_status['raised']:
+                self.section_pos_init = np.concatenate((self.eef_pos,[0,0,0,1]))
+                self.section_pos_final = self.eef_pos + np.array([0, 0, 1, 0, 0, 0, 1])
+
+            if (self.action_status['raised']) and (not self.action_status['moved_to_target']):
+                self.section_pos_init = np.concatenate((self.eef_pos,[0,0,0,1]))
+                self.section_pos_final = np.concatenate( (self.hole_pos[0:2], np.array([0,0,0,0,1]) ) )
+
+            if self.action_status['moved_to_target']:
+                self.section_pos_init = np.concatenate((self.eef_pos,[0,0,0,1]))
+                self.section_pos_final = np.array([0, 0, -1, 0, 0, 0, 1])
