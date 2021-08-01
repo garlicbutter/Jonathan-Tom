@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from my_environment import MyEnv
-from trajectory_planning import Policy_action
+from motion_planning_imp import Policy_action
 
 if __name__ == "__main__":
 	# Task configuration
@@ -15,7 +15,7 @@ if __name__ == "__main__":
 	# find out the source code at https://github.com/garlicbutter/robosuite
 	# Theory based on the paper by Valency: https://doi.org/10.1115/1.1590685
 	controller_config = {
-                    "type": "OSC_POSE",
+                    "type": "IMP_POSE",
                     "input_max": 1,
                     "input_min": -1,
                     "output_max": [0.05, 0.05, 0.05, 0.5, 0.5, 0.5],
@@ -65,6 +65,7 @@ if __name__ == "__main__":
 	# simulation  
 	while not done:
 		obs, reward, done, _ = env.step(action)	# take action in the environment
+		F_int = env.robots[0].ee_force
 		if manual_control:
 			action, grasp = input2action(
 				device=device,
