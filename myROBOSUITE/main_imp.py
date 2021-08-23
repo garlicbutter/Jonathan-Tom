@@ -24,16 +24,17 @@ if __name__ == "__main__":
                     "damping_ratio": 1,
                     "impedance_mode": "fixed",
                     "kp_limits": [0, 300],
-					"impedance_stiffness":[1],
-                	"impedance_damping":[1],
-                	"impedance_inertial":[1],
+					"impedance_stiffness":[1,1,1],
+                	"impedance_damping":[1,1,1],
+                	"impedance_inertial":[1,1,1],
                     "damping_ratio_limits": [0, 10],
                     "position_limits": None,
                     "orientation_limits": None,
                     "uncouple_pos_ori": True,
                     "control_delta": True,
                     "interpolation": None,
-                    "ramp_ratio": 0.2
+                    "ramp_ratio": 0.2,
+					"policy_freq":20,
                     }
 	# create environment instance
 	env = MyEnv(robots="UR5e",
@@ -73,14 +74,15 @@ if __name__ == "__main__":
 			)
 		else:
 			# update observation to motion planning
-			motion_planning.update_obs(obs)
+			motion_planning.update_obs(obs, F_int)
 			# decide which action to take for next simulation
 			action = motion_planning.get_policy_action()    
 
-		env.render()
-		
 		os.system('clear')
 		print("Robot: {}, Gripper:{}".format(env.robots[0].name,env.robots[0].gripper_type))
 		print("Control Frequency:{}".format(env.robots[0].control_freq))
 		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_force))
 		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_torque))
+
+		env.render()
+		

@@ -39,7 +39,7 @@ class Policy_action:
                                 'grabbed'		  :False,
                                 'moved_to_target':False,}
 
-    def update_obs(self,obs):
+    def update_obs(self,obs, F_int):
         # Update Observed value
         self.eef_pos 		=   obs['robot0_eef_pos'] 					# array 1x3
         self.eef_quat 		=   obs['robot0_eef_quat'] 					# array 1x4
@@ -47,16 +47,17 @@ class Policy_action:
         self.eef_quat[1]    =   self.eef_quat[0]
         self.eef_quat[2]    =   -self.eef_quat[2]
         self.eef_vel        =   obs['robot0_gripper_qvel'][0:3]
-        self.peg_pos 		=   obs['peg_pos'] + np.array([0,0,0.025])	# array 1x3
+        self.peg_pos 		=   obs['peg_pos'] + quat2mat(obs['peg_quat']) @ np.array([0,0,0.025])	# array 1x3
         self.peg_quat 		=   obs['peg_quat']							# array 1X4
         self.eef_to_peg_pos =   self.peg_pos - self.eef_pos							# array 1x3
         self.eef_to_peg_quat = self.peg_quat - self.eef_quat						# array 1x3
         self.hole_pos 		= obs['plate_pos'] + quat2mat(obs['plate_quat']) @ np.array([0.155636,0.1507,0.1])	# array 1x3
         self.eef_to_hole_pos = self.hole_pos - self.eef_pos						# array 1x3
+        self.F_int          = F_int
         # decide status based on the observation
         record = self.action_status
         self.decide_status()
-        if record != self.action_status or self.init:
+        if record != self.action_status or record != self.init:
             self.change_inital_conditions()
             self.init = 0
 
@@ -108,17 +109,20 @@ class Policy_action:
             if not self.action_status['moved_to_object']:
                 x_action = self.motion_P * self.eef_to_peg_pos + self.motion_I * self.eef_pos_overall_error 
                 w_action = 0.01*np.array([0,0,self.eef_to_peg_quat[2],0])
-                action = np.concatenate((x_action,w_action))      
+                action = np.concatenate((x_action,w_action))
+                action = np.concatenate((action,self.F_int))  
                 return action
             
             if self.action_status['moved_to_object']:
                 action = np.concatenate( (self.eef_to_peg_pos, np.array([0,0,0,1]))) 
+                action = np.concatenate((action,self.F_int))  
                 self.eef_pos_overall_error = 0 # renew the intergration to 0 for new conduction
                 return action
 
             if self.action_status['grabbed']:
                 if not self.action_status['raised']:
-                    action = np.array([0, 0, 0.2, 0, 0, 0, 1])
+                    action = np.array([0, 0, 0.2, 0, 0, 0, 1])                
+                    action = np.concatenate((action,self.F_int))  
                     return action
 
                 if self.action_status['raised']:
@@ -126,14 +130,16 @@ class Policy_action:
                     return action
                 
                 if not self.action_status['moved_to_target']:
-                    action = np.concatenate( (self.eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) )
+                    action = np.concatenate( (self.eef_to_hole_pos[0:2], np.array([0,0,0,0,1]) ) ) 
+                    action = np.concatenate((action,self.F_int))  
                     return action
                 
                 if self.action_status['moved_to_target']:
                     action = np.array([0, 0, -0.1, 0, 0, 0, 1])
+                    action = np.concatenate((action,self.F_int))  
                     return action
 
-        if self.action_mode == 'abs_position':
+        elif self.action_mode == 'abs_position':
 
             T = self.time_sections
             q_i = self.section_pos_init

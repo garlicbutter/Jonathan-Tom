@@ -50,7 +50,7 @@ if __name__ == "__main__":
 									P=1,
 									I=0.1)
 	# manual control via keyboard
-	manual_control = False
+	manual_control = True
 	if manual_control:
 		from robosuite.devices import Keyboard
 		from robosuite.utils.input_utils import input2action

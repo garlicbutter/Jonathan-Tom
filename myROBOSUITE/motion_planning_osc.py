@@ -40,7 +40,7 @@ class Policy_action:
         self.eef_quat[1]    =   self.eef_quat[0]
         self.eef_quat[2]    =   -self.eef_quat[2]
         self.eef_vel        =   obs['robot0_gripper_qvel'][0:3]
-        self.peg_pos 		=   obs['peg_pos'] + np.array([0,0,0.025])	# array 1x3
+        self.peg_pos 		=   obs['peg_pos'] + quat2mat(obs['peg_quat']) @ np.array([0,0,0.025])	# array 1x3
         self.peg_quat 		=   obs['peg_quat']							# array 1X4
         self.eef_to_peg_pos =   self.peg_pos - self.eef_pos							# array 1x3
         self.eef_to_peg_quat = self.peg_quat - self.eef_quat						# array 1x3
