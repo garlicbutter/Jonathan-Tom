@@ -9,7 +9,7 @@ if __name__ == "__main__":
 	# 			board	: Hole 12mm, Hole 9mm
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
-	task_config = {'board': 'hole',
+	task_config = {'board': 'Square_hole_18mm',
 					'peg' : '16mm'}
 	# IMP_OSC is a custom controller written by us.
 	# find out the source code at https://github.com/garlicbutter/robosuite
@@ -69,7 +69,9 @@ if __name__ == "__main__":
 				robot=env.robots[0],
 			)
 		else:
-			# update observation to motion planning
+			obs['plate_pos'][0] += 0.002
+			obs['plate_pos'][1] += 0.002
+			# update observation to motion planning11
 			motion_planning.update_obs(obs)
 			# decide which action to take for next simulation
 			action, action_status = motion_planning.get_policy_action()    
