@@ -45,3 +45,12 @@ class Custom_Hole_18mm_Object(MujocoXMLObject):
         super().__init__("./assets/XML_files/Custom_Hole_18mm.xml",
                          name=name, joints=[dict(type="free", damping="0.0001")],
                          obj_type="all", duplicate_collision_geoms=True)
+
+class square_hole_16mm(MujocoXMLObject):
+    '''
+    square_hole_16mm
+    '''
+    def __init__(self, name):
+        super().__init__("./assets/XML_files/square_hole_16mm.xml",
+                         name=name, joints=[dict(type="free", damping="0.0001")],
+                         obj_type="all", duplicate_collision_geoms=True)

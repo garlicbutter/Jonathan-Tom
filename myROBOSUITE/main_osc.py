@@ -9,7 +9,7 @@ if __name__ == "__main__":
 	# 			board	: Hole 12mm, Hole 9mm
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
-	task_config = {'board': 'Hole_18mm',
+	task_config = {'board': 'hole',
 					'peg' : '16mm'}
 	# IMP_OSC is a custom controller written by us.
 	# find out the source code at https://github.com/garlicbutter/robosuite
@@ -47,10 +47,10 @@ if __name__ == "__main__":
 				ignore_done=True)
 	# create motion planning class
 	motion_planning = Policy_action(env.control_timestep,
-									P=1,
+									P=3,
 									I=0.1)
 	# manual control via keyboard
-	manual_control = True
+	manual_control = False
 	if manual_control:
 		from robosuite.devices import Keyboard
 		from robosuite.utils.input_utils import input2action
@@ -60,6 +60,7 @@ if __name__ == "__main__":
 		env.viewer.add_keyrepeat_callback("any", device.on_press)
     # Initial action
 	action = np.zeros(env.robots[0].dof)
+	action_status = None
 	# simulate termination condition
 	done = False
 	# simulation  
@@ -74,12 +75,13 @@ if __name__ == "__main__":
 			# update observation to motion planning
 			motion_planning.update_obs(obs)
 			# decide which action to take for next simulation
-			action = motion_planning.get_policy_action()    
+			action, action_status = motion_planning.get_policy_action()    
 
 		env.render()
 		
 		os.system('clear')
 		print("Robot: {}, Gripper:{}".format(env.robots[0].name,env.robots[0].gripper_type))
 		print("Control Frequency:{}".format(env.robots[0].control_freq))
-		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_force))
-		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_torque))
+		print("Action status:{}".format(action_status))
+		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a=env.robots[0].ee_force))
+		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a=env.robots[0].ee_torque))

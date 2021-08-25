@@ -7,6 +7,7 @@ from robosuite.models.arenas import TableArena
 from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.placement_samplers import UniformRandomSampler, SequentialCompositeSampler
 from robosuite.utils.observables import Observable, sensor
+from robosuite.models.objects import PlateWithHoleObject
 
 
 
@@ -111,13 +112,15 @@ class MyEnv(SingleArmEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
+
+        # Load hole object
         # register object with the corresponding option (objectClass, name, xrange, yrange)
-        if self.task_configs['board'] == 'GMC_assembly':
-            self.register_object(my_object.GMC_Assembly_Object,'plate',xrange=[0,0],yrange=[0,0])
-        if self.task_configs['board'] == 'GMC_plate':
-            self.register_object(my_object.GMC_Plate_Object,'plate',xrange=[0,0],yrange=[0,0])
-        if self.task_configs['board'] == 'Hole_18mm':
-            self.register_object(my_object.Custom_Hole_18mm_Object,'plate',xrange=[0,0],yrange=[0,0])
+        # if self.task_configs['board'] == 'GMC_assembly':
+        #     self.register_object(my_object.GMC_Assembly_Object,'plate',xrange=[0,0],yrange=[0,0])
+        # if self.task_configs['board'] == 'GMC_plate':
+        #     self.register_object(my_object.GMC_Plate_Object,'plate',xrange=[0,0],yrange=[0,0])
+        # if self.task_configs['board'] == 'Hole_18mm':
+        #     self.register_object(my_object.Custom_Hole_18mm_Object,'plate',xrange=[0,0],yrange=[0,0])
 
         if self.task_configs['peg'] == '16mm':
             self.register_object(my_object.Round_peg_16mm_Object,'peg',xrange=[-0.1,-0.13],yrange=[0.3,0.33])
@@ -146,7 +149,14 @@ class MyEnv(SingleArmEnv):
         # Add objects to the sampler
         for obj_to_put, obj_name in zip(self.objects_of_interest,self.objectsName_of_interest):
             self.placement_initializer.add_objects_to_sampler(sampler_name=f"{obj_name}Sampler", mujoco_objects=obj_to_put)
-        
+
+        if self.task_configs['board'] == 'hole':
+            self.plate = PlateWithHoleObject(name='plate')
+            plate_obj = self.plate.get_obj()
+            plate_obj.set("quat", "0 0 0 1")
+            plate_obj.set("pos", "0 0 {}".format(self.table_offset[2]))
+            self.objects_of_interest.append(self.plate)
+
         # task includes arena, robot, and objects of interest
         self.model = ManipulationTask(
             mujoco_arena=mujoco_arena,
