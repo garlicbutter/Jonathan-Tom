@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from my_environment import MyEnv
-from motion_planning_imp import Policy_action
+import motion_planning_imp
 
 if __name__ == "__main__":
 	# Task configuration
@@ -9,7 +9,7 @@ if __name__ == "__main__":
 	# 			board	: Hole 12mm, Hole 9mm
 	#			peg		: 16mm. 12mm, 9mm
 	#			USB		: USB-C
-	task_config = {'board': 'Hole_18mm',
+	task_config = {'board': 'hole',
 					'peg' : '16mm'}
 	# IMP_OSC is a custom controller written by us.
 	# find out the source code at https://github.com/garlicbutter/robosuite
@@ -47,9 +47,9 @@ if __name__ == "__main__":
 				render_camera=None,
 				ignore_done=True)
 	# create motion planning class
-	motion_planning = Policy_action(env.control_timestep,
-									P=1,
-									I=0.1)
+	motion_planning = motion_planning_imp.Policy_action(env.control_timestep,
+														P=1,
+														I=0.1)
 	# manual control via keyboard
 	manual_control = False
 	if manual_control:
@@ -81,8 +81,8 @@ if __name__ == "__main__":
 		os.system('clear')
 		print("Robot: {}, Gripper:{}".format(env.robots[0].name,env.robots[0].gripper_type))
 		print("Control Frequency:{}".format(env.robots[0].control_freq))
-		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_force))
-		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[1]:2.4f}".format(a=env.robots[0].ee_torque))
+		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a=env.robots[0].ee_force))
+		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a=env.robots[0].ee_torque))
 
 		env.render()
 		

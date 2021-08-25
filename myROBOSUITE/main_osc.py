@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from my_environment import MyEnv
-from motion_planning_osc import Policy_action
+import motion_planning_osc
 
 if __name__ == "__main__":
 	# Task configuration
@@ -20,13 +20,10 @@ if __name__ == "__main__":
                     "input_min": -1,
                     "output_max": [0.05, 0.05, 0.05, 0.5, 0.5, 0.5],
                     "output_min": [-0.05, -0.05, -0.05, -0.5, -0.5, -0.5],
-                    "kp": 150,
+                    "kp": [150, 150, 150, 150, 150, 150],
                     "damping_ratio": 1,
                     "impedance_mode": "fixed",
-                    "kp_limits": [0, 300],
-					"impedance_stiffness":[1],
-                	"impedance_damping":[1],
-                	"impedance_inertial":[1],
+                    "kp_limits": [[0, 300], [0, 300], [0, 300], [0, 300], [0, 300], [0, 300]],
                     "damping_ratio_limits": [0, 10],
                     "position_limits": None,
                     "orientation_limits": None,
@@ -46,9 +43,9 @@ if __name__ == "__main__":
 				render_camera=None,
 				ignore_done=True)
 	# create motion planning class
-	motion_planning = Policy_action(env.control_timestep,
-									P=3,
-									I=0.1)
+	motion_planning = motion_planning_osc.Policy_action(env.control_timestep,
+														P=3,
+														I=0.1)
 	# manual control via keyboard
 	manual_control = False
 	if manual_control:
