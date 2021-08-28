@@ -119,7 +119,7 @@ class MyEnv(SingleArmEnv):
             self.register_object(my_object.GMC_Assembly_Object,'plate',xrange=[0,0],yrange=[0,0])
         if self.task_configs['board'] == 'GMC_plate':
             self.register_object(my_object.GMC_Plate_Object,'plate',xrange=[0,0],yrange=[0,0])
-        if self.task_configs['board'] == 'Square_hole_18mm':
+        if self.task_configs['board'] == 'Square_hole_16mm':
             self.register_object(my_object.square_hole_16mm,'plate',xrange=[0,0],yrange=[0,0])
 
         # Load peg object
