@@ -129,6 +129,13 @@ class MyEnv(SingleArmEnv):
             self.register_object(my_object.Round_peg_12mm_Object,'peg',xrange=[-0.1,-0.13],yrange=[0.3,0.33])
         elif self.task_configs['peg'] == '9mm':
             raise NotImplementedError
+        elif self.task_configs['peg'] == 'cylinder_16mm':
+            from robosuite.models.objects.primitive import CylinderObject
+            self.peg = CylinderObject('peg',size=(0.007,0.025))
+            self.objects_of_interest.append(self.peg)
+            self.objectsName_of_interest.append('peg')
+            self.objectsXrange_of_interest.append([-0.1,-0.13])
+            self.objectsYrange_of_interest.append([0.3,0.33])
 
         # Create Sequential Sampler. The order is same as the order of register.
         # Create individual samplers per object
