@@ -70,7 +70,7 @@ class Policy_action:
         # if self.action_status['moved_to_object'] and not self.action_status['grabbed']:
         #     self.action_status['grabbed'] = True
 
-        if self.action_status['grabbed'] and norm(self.eef_to_hole_pos[0:2]) < 0.002:
+        if self.action_status['grabbed'] and norm(self.eef_to_hole_pos[0:2]) < 0.001:
             self.action_status['moved_to_target'] = True
 
         return self.action_status
@@ -119,7 +119,9 @@ class Policy_action:
         
         # print("hole_to_peg_pos:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a = self.hole_to_peg_pos))
         if moved_to_target and not done:
-            if self.hole_to_peg_pos[2] < 0.035: # 0.05
+            xy_distance = np.sqrt(self.hole_to_peg_pos[0] **2 + self.hole_to_peg_pos[1] **2)
+            z_distance  = self.hole_to_peg_pos[2]
+            if  xy_distance < 0.003 and z_distance < 0.05:
                 action = np.array([0, 0, 0, 0, 0, 0, -1])
                 self.action_status['done'] = True
                 return action, self.action_status

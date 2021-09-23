@@ -3,6 +3,10 @@ import os
 from my_environment import MyEnv
 import motion_planning_osc
 
+import numpy as np
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+
 if __name__ == "__main__":
 	# Task configuration
 	# option:
@@ -20,8 +24,8 @@ if __name__ == "__main__":
                     "input_min": -1,
                     "output_max": [0.05, 0.05, 0.05, 0.5, 0.5, 0.5],
                     "output_min": [-0.05, -0.05, -0.05, -0.5, -0.5, -0.5],
-                    "kp": [150, 150, 150, 150, 150, 150],
-                    "damping_ratio": 1,
+                    "kp": [1500, 1500, 50, 150, 150, 150],
+                    "damping_ratio": [1.5, 1.5, 1, 10, 10, 10],
                     "impedance_mode": "fixed",
                     "kp_limits": [[0, 300], [0, 300], [0, 300], [0, 300], [0, 300], [0, 300]],
                     "damping_ratio_limits": [0, 10],
@@ -55,7 +59,12 @@ if __name__ == "__main__":
 		env.viewer.add_keypress_callback("any", device.on_press)
 		env.viewer.add_keyup_callback("any", device.on_release)
 		env.viewer.add_keyrepeat_callback("any", device.on_press)
-    # Initial action
+	
+	# Initial recorder
+	eeff_record = np.empty([1,3])
+	t_record = np.empty(1)
+
+	# Initial action
 	action = np.zeros(env.robots[0].dof)
 	action_status = None
 	# simulate termination condition
@@ -69,8 +78,8 @@ if __name__ == "__main__":
 				robot=env.robots[0],
 			)
 		else:
-			# obs['plate_pos'][0] += 0.0016
-			# obs['plate_pos'][1] += 0.0016
+			obs['plate_pos'][0] += 0.00
+			obs['plate_pos'][1] += 0.00
 
 			# update observation to motion planning11
 			motion_planning.update_obs(obs)
@@ -85,3 +94,29 @@ if __name__ == "__main__":
 		print("Action status:{}".format(action_status))
 		print("eef_force:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a=env.robots[0].ee_force))
 		print("eef_torque:\n \t x: {a[0]:2.4f}, y: {a[1]:2.4f}, z: {a[2]:2.4f}".format(a=env.robots[0].ee_torque))
+
+		eeff_record = np.append(eeff_record,[env.robots[0].ee_force],axis=0)
+		t_record = np.append(t_record,np.array([env.cur_time]),axis=0)
+		
+		if action_status['done']:
+			break
+
+	fig_eeff, ax_eeff = plt.subplots(3)
+	fig_eeff.figsize=(10,6)
+	fig_eeff.suptitle('eef_force')
+	ylabels = [r'Fx[N]',r'Fy[N]',r'Fz[N]']
+
+	for idx,ylabel in enumerate(ylabels):
+		ax_eeff[idx].grid()
+		ax_eeff[idx].set_ylabel(ylabel)
+		ax_eeff[idx].set_xlabel(r't[s]')
+		ax_eeff[idx].plot(t_record,eeff_record[:,idx])
+	plt.ioff()
+	plt.show()
+	
+
+
+
+
+
+
