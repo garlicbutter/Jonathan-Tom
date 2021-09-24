@@ -40,7 +40,7 @@ def run_test(kp, kd, percetion_error):
                                                                perception_error=percetion_error,
                                                                offscreen=True)
     
-    if t_record[-1]>0:
+    if len(t_record)>=2:
         inserting_eeff_x_max = np.amax(eeff_record[0][-50:-1])
         inserting_eeff_y_max = np.amax(eeff_record[1][-50:-1])
         inserting_eeff_z_max = np.amax(eeff_record[2][-50:-1])
@@ -48,12 +48,10 @@ def run_test(kp, kd, percetion_error):
                 'run_time':t_record,
                 'inserting_eeff_xy_max':np.sqrt(inserting_eeff_x_max**2 + inserting_eeff_y_max**2),
                 'inserting_eeff_z_max':inserting_eeff_z_max}
-    elif t_record[-1]==0:
+    else:
         result = {'success':False,
                 'run_time':0,
                 'inserting_eeff_xy_max':0,
                 'inserting_eeff_z_max':0}
-    else:
-        raise ValueError
     
     return result
