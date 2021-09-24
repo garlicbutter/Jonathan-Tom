@@ -54,7 +54,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 					gripper_types='Robotiq85Gripper',
 					has_renderer=True,
 					has_offscreen_renderer=False,
-					use_object_obs=False,
+					use_object_obs=True,
 					use_camera_obs=False,
 					ignore_done=True,
 					render_camera=None)
@@ -111,7 +111,8 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 			# decide which action to take for next simulation
 			action, action_status = motion_planning.get_policy_action()    
 
-		env.render()
+		if not offscreen:
+			env.render()
 	
 		eeff_record = np.append(eeff_record,[env.robots[0].ee_force],axis=0)
 		eeft_record = np.append(eeft_record,[env.robots[0].ee_torque],axis=0)
@@ -131,7 +132,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 
 	return eeff_record, eeft_record, eefd_record, t_record
 
-def plot_eeff(eeff_record, eeft_record, eefd_record, t_record):
+def plotter(eeff_record, eeft_record, eefd_record, t_record):
 	# plot of end effector force record 
 	fig_eeff, ax_eeff = plt.subplots(3)
 	fig_eeff.figsize=(10,6)
@@ -169,8 +170,9 @@ def plot_eeff(eeff_record, eeft_record, eefd_record, t_record):
 if __name__ == "__main__":
 	eeff_record, eeft_record, eefd_record, t_record = main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 															   controller_zeta = [1.5, 1.5, 1, 10, 10, 10],
+															   perception_error = 0.0,
 															   offscreen=False)
-	plot_eeff(eeff_record, eeft_record, eefd_record, t_record)
+	plotter(eeff_record, eeft_record, eefd_record, t_record)
 
 	
 

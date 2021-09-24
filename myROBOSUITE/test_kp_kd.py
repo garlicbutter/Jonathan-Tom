@@ -28,7 +28,7 @@ def main():
             inserting_eeff_z_max_list.append(result['inserting_eeff_z_max'])
     
     # draw some figures with the test results
-    pass
+    print(success_list)
 
 
 if __name__ == '__main__':
