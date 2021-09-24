@@ -129,7 +129,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 			eefd_record = 0
 			t_record	= 0
 			break
-
+	print('finished one simulation')
 	return eeff_record, eeft_record, eefd_record, t_record
 
 def plotter(eeff_record, eeft_record, eefd_record, t_record):
