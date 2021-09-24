@@ -123,7 +123,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 		
 		if action_status['done']:
 			break
-		if t_record[-1] > 50: # failure case
+		if t_record[-1] > 30: # failure case
 			eeff_record = 0
 			eeft_record = 0
 			eefd_record = 0

@@ -5,12 +5,12 @@ def main():
     kp_test = things_to_test('controller_stiffness',
                             testing_min = np.array([100, 100, 50, 50, 50, 100]),
                             testing_max = np.array([1500, 1500, 50, 150, 150, 150]),
-                            amount_of_tests = 11)
+                            amount_of_tests = 3)
 
     kd_test = things_to_test('damping_ratio',
                             testing_min = np.array([1, 1, 1, 10, 10, 10]),
                             testing_max = np.array([3, 3, 1, 10, 10, 10]),
-                            amount_of_tests = 11)
+                            amount_of_tests = 3)
 
     perception_error_test = 0
 
