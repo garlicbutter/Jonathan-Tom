@@ -1,5 +1,7 @@
 import numpy as np
+from numpy.core.fromnumeric import reshape
 from testing_module import things_to_test, run_test
+import matplotlib.pyplot as plt
 
 def main():
     kp_test = things_to_test('controller_stiffness',
@@ -28,8 +30,21 @@ def main():
             inserting_eeff_z_max_list.append(result['inserting_eeff_z_max'])
     
     # draw some figures with the test results
-    print(success_list)
+    data_to_plot = run_time_list
+    which_kp_kd = 0 # choose one from 0~5
 
+    # drawing
+    x = np.array(list(iter(kp_test)))[:,which_kp_kd]
+    y = np.array(list(iter(kd_test)))[:,which_kp_kd]
+    xv, yv = np.meshgrid(x, y)
+    fig = plt.figure(figsize=(10,6))
+    ax = fig.gca(projection='rectilinear')
+    plt.xlabel(r'$K_p$')
+    plt.ylabel(r'$K_d$')
+    sc = ax.scatter(xv,yv,c=data_to_plot,cmap='gnuplot')
+    cb = plt.colorbar(sc)
+    cb.set_label('run_time')
+    plt.show() 
 
 if __name__ == '__main__':
     main()

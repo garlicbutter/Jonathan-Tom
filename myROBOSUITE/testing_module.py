@@ -20,7 +20,7 @@ class things_to_test():
         self.max  = testing_max
         self.num  = amount_of_tests
         self.interval = (self.max - self.min)/(self.num-1)
-    
+
     def __iter__(self):
         self.n  = 0
         self.result = self.min - self.interval
@@ -50,7 +50,7 @@ def run_test(kp, kd, percetion_error):
         inserting_eeff_y_max = np.amax(eeff_record[1][-50:-1])
         inserting_eeff_z_max = np.amax(eeff_record[2][-50:-1])
         result = {'success':True,
-                    'run_time':t_record,
+                    'run_time':t_record[-1],
                     'inserting_eeff_xy_max':np.sqrt(inserting_eeff_x_max**2 + inserting_eeff_y_max**2),
                     'inserting_eeff_z_max':inserting_eeff_z_max}
     
