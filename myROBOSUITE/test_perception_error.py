@@ -3,12 +3,12 @@ from testing_module import things_to_test, run_test
 import matplotlib.pyplot as plt
 
 def main():
-    kp_test = np.array([100, 100, 50, 50, 50, 100])
-    kd_test = np.array([3, 3, 1, 10, 10, 10])
+    kp_test = np.array([1500, 1500, 15, 150, 150, 150])
+    kd_test = np.array([1.5, 1.5, 1, 1, 1, 1])
     perception_error_test = things_to_test('perception_error',
-                                            testing_min = np.array([0.0001]),
+                                            testing_min = np.array([0.0]),
                                             testing_max = np.array([0.001]),
-                                            amount_of_tests = 3)
+                                            amount_of_tests = 5)
 
     success_list = []
     run_time_list = []
