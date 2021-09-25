@@ -31,7 +31,7 @@ def main():
     
     # draw some figures with the test results
     data_to_plot = run_time_list
-    which_kp_kd = 0 # choose one from 0~5
+    which_kp_kd = 0 # choose an index from 0~5
 
     # drawing
     x = np.array(list(iter(kp_test)))[:,which_kp_kd]
