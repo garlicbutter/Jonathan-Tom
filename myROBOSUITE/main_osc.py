@@ -169,9 +169,9 @@ def plotter(eeff_record, eeft_record, eefd_record, t_record):
 	plt.show()
 
 if __name__ == "__main__":
-	eeff_record, eeft_record, eefd_record, t_record, robot_torque_record = main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
-															   controller_zeta = [1.5, 1.5, 1, 10, 10, 10],
-															   perception_error = 0.0,
+	eeff_record, eeft_record, eefd_record, t_record, robot_torque_record = main_osc(controller_kp = [700, 700, 500, 100, 100, 50],
+															   controller_zeta = [1.5, 1.5, 2, 5, 5, 5],
+															   perception_error = 0.001,
 															   offscreen=False)
 	plotter(eeff_record, eeft_record, eefd_record, t_record)
 

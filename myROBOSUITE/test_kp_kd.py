@@ -8,14 +8,14 @@ import pandas as pd
 def run_episodes(filename):
     # parameters to test
     kp_test = things_to_test('controller_stiffness',
-                            testing_min = np.array([100, 100, 50, 50, 50, 100]),
-                            testing_max = np.array([1500, 1500, 50, 150, 150, 150]),
-                            amount_of_tests = 3)
+                            testing_min = np.array([100, 100, 500, 100, 100, 50]),
+                            testing_max = np.array([2000, 2000, 500, 100, 100, 50]),
+                            amount_of_tests = 15)
 
     kd_test = things_to_test('damping_ratio',
-                            testing_min = np.array([1, 1, 1, 10, 10, 10]),
-                            testing_max = np.array([3, 3, 1, 10, 10, 10]),
-                            amount_of_tests = 3)
+                            testing_min = np.array([1, 1, 2, 5, 5, 5]),
+                            testing_max = np.array([10, 10, 2, 5, 5, 5]),
+                            amount_of_tests = 15)
 
     perception_error_test = 0
 
@@ -53,11 +53,11 @@ def draw_kp_kd(filename):
         # run time
         # xy error
         # z error
-    data_to_plot = 'z error'
+    data_to_plot = 'run time'
     # drawing
     fig = plt.figure(figsize=(10,6))
     ax = fig.gca(projection='rectilinear')
-    which_direction = 0 # 0~5 so you can choose which kp, kd to plot
+    which_direction = 5 # 0~5 so you can choose which kp, kd to plot
     df['kp_list'] = df['kp'].apply(lambda x: [float(val) for val in x.replace("[","").replace("]","").split()])
     df['kd_list'] = df['kd'].apply(lambda x: [float(val) for val in x.replace("[","").replace("]","").split()])
     df['kp_plot'] = df['kp_list'].apply(lambda x: x[which_direction])
@@ -65,16 +65,17 @@ def draw_kp_kd(filename):
     plt.title('Performance of different impedance parameters')
     plt.xlabel(r'$Stiffness$'+' on direction '+str(which_direction+1))
     plt.ylabel(r'$Damping$'+' on direction '+str(which_direction+1))
-    sc = ax.scatter(df['kp_plot'],df['kd_plot'],c=df[data_to_plot],cmap='gnuplot')
+    size = df['run time'].apply(lambda x: 30.0 if float(x)>0.1 else 0.0)
+    sc = ax.scatter(df['kp_plot'],df['kd_plot'],c=df[data_to_plot],cmap='jet',s=size)
     cb = plt.colorbar(sc)
     cb.set_label(data_to_plot)
     plt.show()
 
 if __name__ == '__main__':
-    filename = './results/whatever.csv' # the file to read/write
+    filename = './results/kp6kd6.csv' # the file to read/write
 
     # runs the simulation and save result file
-    run_episodes(filename)
+    # run_episodes(filename)
 
     # draw the results from the file
     draw_kp_kd(filename)

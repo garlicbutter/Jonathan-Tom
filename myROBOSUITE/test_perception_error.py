@@ -6,12 +6,13 @@ import pandas as pd
 # go to the bottom section of the code to run this file
 #######################################################
 def run_episodes(filename):
-    kp_test = np.array([700, 700, 50, 50, 50, 100])
-    kd_test = np.array([1.5, 1.5, 1, 10, 10, 10])
+    kp_test = np.array([700, 700, 500, 100, 100, 50])
+    kd_test = np.array([1.5, 1.5, 2, 5, 5, 5])
+
     perception_error_test = things_to_test('perception_error',
                                             testing_min = np.array([0.0]),
-                                            testing_max = np.array([0.001]),
-                                            amount_of_tests = 2)
+                                            testing_max = np.array([0.005]),
+                                            amount_of_tests = 40)
 
     # testing code (no need to change anything below)
     data = []
@@ -52,17 +53,17 @@ def draw_perception_error(filename):
     y = df[data_to_plot]
 
     fig = plt.figure(figsize=(10,6))
-    plt.plot(x,y)
+    plt.plot(x,y, '.')
     plt.xlabel('Perception error [mm]')
     plt.ylabel(data_to_plot)
     plt.grid()
     plt.show() 
 
 if __name__ == '__main__':
-    filename = './results/percp09291558.csv' # the file to read/write
+    filename = './results/percp1500.csv' # the file to read/write
 
     # runs the simulation and save result file
-    run_episodes(filename)
+    # run_episodes(filename)
 
     # draw the results from the file
     draw_perception_error(filename)
