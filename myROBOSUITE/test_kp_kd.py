@@ -1,12 +1,11 @@
-from math import fabs
 import numpy as np
-from numpy.core.fromnumeric import reshape
 from testing_module import things_to_test, run_test
 import matplotlib.pyplot as plt
 import pandas as pd  
-
-
-def main():
+#######################################################
+# go to the bottom section of the code to run this file
+#######################################################
+def run_episodes(filename):
     # parameters to test
     kp_test = things_to_test('controller_stiffness',
                             testing_min = np.array([100, 100, 50, 50, 50, 100]),
@@ -19,7 +18,6 @@ def main():
                             amount_of_tests = 3)
 
     perception_error_test = 0
-    filename = './results/kp_kd_result.csv'
 
     # testing code (no need to change anything below)
     data = []
@@ -46,19 +44,36 @@ def main():
     df.to_csv(filename,mode='a',header= not os.path.exists(filename),index=False)
     print('Saved result to ' + filename)
 
-def draw_kp_kd():
-    pass
-    # # draw some figures with the test results
-    # data_to_plot = run_time_list
-    # # drawing
-    # fig = plt.figure(figsize=(10,6))
-    # ax = fig.gca(projection='rectilinear')
-    # plt.xlabel(r'$K_p$')
-    # plt.ylabel(r'$K_d$')
-    # sc = ax.scatter(kp_plot,kd_plot,c=data_to_plot,cmap='gnuplot')
-    # cb = plt.colorbar(sc)
-    # cb.set_label('run time')
-    # plt.show()
+def draw_kp_kd(filename):
+    # read file
+    df = pd.read_csv(filename)  
+    # draw some figures with the test results.
+    # Options:
+        # run time
+        # xy error
+        # z error
+    data_to_plot = 'run time'
+    # drawing
+    fig = plt.figure(figsize=(10,6))
+    ax = fig.gca(projection='rectilinear')
+    which_direction = 0 # 0~5 so you can choose which kp, kd to plot
+    df['kp_list'] = df['kp'].apply(lambda x: [float(val) for val in x.replace("[","").replace("]","").split()])
+    df['kd_list'] = df['kd'].apply(lambda x: [float(val) for val in x.replace("[","").replace("]","").split()])
+    df['kp_plot'] = df['kp_list'].apply(lambda x: x[which_direction])
+    df['kd_plot'] = df['kd_list'].apply(lambda x: x[which_direction])
+    plt.title('Performance of different impedance parameters')
+    plt.xlabel(r'$Stiffness$'+' on direction '+str(which_direction+1))
+    plt.ylabel(r'$Damping$'+' on direction '+str(which_direction+1))
+    sc = ax.scatter(df['kp_plot'],df['kd_plot'],c=df[data_to_plot],cmap='gnuplot')
+    cb = plt.colorbar(sc)
+    cb.set_label(data_to_plot)
+    plt.show()
 
 if __name__ == '__main__':
-    main()
+    filename = './results/kp_kd_result_10000.csv' # the file to read/write
+
+    # runs the simulation and save result file
+    # run_episodes(filename)
+
+    # draw the results from the file
+    draw_kp_kd(filename)

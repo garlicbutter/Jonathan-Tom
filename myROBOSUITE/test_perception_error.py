@@ -1,8 +1,11 @@
 import numpy as np
 from testing_module import things_to_test, run_test
 import matplotlib.pyplot as plt
-
-def main():
+import pandas as pd 
+#######################################################
+# go to the bottom section of the code to run this file
+#######################################################
+def run_episodes(filename):
     kp_test = np.array([1500, 1500, 15, 150, 150, 150])
     kd_test = np.array([1.5, 1.5, 1, 1, 1, 1])
     perception_error_test = things_to_test('perception_error',
@@ -10,30 +13,55 @@ def main():
                                             testing_max = np.array([0.001]),
                                             amount_of_tests = 5)
 
-    success_list = []
-    run_time_list = []
-    inserting_eeff_xy_max_list = []
-    inserting_eeff_z_max_list = []
-    
+    # testing code (no need to change anything below)
+    data = []
+    test_num = 1
     for perception_error in iter(perception_error_test):
-        result = run_test(kp_test, kd_test,perception_error)
-        success_list.append(result['success'])
-        run_time_list.append(result['run_time'])
-        inserting_eeff_xy_max_list.append(result['inserting_eeff_xy_max'])
-        inserting_eeff_z_max_list.append(result['inserting_eeff_z_max'])    
+        result = run_test(kp_test, kd_test, perception_error)
+        data.append([kp_test,
+                    kd_test,
+                    perception_error,
+                    result['run_time'],
+                    result['inserting_eeff_xy_max'],
+                    result['inserting_eeff_z_max']])
 
-    # draw some figures with the test results
-    data_to_plot = run_time_list
+        print('episode number: {a:3d}, run_time: {b:2.2f}'.format(a=test_num,b=result['run_time']))
+        print('          kp: ',end="")
+        print(kp_test)
+        print('          kd: ',end="")
+        print(kd_test)
+        test_num += 1
 
+    df = pd.DataFrame(data, columns=['kp', 'kd', 'perception error','run time', 'xy error', 'z error'])
+    import os.path
+    df.to_csv(filename,mode='a',header= not os.path.exists(filename),index=False)
+    print('Saved result to ' + filename)
+
+def draw_perception_error(filename):
+   # read file
+    df = pd.read_csv(filename)  
+    # draw some figures with the test results.
+    # Options:
+        # run time
+        # xy error
+        # z error
+    data_to_plot = 'run time'
     # drawing
-    x = np.array(list(iter(perception_error_test))).flatten()
-    y = data_to_plot
+    x = df['perception error'].apply(lambda x: float(x.replace("[","").replace("]",""))*1000)
+    y = df[data_to_plot]
 
     fig = plt.figure(figsize=(10,6))
     plt.plot(x,y)
-    plt.xlabel(r'$Perception error$')
-    plt.ylabel(r'$Run time$')
+    plt.xlabel('Perception error [mm]')
+    plt.ylabel(data_to_plot)
+    plt.grid()
     plt.show() 
 
 if __name__ == '__main__':
-    main()
+    filename = './results/percp.csv' # the file to read/write
+
+    # runs the simulation and save result file
+    # run_episodes(filename)
+
+    # draw the results from the file
+    draw_perception_error(filename)
