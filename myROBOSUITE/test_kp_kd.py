@@ -52,7 +52,7 @@ def draw_kp_kd(filename):
         # run time
         # xy error
         # z error
-    data_to_plot = 'run time'
+    data_to_plot = 'z error'
     # drawing
     fig = plt.figure(figsize=(10,6))
     ax = fig.gca(projection='rectilinear')
@@ -70,10 +70,10 @@ def draw_kp_kd(filename):
     plt.show()
 
 if __name__ == '__main__':
-    filename = './results/kp_kd_result_10000.csv' # the file to read/write
+    filename = './results/whatever.csv' # the file to read/write
 
     # runs the simulation and save result file
-    # run_episodes(filename)
+    run_episodes(filename)
 
     # draw the results from the file
     draw_kp_kd(filename)

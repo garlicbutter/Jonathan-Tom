@@ -75,6 +75,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 	
 	# Initial recorder
 	eeff_record = np.empty([1,3]) # end effector force record
+	robot_torque_record = np.empty([1,6]) # Actuation torque record
 	eeft_record = np.empty([1,3]) # end effector torque record
 	eefd_record = np.empty([1,3]) # end effector displacement record
 	eefd_desire_record = np.empty([1,3]) # desired end effector displacement record
@@ -119,6 +120,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 		eefd_record = np.append(eefd_record,[obs['robot0_eef_pos']],axis=0)
 		eefd_desire = np.add(eefd_desire,action[0:3])
 		eefd_desire_record = np.append(eefd_desire_record,eefd_desire,axis=0)
+		robot_torque_record = np.append(robot_torque_record, [env.robots[0].torques], axis=0)
 		t_record = np.append(t_record,np.array([env.cur_time]),axis=0)
 		
 		if action_status['done']:
@@ -129,7 +131,7 @@ def main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 			eefd_record = 0
 			t_record	= 0
 			break
-	return eeff_record, eeft_record, eefd_record, t_record
+	return eeff_record, eeft_record, eefd_record, t_record, robot_torque_record
 
 def plotter(eeff_record, eeft_record, eefd_record, t_record):
 	# plot of end effector force record 
@@ -167,7 +169,7 @@ def plotter(eeff_record, eeft_record, eefd_record, t_record):
 	plt.show()
 
 if __name__ == "__main__":
-	eeff_record, eeft_record, eefd_record, t_record = main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
+	eeff_record, eeft_record, eefd_record, t_record, robot_torque_record = main_osc(controller_kp = [1500, 1500, 50, 150, 150, 150],
 															   controller_zeta = [1.5, 1.5, 1, 10, 10, 10],
 															   perception_error = 0.0,
 															   offscreen=False)

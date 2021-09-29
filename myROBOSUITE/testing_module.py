@@ -30,12 +30,12 @@ class things_to_test():
         if self.n < self.num:
             self.result = self.result + self.interval
             self.n += 1
-            return np.round( self.result, 3)
+            return np.round( self.result, 5)
         else:
             raise StopIteration
 
 def run_test(kp, kd, percetion_error):
-    eeff_record, eeft_record, eefd_record, t_record = main_osc(kp,
+    eeff_record, eeft_record, eefd_record, t_record, robot_torque_record = main_osc(kp,
                                                                kd, 
                                                                perception_error=percetion_error,
                                                                offscreen=True)
@@ -44,14 +44,17 @@ def run_test(kp, kd, percetion_error):
         result = {'success':False,
                     'run_time':0,
                     'inserting_eeff_xy_max':0,
-                    'inserting_eeff_z_max':0}
+                    'inserting_eeff_z_max':0,
+                    'actuation_torque':0}
     else:
-        inserting_eeff_x_max = np.amax(eeff_record[0][-50:-1])
-        inserting_eeff_y_max = np.amax(eeff_record[1][-50:-1])
-        inserting_eeff_z_max = np.amax(eeff_record[2][-50:-1])
+        inserting_eeff_x_max = np.amax(eeff_record[-50:-1,0])
+        inserting_eeff_y_max = np.amax(eeff_record[-50:-1,1])
+        inserting_eeff_z_max = np.amax(eeff_record[-50:-1,2])
+        robot_torque_max    = np.amax(robot_torque_record[-50:-1,:],axis=0)
         result = {'success':True,
                     'run_time':t_record[-1],
                     'inserting_eeff_xy_max':np.sqrt(inserting_eeff_x_max**2 + inserting_eeff_y_max**2),
-                    'inserting_eeff_z_max':inserting_eeff_z_max}
+                    'inserting_eeff_z_max':np.abs(inserting_eeff_z_max),
+                    'actuation_torque':robot_torque_max}
     
     return result
