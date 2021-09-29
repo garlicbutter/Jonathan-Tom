@@ -40,7 +40,7 @@ def run_episodes(filename):
             print(kd)
             test_num += 1
 
-    df = pd.DataFrame(data, columns=['kp', 'kd', 'perception error','run time', 'xy error', 'z error'])
+    df = pd.DataFrame(data, columns=['kp', 'kd', 'perception error','run time', 'xy error', 'z error','torque'])
     import os.path
     df.to_csv(filename,mode='a',header= not os.path.exists(filename),index=False)
     print('Saved result to ' + filename)

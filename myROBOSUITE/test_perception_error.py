@@ -11,7 +11,7 @@ def run_episodes(filename):
     perception_error_test = things_to_test('perception_error',
                                             testing_min = np.array([0.0]),
                                             testing_max = np.array([0.001]),
-                                            amount_of_tests = 20)
+                                            amount_of_tests = 2)
 
     # testing code (no need to change anything below)
     data = []
@@ -33,7 +33,7 @@ def run_episodes(filename):
         print(kd_test)
         test_num += 1
 
-    df = pd.DataFrame(data, columns=['kp', 'kd', 'perception error','run time', 'xy error', 'z error'])
+    df = pd.DataFrame(data, columns=['kp', 'kd', 'perception error','run time', 'xy error', 'z error','torque'])
     import os.path
     df.to_csv(filename,mode='a',header= not os.path.exists(filename),index=False)
     print('Saved result to ' + filename)
@@ -59,10 +59,10 @@ def draw_perception_error(filename):
     plt.show() 
 
 if __name__ == '__main__':
-    filename = './results/percp09291458.csv' # the file to read/write
+    filename = './results/percp09291558.csv' # the file to read/write
 
     # runs the simulation and save result file
-    # run_episodes(filename)
+    run_episodes(filename)
 
     # draw the results from the file
     draw_perception_error(filename)
