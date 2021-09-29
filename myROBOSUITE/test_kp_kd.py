@@ -30,7 +30,8 @@ def run_episodes(filename):
                         perception_error_test,
                         result['run_time'],
                         result['inserting_eeff_xy_max'],
-                        result['inserting_eeff_z_max']])
+                        result['inserting_eeff_z_max'],
+                        result['actuation_torque']])
 
             print('episode number: {a:3d}, run_time: {b:2.2f}'.format(a=test_num,b=result['run_time']))
             print('          kp: ',end="")

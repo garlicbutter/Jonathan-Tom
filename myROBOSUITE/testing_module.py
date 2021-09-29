@@ -45,7 +45,7 @@ def run_test(kp, kd, percetion_error):
                     'run_time':0,
                     'inserting_eeff_xy_max':0,
                     'inserting_eeff_z_max':0,
-                    'actuation_torque':0}
+                    'actuation_torque':[0, 0, 0, 0, 0, 0]}
     else:
         inserting_eeff_x_max = np.amax(eeff_record[-50:-1,0])
         inserting_eeff_y_max = np.amax(eeff_record[-50:-1,1])

@@ -23,7 +23,8 @@ def run_episodes(filename):
                     perception_error,
                     result['run_time'],
                     result['inserting_eeff_xy_max'],
-                    result['inserting_eeff_z_max']])
+                    result['inserting_eeff_z_max'],
+                    result['actuation_torque']])
 
         print('episode number: {a:3d}, run_time: {b:2.2f}'.format(a=test_num,b=result['run_time']))
         print('          kp: ',end="")
@@ -45,7 +46,7 @@ def draw_perception_error(filename):
         # run time
         # xy error
         # z error
-    data_to_plot = 'z error'
+    data_to_plot = 'run time'
     # drawing
     x = df['perception error'].apply(lambda x: float(x.replace("[","").replace("]",""))*1000)
     y = df[data_to_plot]
@@ -61,7 +62,7 @@ if __name__ == '__main__':
     filename = './results/percp09291458.csv' # the file to read/write
 
     # runs the simulation and save result file
-    run_episodes(filename)
+    # run_episodes(filename)
 
     # draw the results from the file
     draw_perception_error(filename)
