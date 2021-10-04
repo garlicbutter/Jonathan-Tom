@@ -57,7 +57,7 @@ def draw_kp_kd(filename):
     # drawing
     fig = plt.figure(figsize=(10,6))
     ax = fig.gca(projection='rectilinear')
-    which_direction = 5 # 0~5 so you can choose which kp, kd to plot
+    which_direction = 2 # 0~5 so you can choose which kp, kd to plot
     df['kp_list'] = df['kp'].apply(lambda x: [float(val) for val in x.replace("[","").replace("]","").split()])
     df['kd_list'] = df['kd'].apply(lambda x: [float(val) for val in x.replace("[","").replace("]","").split()])
     df['kp_plot'] = df['kp_list'].apply(lambda x: x[which_direction])
@@ -72,7 +72,7 @@ def draw_kp_kd(filename):
     plt.show()
 
 if __name__ == '__main__':
-    filename = './results/kp6kd6.csv' # the file to read/write
+    filename = './results/kp3kd3.csv' # the file to read/write
 
     # runs the simulation and save result file
     # run_episodes(filename)

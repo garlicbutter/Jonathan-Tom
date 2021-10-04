@@ -60,7 +60,7 @@ def draw_perception_error(filename):
     plt.show() 
 
 if __name__ == '__main__':
-    filename = './results/percp1500.csv' # the file to read/write
+    filename = './results/percp700.csv' # the file to read/write
 
     # runs the simulation and save result file
     # run_episodes(filename)
